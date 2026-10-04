@@ -1,0 +1,28 @@
+{
+  "name": "automatic-correction-backend",
+  "version": "1.0.0",
+  "description": "Backend do Automatic Correction",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/capic2024118isinf0082-arch/Automatic-Correction--A.C.-.git"
+  },
+  "keywords": ["educação", "correção", "provas", "IA"],
+  "author": "Seu Nome",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
