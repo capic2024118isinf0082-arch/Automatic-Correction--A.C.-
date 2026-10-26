@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 // CONFIGURAÇÃO DO DOMÍNIO
 // ============================================================
 const DOMAIN = process.env.SITE_URL || 'https://automatic-correction.com';
-const FRONTEND_URL = process.env.FRONTEND_URL || 'https://automatic-correction.netlify.app';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://automaticcorrection.netlify.app';
 
 console.log(`🌐 Backend rodando no Render`);
 console.log(`🔗 API URL: ${DOMAIN}`);

@@ -308,15 +308,15 @@
             // ⚠️ SUBSTITUA PELO SEU LINK DO RENDER ABAIXO ⚠️
             API_URL: isLocal 
                 ? 'http://localhost:3000/api' 
-                : 'https://automatic-correction-backend.onrender.com/api', 
+                : 'https://automatic-correction-t5h6.onrender.com/api',
             
             // ⚠️ SUBSTITUA PELO SEU LINK DO NETLIFY ABAIXO ⚠️
             SITE_URL: isLocal 
                 ? 'http://localhost:3000' 
-                : 'https://automatic-correction.netlify.app',
+                : 'https://automaticcorrection.netlify.app',
             
             APP_NAME: 'Automatic Correction',
-            APP_DOMAIN: 'automatic-correction.com',
+            APP_DOMAIN: 'automaticcorrection.com',
             GITHUB_URL: 'https://github.com/capic2024118isinf0082-arch/Automatic-Correction--A.C.-',
             VERSION: '1.0.0',
             NOTA_MINIMA_APROVACAO: 6.0,
@@ -378,15 +378,6 @@
     BLOCO 3: API - COMUNICAÇÃO COM O BACKEND
     ============================================================ -->
     <script>
-        const CONFIG = {
-            API_URL: isLocal 
-                ? 'http://localhost:3000/api' 
-                : 'https://automatic-correction-backend.onrender.com/api',
-            SITE_URL: isLocal 
-                ? 'http://localhost:3000' 
-                : 'https://automaticcorrection.netlify.app'
-        };
-
         function getToken() { return localStorage.getItem('token'); }
 
         function getHeaders() {
