@@ -325,7 +325,7 @@
 
         console.log('🌐 AUTOMATIC CORRECTION');
         console.log(`📡 Ambiente: ${CONFIG.isProduction ? '🚀 Nuvem (Produção)' : '💻 Local'}`);
-        console.log(`🔗 API URL: ${CONFIG.CONFIG.API_URL}`);
+        console.log(`🔗 API URL: ${CONFIG.API_URL}`);
         console.log(`🏠 Site URL: ${CONFIG.SITE_URL}`);
         console.log(`📂 GitHub: ${CONFIG.GITHUB_URL}`);
     </script>
@@ -339,7 +339,7 @@
             if (!el) return;
             
             try {
-                const response = await fetch(`${CONFIG.CONFIG.API_URL}/health`, {
+                const response = await fetch(`${CONFIG.API_URL}/health`, {
                     method: 'GET',
                     headers: { 'Accept': 'application/json' },
                     signal: AbortSignal.timeout(8000)
@@ -392,7 +392,7 @@
         // ============================================================
         async function apiLogin(email, senha) {
             try {
-                const response = await fetch(`${CONFIG.CONFIG.API_URL}/auth/login`, {
+                const response = await fetch(`${CONFIG.API_URL}/auth/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, senha })
@@ -407,7 +407,7 @@
 
         async function apiRegister(dados) {
             try {
-                const response = await fetch(`${CONFIG.API_URL}/auth/register`, {
+                const response = await fetch(`${API_URL}/auth/register`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -428,14 +428,14 @@
         }
 
         async function apiGetProfile() {
-            const response = await fetch(`${CONFIG.API_URL}/auth/profile`, { headers: getHeaders() });
+            const response = await fetch(`${API_URL}/auth/profile`, { headers: getHeaders() });
             const data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erro ao buscar perfil');
             return data.user;
         }
 
         async function apiUpdateProfile(dados) {
-            const response = await fetch(`${CONFIG.API_URL}/auth/profile`, {
+            const response = await fetch(`${API_URL}/auth/profile`, {
                 method: 'PUT',
                 headers: getHeaders(),
                 body: JSON.stringify(dados)
@@ -451,7 +451,7 @@
         // ============================================================
         async function apiListarTurmas(filtros = {}) {
             try {
-                let url = `${CONFIG.API_URL}/turmas`;
+                let url = `${API_URL}/turmas`;
                 const params = new URLSearchParams();
                 if (filtros.busca) params.append('busca', filtros.busca);
                 if (filtros.status && filtros.status !== 'todos') params.append('status', filtros.status);
@@ -468,7 +468,7 @@
 
         async function apiCriarTurma(dados) {
             try {
-                const response = await fetch(`${CONFIG.API_URL}/turmas`, {
+                const response = await fetch(`${API_URL}/turmas`, {
                     method: 'POST',
                     headers: getHeaders(),
                     body: JSON.stringify(dados)
@@ -481,7 +481,7 @@
 
         async function apiBuscarTurma(id) {
             try {
-                const response = await fetch(`${CONFIG.API_URL}/turmas/${id}`, { headers: getHeaders() });
+                const response = await fetch(`${API_URL}/turmas/${id}`, { headers: getHeaders() });
                 const data = await response.json();
                 if (!response.ok) throw new Error(data.error || data.message || 'Erro ao buscar turma');
                 return data;
@@ -489,7 +489,7 @@
         }
 
         async function apiAtualizarTurma(id, dados) {
-            const response = await fetch(`${CONFIG.API_URL}/turmas/${id}`, {
+            const response = await fetch(`${API_URL}/turmas/${id}`, {
                 method: 'PUT',
                 headers: getHeaders(),
                 body: JSON.stringify(dados)
@@ -500,7 +500,7 @@
         }
 
         async function apiDeletarTurma(id) {
-            const response = await fetch(`${CONFIG.API_URL}/turmas/${id}`, {
+            const response = await fetch(`${API_URL}/turmas/${id}`, {
                 method: 'DELETE',
                 headers: getHeaders()
             });
@@ -510,7 +510,7 @@
         }
 
         async function apiDuplicarTurma(id) {
-            const response = await fetch(`${CONFIG.API_URL}/turmas/${id}/duplicar`, {
+            const response = await fetch(`${API_URL}/turmas/${id}/duplicar`, {
                 method: 'POST',
                 headers: getHeaders()
             });
@@ -523,7 +523,7 @@
         // ALUNOS
         // ============================================================
         async function apiAdicionarAluno(dados) {
-            const response = await fetch(`${CONFIG.API_URL}/alunos`, {
+            const response = await fetch(`${API_URL}/alunos`, {
                 method: 'POST',
                 headers: getHeaders(),
                 body: JSON.stringify(dados)
@@ -534,21 +534,21 @@
         }
 
         async function apiListarAlunos(turmaId) {
-            const response = await fetch(`${CONFIG.API_URL}/alunos/turma/${turmaId}`, { headers: getHeaders() });
+            const response = await fetch(`${API_URL}/alunos/turma/${turmaId}`, { headers: getHeaders() });
             const data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erro ao listar alunos');
             return data.alunos || [];
         }
 
         async function apiBuscarAluno(id) {
-            const response = await fetch(`${CONFIG.API_URL}/alunos/${id}`, { headers: getHeaders() });
+            const response = await fetch(`${API_URL}/alunos/${id}`, { headers: getHeaders() });
             const data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erro ao buscar aluno');
             return data;
         }
 
         async function apiAtualizarAluno(id, dados) {
-            const response = await fetch(`${CONFIG.API_URL}/alunos/${id}`, {
+            const response = await fetch(`${API_URL}/alunos/${id}`, {
                 method: 'PUT',
                 headers: getHeaders(),
                 body: JSON.stringify(dados)
@@ -559,7 +559,7 @@
         }
 
         async function apiRemoverAluno(id) {
-            const response = await fetch(`${CONFIG.API_URL}/alunos/${id}`, {
+            const response = await fetch(`${API_URL}/alunos/${id}`, {
                 method: 'DELETE',
                 headers: getHeaders()
             });
@@ -569,7 +569,7 @@
         }
 
         async function apiAdicionarNota(alunoId, dados) {
-            const response = await fetch(`${CONFIG.API_URL}/alunos/${alunoId}/nota`, {
+            const response = await fetch(`${API_URL}/alunos/${alunoId}/nota`, {
                 method: 'POST',
                 headers: getHeaders(),
                 body: JSON.stringify(dados)
@@ -580,7 +580,7 @@
         }
 
         async function apiRegistrarPresenca(alunoId, dados) {
-            const response = await fetch(`${CONFIG.API_URL}/alunos/${alunoId}/presenca`, {
+            const response = await fetch(`${API_URL}/alunos/${alunoId}/presenca`, {
                 method: 'POST',
                 headers: getHeaders(),
                 body: JSON.stringify(dados)
