@@ -10,14 +10,25 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ============================================================
-// CONFIGURAÇÃO DO DOMÍNIO
+// CONFIGURAÇÃO DO DOMÍNIO E CORS
 // ============================================================
-const DOMAIN = process.env.SITE_URL || 'https://automatic-correction.com';
+const DOMAIN = process.env.SITE_URL || 'https://automatic-correction-t5h6.onrender.com';
 const FRONTEND_URL = process.env.FRONTEND_URL || 'https://automaticcorrection.netlify.app';
 
-console.log(`🌐 Backend rodando no Render`);
-console.log(`🔗 API URL: ${DOMAIN}`);
-console.log(`🖥️  Frontend permitido: ${FRONTEND_URL}`);
+// Middleware CORS
+app.use(cors({
+    origin: [
+        FRONTEND_URL, // Puxa a variável de ambiente do Render
+        'https://automaticcorrection.netlify.app', // Seu link do Netlify
+        'https://automatic-correction-t5h6.onrender.com', // Seu link do Render
+        'http://localhost:3000', // Para testes locais
+        'http://localhost:5500',
+        'http://127.0.0.1:5500'
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    credentials: true
+}));
 
 // ============================================================
 // MIDDLEWARE CORS (LIBERADO PARA O NETLIFY)
