@@ -10,46 +10,55 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ============================================================
-// CONFIGURAÇÃO DO DOMÍNIO E CORS
+// CONFIGURAÇÃO DE AMBIENTE E DOMÍNIOS
 // ============================================================
 const DOMAIN = process.env.SITE_URL || 'https://automatic-correction-t5h6.onrender.com';
 const FRONTEND_URL = process.env.FRONTEND_URL || 'https://automaticcorrection.netlify.app';
 
-// Middleware CORS
+console.log(`🌐 Backend rodando no Render`);
+console.log(`🔗 API URL: ${DOMAIN}`);
+console.log(`🖥️  Frontend permitido: ${FRONTEND_URL}`);
+
+// ============================================================
+// MIDDLEWARE CORS (CORRIGIDO PARA NETLIFY)
+// ============================================================
+// O CORS precisa permitir que o Netlify faça requisições.
+// Usamos uma função para ter controle total sobre quem é liberado.
 app.use(cors({
-    origin: [
-        FRONTEND_URL, // Puxa a variável de ambiente do Render
-        'https://automaticcorrection.netlify.app', // Seu link do Netlify
-        'https://automatic-correction-t5h6.onrender.com', // Seu link do Render
-        'http://localhost:3000', // Para testes locais
-        'http://localhost:5500',
-        'http://127.0.0.1:5500'
-    ],
+    origin: function (origin, callback) {
+        // Lista de domínios permitidos
+        const allowedOrigins = [
+            FRONTEND_URL,
+            'https://automaticcorrection.netlify.app', // Seu link do Netlify
+            'https://automatic-correction-t5h6.onrender.com', // Seu link do Render
+            'http://localhost:3000', // Para testes locais
+            'http://localhost:5500',
+            'http://127.0.0.1:5500'
+        ];
+
+        // Permite requisições sem 'origin' (como apps mobile ou Postman)
+        if (!origin) return callback(null, true);
+
+        // Se a origem estiver na lista, permite
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            console.log(`🚫 CORS bloqueado para a origem: ${origin}`);
+            callback(new Error('Não permitido pelo CORS'));
+        }
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
     credentials: true
 }));
 
 // ============================================================
-// MIDDLEWARE CORS (LIBERADO PARA O NETLIFY)
+// OUTROS MIDDLEWARES
 // ============================================================
-app.use(cors({
-    origin: [
-        FRONTEND_URL,
-        'https://automaticcorrection.netlify.app/',
-        'http://localhost:3000',
-        'http://localhost:5500',
-        'http://127.0.0.1:5500'
-    ],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-    credentials: true
-}));
-
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Log de requisições
+// Log de requisições (útil para debug no Render)
 app.use((req, res, next) => {
     console.log(`📥 ${req.method} ${req.url} - Origem: ${req.headers.origin || 'Desconhecida'}`);
     next();
