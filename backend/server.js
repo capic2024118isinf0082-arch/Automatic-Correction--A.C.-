@@ -3,18 +3,36 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
 
+// Carregar variáveis de ambiente
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ============================================================
-// MIDDLEWARE
+// CONFIGURAÇÃO DO DOMÍNIO
+// ============================================================
+const DOMAIN = process.env.SITE_URL || 'https://automatic-correction.com';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://automatic-correction.netlify.app';
+
+console.log(`🌐 Backend rodando no Render`);
+console.log(`🔗 API URL: ${DOMAIN}`);
+console.log(`🖥️  Frontend permitido: ${FRONTEND_URL}`);
+
+// ============================================================
+// MIDDLEWARE CORS (LIBERADO PARA O NETLIFY)
 // ============================================================
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:5500', 'http://127.0.0.1:5500'],
+    origin: [
+        FRONTEND_URL,
+        'https://automaticcorrection.netlify.app/',
+        'http://localhost:3000',
+        'http://localhost:5500',
+        'http://127.0.0.1:5500'
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    credentials: true
 }));
 
 app.use(express.json({ limit: '10mb' }));
@@ -22,14 +40,9 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Log de requisições
 app.use((req, res, next) => {
-    console.log(`📥 ${req.method} ${req.url}`);
+    console.log(`📥 ${req.method} ${req.url} - Origem: ${req.headers.origin || 'Desconhecida'}`);
     next();
 });
-
-// ============================================================
-// ARQUIVOS ESTÁTICOS (FRONTEND)
-// ============================================================
-app.use(express.static(path.join(__dirname, '../frontend')));
 
 // ============================================================
 // ROTAS DA API
@@ -43,13 +56,14 @@ app.use('/api/turmas', turmaRoutes);
 app.use('/api/alunos', alunoRoutes);
 
 // ============================================================
-// ROTAS DE TESTE
+// ROTAS DE TESTE E HEALTH CHECK
 // ============================================================
 app.get('/api/test', (req, res) => {
     res.json({
         status: 'OK',
         message: 'API do Automatic Correction está funcionando!',
-        domain: process.env.SITE_URL || 'http://localhost:3000',
+        domain: DOMAIN,
+        frontend: FRONTEND_URL,
         timestamp: new Date().toISOString()
     });
 });
@@ -61,13 +75,6 @@ app.get('/api/health', (req, res) => {
         timestamp: new Date().toISOString(),
         uptime: process.uptime()
     });
-});
-
-// ============================================================
-// ROTA PRINCIPAL
-// ============================================================
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
 });
 
 // ============================================================
@@ -86,13 +93,11 @@ app.use((err, req, res, next) => {
 // ============================================================
 app.listen(PORT, '0.0.0.0', () => {
     console.log('========================================');
-    console.log('🌐 AUTOMATIC CORRECTION');
+    console.log('🚀 AUTOMATIC CORRECTION - BACKEND');
     console.log('========================================');
-    console.log(`📡 Site: http://localhost:${PORT}`);
-    console.log(`🧪 API: http://localhost:${PORT}/api/test`);
-    console.log(`🔐 Auth: http://localhost:${PORT}/api/auth`);
-    console.log(`📚 Turmas: http://localhost:${PORT}/api/turmas`);
+    console.log(`📡 Rodando na porta: ${PORT}`);
+    console.log(`🌐 URL do Site: ${DOMAIN}`);
+    console.log(`🧪 Teste API: ${DOMAIN}/api/test`);
     console.log('========================================');
-    console.log('✅ Servidor pronto!');
-    console.log('========================================');
+    console.log('✅ Servidor pronto para receber requisições!');
 });
