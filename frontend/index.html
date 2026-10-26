@@ -296,40 +296,33 @@
 <body>
     <div id="app"></div>
 
-    <!-- ============================================================
+        <!-- ============================================================
     BLOCO 1: CONFIGURAÇÃO DE NUVEM (RENDER + NETLIFY)
     ============================================================ -->
     <script>
-        // Detecta automaticamente se está local ou na nuvem
         const isLocal = window.location.hostname === 'localhost' || 
                         window.location.hostname === '127.0.0.1';
 
-        const CONFIG = {
-            // ⚠️ SUBSTITUA PELO SEU LINK DO RENDER ABAIXO ⚠️
+        // Variável global que será usada por TODAS as funções
+        window.CONFIG = {
             API_URL: isLocal 
                 ? 'http://localhost:3000/api' 
-                : 'https://automatic-correction-t5h6.onrender.com/api',
+                : 'https://automatic-correction-t5h6.onrender.com/api', // SUA URL DO RENDER AQUI
             
-            // ⚠️ SUBSTITUA PELO SEU LINK DO NETLIFY ABAIXO ⚠️
             SITE_URL: isLocal 
                 ? 'http://localhost:3000' 
-                : 'https://automaticcorrection.netlify.app',
+                : 'https://automaticcorrection.netlify.app', // SUA URL DO NETLIFY AQUI
             
             APP_NAME: 'Automatic Correction',
-            APP_DOMAIN: 'automaticcorrection.com',
             GITHUB_URL: 'https://github.com/capic2024118isinf0082-arch/Automatic-Correction--A.C.-',
-            VERSION: '1.0.0',
-            NOTA_MINIMA_APROVACAO: 6.0,
-            isProduction: !isLocal
+            NOTA_MINIMA_APROVACAO: 6.0
         };
 
         console.log('🌐 AUTOMATIC CORRECTION');
-        console.log(`📡 Ambiente: ${CONFIG.isProduction ? '🚀 Nuvem (Produção)' : '💻 Local'}`);
-        console.log(`🔗 API URL: ${CONFIG.API_URL}`);
-        console.log(`🏠 Site URL: ${CONFIG.SITE_URL}`);
-        console.log(`📂 GitHub: ${CONFIG.GITHUB_URL}`);
+        console.log(`📡 Ambiente: ${isLocal ? '💻 Local' : '🚀 Nuvem'}`);
+        console.log(`🔗 API URL: ${window.CONFIG.API_URL}`);
     </script>
-
+    
     <!-- ============================================================
     BLOCO 2: VERIFICAÇÃO DO SERVIDOR
     ============================================================ -->
