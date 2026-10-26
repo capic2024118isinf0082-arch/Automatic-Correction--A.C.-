@@ -81,19 +81,6 @@
         }
         .btn-success:hover { background: #a7f3d0; }
 
-        .btn-warning {
-            padding: 12px 24px;
-            background: #fef3c7;
-            color: #d97706;
-            font-weight: 700;
-            border-radius: 12px;
-            font-size: 13px;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-warning:hover { background: #fde68a; }
-
         .btn-info {
             padding: 12px 24px;
             background: #dbeafe;
@@ -119,33 +106,16 @@
         .dark .text-gray-700 { color: #e2e8f0; }
         .dark .text-gray-800 { color: #f1f5f9; }
 
-        .sidebar {
-            position: fixed;
-            inset: 0;
-            z-index: 50;
-            display: flex;
-        }
+        .sidebar { position: fixed; inset: 0; z-index: 50; display: flex; }
         .sidebar-backdrop { flex: 1; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); }
         .sidebar-content {
-            width: 320px;
-            height: 100%;
-            background: #f0f7f7;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            animation: slideRight 0.3s ease-out;
-            border-right: 2px solid #7aa2a1;
+            width: 320px; height: 100%; background: #f0f7f7; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: flex; flex-direction: column; animation: slideRight 0.3s ease-out; border-right: 2px solid #7aa2a1;
         }
         .dark .sidebar-content { background: #1e293b; border-color: #334155; }
-        @keyframes slideRight {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
-        }
+        @keyframes slideRight { from { transform: translateX(-100%); } to { transform: translateX(0); } }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes bounce { 0%,100% { transform: translateY(-25%); } 50% { transform: translateY(0); } }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes scanMove { 0% { top: 20%; } 50% { top: 80%; } 100% { top: 20%; } }
@@ -160,15 +130,13 @@
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 50;
             background: #22c55e; color: white; font-weight: 700; padding: 16px 24px;
             border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            display: flex; align-items: center; gap: 12px; border: 2px solid #4ade80;
-            animation: bounce 1s infinite;
+            display: flex; align-items: center; gap: 12px; border: 2px solid #4ade80; animation: bounce 1s infinite;
         }
         .toast-error {
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 50;
             background: #ef4444; color: white; font-weight: 700; padding: 16px 24px;
             border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            display: flex; align-items: center; gap: 12px; border: 2px solid #f87171;
-            animation: bounce 1s infinite;
+            display: flex; align-items: center; gap: 12px; border: 2px solid #f87171; animation: bounce 1s infinite;
         }
 
         .notification-badge {
@@ -186,12 +154,7 @@
         .menu-item:hover { background: white; }
         .dark .menu-item:hover { background: #334155; }
 
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-            width: 100%;
-        }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; width: 100%; }
         @media (min-width: 640px) { .dashboard-grid { grid-template-columns: repeat(3, 1fr); } }
         @media (min-width: 768px) { .dashboard-grid { grid-template-columns: repeat(4, 1fr); } }
 
@@ -221,10 +184,7 @@
             display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0;
         }
 
-        .status-badge {
-            display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px;
-            border-radius: 9999px; font-size: 12px; font-weight: 700;
-        }
+        .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; }
         .status-badge.otimo { background: #d1fae5; color: #059669; }
         .status-badge.bom { background: #dbeafe; color: #2563eb; }
         .status-badge.regular { background: #fef3c7; color: #d97706; }
@@ -244,44 +204,28 @@
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-        input[type="number"] { appearance: textfield; -moz-appearance: textfield; }
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
-            -webkit-appearance: none; margin: 0;
-        }
+        input[type="number"] { -moz-appearance: textfield; }
+        input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 
         .logo-fixed { display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .logo-fixed img { width: 100%; height: 100%; object-fit: contain; }
 
-        .scan-line {
-            position: absolute; top: 20%; left: 10%; right: 10%; height: 2px;
-            background: rgba(122,162,161,0.6); animation: scanMove 2s ease-in-out infinite;
-        }
-        .scan-overlay {
-            position: absolute; inset: 0; border: 4px solid rgba(122,162,161,0.4);
-            border-radius: 12px; pointer-events: none;
-        }
+        .scan-line { position: absolute; top: 20%; left: 10%; right: 10%; height: 2px; background: rgba(122,162,161,0.6); animation: scanMove 2s ease-in-out infinite; }
+        .scan-overlay { position: absolute; inset: 0; border: 4px solid rgba(122,162,161,0.4); border-radius: 12px; pointer-events: none; }
 
-        .student-card {
-            background: white; border-radius: 16px; padding: 16px; border: 1px solid #e5e7eb;
-            transition: all 0.3s;
-        }
+        .student-card { background: white; border-radius: 16px; padding: 16px; border: 1px solid #e5e7eb; transition: all 0.3s; }
         .student-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         .dark .student-card { background: #1e293b; border-color: #334155; }
 
         #statusServidor {
             position: fixed; bottom: 10px; left: 10px; padding: 5px 15px;
-            background: rgba(0,0,0,0.8); border-radius: 20px; color: white; font-size: 12px;
-            z-index: 9999; font-family: 'Inter', sans-serif;
+            background: rgba(0,0,0,0.8); border-radius: 20px; color: white; font-size: 12px; z-index: 9999; font-family: 'Inter', sans-serif;
         }
         .status-online { color: #22c55e; }
         .status-offline { color: #ef4444; }
         .status-checking { color: #eab308; }
 
-        .drop-zone {
-            border: 3px dashed #d1d5db; border-radius: 12px; padding: 30px;
-            text-align: center; transition: all 0.3s; cursor: pointer;
-        }
+        .drop-zone { border: 3px dashed #d1d5db; border-radius: 12px; padding: 30px; text-align: center; transition: all 0.3s; cursor: pointer; }
         .drop-zone:hover, .drop-zone.dragover { border-color: #7aa2a1; background: #e8f1f1; }
         .dark .drop-zone { border-color: #475569; }
         .dark .drop-zone:hover, .dark .drop-zone.dragover { border-color: #7aa2a1; background: #1e293b; }
@@ -296,43 +240,45 @@
 <body>
     <div id="app"></div>
 
-        <!-- ============================================================
+    <!-- ============================================================
     BLOCO 1: CONFIGURAÇÃO DE NUVEM (RENDER + NETLIFY)
     ============================================================ -->
     <script>
-        const isLocal = window.location.hostname === 'localhost' || 
-                        window.location.hostname === '127.0.0.1';
+        // Detecta automaticamente se está local ou na nuvem
+        var isLocal = window.location.hostname === 'localhost' || 
+                      window.location.hostname === '127.0.0.1';
 
-        // Variável global que será usada por TODAS as funções
-        window.CONFIG = {
+        // Objeto global de configuração
+        var CONFIG = {
             API_URL: isLocal 
                 ? 'http://localhost:3000/api' 
-                : 'https://automatic-correction-t5h6.onrender.com/api', // SUA URL DO RENDER AQUI
+                : 'https://automatic-correction-t5h6.onrender.com/api', // ⚠️ SUA URL DO RENDER AQUI
             
             SITE_URL: isLocal 
                 ? 'http://localhost:3000' 
-                : 'https://automaticcorrection.netlify.app', // SUA URL DO NETLIFY AQUI
+                : 'https://automaticcorrection.netlify.app', // ⚠️ SUA URL DO NETLIFY AQUI
             
             APP_NAME: 'Automatic Correction',
             GITHUB_URL: 'https://github.com/capic2024118isinf0082-arch/Automatic-Correction--A.C.-',
-            NOTA_MINIMA_APROVACAO: 6.0
+            NOTA_MINIMA_APROVACAO: 6.0,
+            isProduction: !isLocal
         };
 
         console.log('🌐 AUTOMATIC CORRECTION');
-        console.log(`📡 Ambiente: ${isLocal ? '💻 Local' : '🚀 Nuvem'}`);
-        console.log(`🔗 API URL: ${window.CONFIG.API_URL}`);
+        console.log('📡 Ambiente: ' + (isLocal ? '💻 Local' : '🚀 Nuvem'));
+        console.log('🔗 API URL: ' + CONFIG.API_URL);
     </script>
-    
+
     <!-- ============================================================
     BLOCO 2: VERIFICAÇÃO DO SERVIDOR
     ============================================================ -->
     <script>
         async function verificarServidor() {
-            const el = document.getElementById('statusServidor');
+            var el = document.getElementById('statusServidor');
             if (!el) return;
             
             try {
-                const response = await fetch(`${CONFIG.API_URL}/health`, {
+                var response = await fetch(CONFIG.API_URL + '/health', {
                     method: 'GET',
                     headers: { 'Accept': 'application/json' },
                     signal: AbortSignal.timeout(8000)
@@ -356,7 +302,7 @@
         }
 
         if (!document.getElementById('statusServidor')) {
-            const statusDiv = document.createElement('div');
+            var statusDiv = document.createElement('div');
             statusDiv.id = 'statusServidor';
             statusDiv.innerHTML = '🔄 Verificando...';
             statusDiv.className = 'status-checking';
@@ -368,16 +314,21 @@
     </script>
 
     <!-- ============================================================
-    BLOCO 3: API - COMUNICAÇÃO COM O BACKEND
+    BLOCO 3: API - COMUNICAÇÃO COM O BACKEND (CORRIGIDO)
     ============================================================ -->
     <script>
         function getToken() { return localStorage.getItem('token'); }
 
         function getHeaders() {
-            const token = getToken();
-            const headers = { 'Content-Type': 'application/json', 'Accept': 'application/json' };
-            if (token) headers['Authorization'] = `Bearer ${token}`;
+            var token = getToken();
+            var headers = { 'Content-Type': 'application/json', 'Accept': 'application/json' };
+            if (token) headers['Authorization'] = 'Bearer ' + token;
             return headers;
+        }
+
+        // Função auxiliar que resolve o problema da vírgula e do escopo
+        function getApiUrl(endpoint) {
+            return CONFIG.API_URL + endpoint;
         }
 
         // ============================================================
@@ -385,12 +336,12 @@
         // ============================================================
         async function apiLogin(email, senha) {
             try {
-                const response = await fetch(`${CONFIG.API_URL}/auth/login`, {
+                var response = await fetch(getApiUrl('/auth/login'), {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, senha })
+                    body: JSON.stringify({ email: email, senha: senha })
                 });
-                const data = await response.json();
+                var data = await response.json();
                 if (!response.ok) throw new Error(data.error || 'Erro ao fazer login');
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('user', JSON.stringify(data.user));
@@ -400,7 +351,7 @@
 
         async function apiRegister(dados) {
             try {
-                const response = await fetch(`${API_URL}/auth/register`, {
+                var response = await fetch(getApiUrl('/auth/register'), {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -412,7 +363,7 @@
                         escola: dados.escola || 'Escola'
                     })
                 });
-                const data = await response.json();
+                var data = await response.json();
                 if (!response.ok) throw new Error(data.error || 'Erro ao registrar');
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('user', JSON.stringify(data.user));
@@ -421,19 +372,19 @@
         }
 
         async function apiGetProfile() {
-            const response = await fetch(`${API_URL}/auth/profile`, { headers: getHeaders() });
-            const data = await response.json();
+            var response = await fetch(getApiUrl('/auth/profile'), { headers: getHeaders() });
+            var data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erro ao buscar perfil');
             return data.user;
         }
 
         async function apiUpdateProfile(dados) {
-            const response = await fetch(`${API_URL}/auth/profile`, {
+            var response = await fetch(getApiUrl('/auth/profile'), {
                 method: 'PUT',
                 headers: getHeaders(),
                 body: JSON.stringify(dados)
             });
-            const data = await response.json();
+            var data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erro ao atualizar perfil');
             localStorage.setItem('user', JSON.stringify(data.user));
             return data.user;
@@ -442,18 +393,19 @@
         // ============================================================
         // TURMAS
         // ============================================================
-        async function apiListarTurmas(filtros = {}) {
+        async function apiListarTurmas(filtros) {
             try {
-                let url = `${API_URL}/turmas`;
-                const params = new URLSearchParams();
+                if (!filtros) filtros = {};
+                var url = getApiUrl('/turmas');
+                var params = new URLSearchParams();
                 if (filtros.busca) params.append('busca', filtros.busca);
                 if (filtros.status && filtros.status !== 'todos') params.append('status', filtros.status);
                 if (filtros.nivel && filtros.nivel !== 'todos') params.append('nivel', filtros.nivel);
                 if (filtros.ordenar) params.append('ordenar', filtros.ordenar);
-                if (params.toString()) url += `?${params.toString()}`;
+                if (params.toString()) url += '?' + params.toString();
                 
-                const response = await fetch(url, { headers: getHeaders() });
-                const data = await response.json();
+                var response = await fetch(url, { headers: getHeaders() });
+                var data = await response.json();
                 if (!response.ok) throw new Error(data.error || 'Erro ao listar turmas');
                 return data;
             } catch (error) { console.error('❌ Erro ao listar turmas:', error); throw error; }
@@ -461,12 +413,12 @@
 
         async function apiCriarTurma(dados) {
             try {
-                const response = await fetch(`${API_URL}/turmas`, {
+                var response = await fetch(getApiUrl('/turmas'), {
                     method: 'POST',
                     headers: getHeaders(),
                     body: JSON.stringify(dados)
                 });
-                const data = await response.json();
+                var data = await response.json();
                 if (!response.ok) throw new Error(data.error || 'Erro ao criar turma');
                 return data.turma;
             } catch (error) { console.error('❌ Erro ao criar turma:', error); throw error; }
@@ -474,40 +426,40 @@
 
         async function apiBuscarTurma(id) {
             try {
-                const response = await fetch(`${API_URL}/turmas/${id}`, { headers: getHeaders() });
-                const data = await response.json();
+                var response = await fetch(getApiUrl('/turmas/' + id), { headers: getHeaders() });
+                var data = await response.json();
                 if (!response.ok) throw new Error(data.error || data.message || 'Erro ao buscar turma');
                 return data;
             } catch (error) { console.error('❌ Erro ao buscar turma:', error); throw error; }
         }
 
         async function apiAtualizarTurma(id, dados) {
-            const response = await fetch(`${API_URL}/turmas/${id}`, {
+            var response = await fetch(getApiUrl('/turmas/' + id), {
                 method: 'PUT',
                 headers: getHeaders(),
                 body: JSON.stringify(dados)
             });
-            const data = await response.json();
+            var data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erro ao atualizar turma');
             return data.turma;
         }
 
         async function apiDeletarTurma(id) {
-            const response = await fetch(`${API_URL}/turmas/${id}`, {
+            var response = await fetch(getApiUrl('/turmas/' + id), {
                 method: 'DELETE',
                 headers: getHeaders()
             });
-            const data = await response.json();
+            var data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erro ao deletar turma');
             return data;
         }
 
         async function apiDuplicarTurma(id) {
-            const response = await fetch(`${API_URL}/turmas/${id}/duplicar`, {
+            var response = await fetch(getApiUrl('/turmas/' + id + '/duplicar'), {
                 method: 'POST',
                 headers: getHeaders()
             });
-            const data = await response.json();
+            var data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erro ao duplicar turma');
             return data.turma;
         }
@@ -516,69 +468,69 @@
         // ALUNOS
         // ============================================================
         async function apiAdicionarAluno(dados) {
-            const response = await fetch(`${API_URL}/alunos`, {
+            var response = await fetch(getApiUrl('/alunos'), {
                 method: 'POST',
                 headers: getHeaders(),
                 body: JSON.stringify(dados)
             });
-            const data = await response.json();
+            var data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erro ao adicionar aluno');
             return data.aluno;
         }
 
         async function apiListarAlunos(turmaId) {
-            const response = await fetch(`${API_URL}/alunos/turma/${turmaId}`, { headers: getHeaders() });
-            const data = await response.json();
+            var response = await fetch(getApiUrl('/alunos/turma/' + turmaId), { headers: getHeaders() });
+            var data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erro ao listar alunos');
             return data.alunos || [];
         }
 
         async function apiBuscarAluno(id) {
-            const response = await fetch(`${API_URL}/alunos/${id}`, { headers: getHeaders() });
-            const data = await response.json();
+            var response = await fetch(getApiUrl('/alunos/' + id), { headers: getHeaders() });
+            var data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erro ao buscar aluno');
             return data;
         }
 
         async function apiAtualizarAluno(id, dados) {
-            const response = await fetch(`${API_URL}/alunos/${id}`, {
+            var response = await fetch(getApiUrl('/alunos/' + id), {
                 method: 'PUT',
                 headers: getHeaders(),
                 body: JSON.stringify(dados)
             });
-            const data = await response.json();
+            var data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erro ao atualizar aluno');
             return data.aluno;
         }
 
         async function apiRemoverAluno(id) {
-            const response = await fetch(`${API_URL}/alunos/${id}`, {
+            var response = await fetch(getApiUrl('/alunos/' + id), {
                 method: 'DELETE',
                 headers: getHeaders()
             });
-            const data = await response.json();
+            var data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erro ao remover aluno');
             return data;
         }
 
         async function apiAdicionarNota(alunoId, dados) {
-            const response = await fetch(`${API_URL}/alunos/${alunoId}/nota`, {
+            var response = await fetch(getApiUrl('/alunos/' + alunoId + '/nota'), {
                 method: 'POST',
                 headers: getHeaders(),
                 body: JSON.stringify(dados)
             });
-            const data = await response.json();
+            var data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erro ao adicionar nota');
             return data;
         }
 
         async function apiRegistrarPresenca(alunoId, dados) {
-            const response = await fetch(`${API_URL}/alunos/${alunoId}/presenca`, {
+            var response = await fetch(getApiUrl('/alunos/' + alunoId + '/presenca'), {
                 method: 'POST',
                 headers: getHeaders(),
                 body: JSON.stringify(dados)
             });
-            const data = await response.json();
+            var data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erro ao registrar presença');
             return data;
         }
@@ -588,49 +540,27 @@
         // ============================================================
         function processarArquivoImagem(file, callback) {
             if (!file) return;
-            
-            const tiposValidos = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'application/pdf'];
-            if (!tiposValidos.includes(file.type) && !file.type.startsWith('image/')) {
-                alert('Formato de arquivo não suportado. Use JPG, PNG, GIF, WEBP ou PDF.');
-                return;
+            var tiposValidos = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'application/pdf'];
+            if (tiposValidos.indexOf(file.type) === -1 && file.type.indexOf('image/') !== 0) {
+                alert('Formato de arquivo não suportado. Use JPG, PNG, GIF, WEBP ou PDF.'); return;
             }
+            if (file.size > 10 * 1024 * 1024) { alert('Arquivo muito grande. Máximo 10MB.'); return; }
 
-            if (file.size > 10 * 1024 * 1024) {
-                alert('Arquivo muito grande. Máximo 10MB.');
-                return;
-            }
-
-            const reader = new FileReader();
+            var reader = new FileReader();
             reader.onloadend = function() {
-                callback({
-                    dataUrl: reader.result,
-                    mimeType: file.type,
-                    base64: reader.result.split(',')[1],
-                    name: file.name,
-                    size: file.size
-                });
+                callback({ dataUrl: reader.result, mimeType: file.type, base64: reader.result.split(',')[1], name: file.name, size: file.size });
             };
-            reader.onerror = function() {
-                alert('Erro ao ler o arquivo. Tente novamente.');
-            };
+            reader.onerror = function() { alert('Erro ao ler o arquivo. Tente novamente.'); };
             reader.readAsDataURL(file);
         }
 
         function tirarFoto(callback) {
             if ('mediaDevices' in navigator && navigator.mediaDevices.getUserMedia) {
-                const input = document.createElement('input');
-                input.type = 'file';
-                input.accept = 'image/*';
-                input.capture = 'environment';
-                input.onchange = function(e) {
-                    if (e.target.files && e.target.files[0]) {
-                        processarArquivoImagem(e.target.files[0], callback);
-                    }
-                };
+                var input = document.createElement('input');
+                input.type = 'file'; input.accept = 'image/*'; input.capture = 'environment';
+                input.onchange = function(e) { if (e.target.files && e.target.files[0]) processarArquivoImagem(e.target.files[0], callback); };
                 input.click();
-            } else {
-                alert('Seu dispositivo não suporta câmera. Use a opção "Carregar".');
-            }
+            } else { alert('Seu dispositivo não suporta câmera. Use a opção "Carregar".'); }
         }
     </script>
 
@@ -639,86 +569,21 @@
     ============================================================ -->
     <script>
         var App = {
-            view: 'splash',
-            sidebarOpen: false,
-            theme: 'light',
-            classes: [],
-            selectedClass: null,
-            selectedStudent: null,
-            notifications: [
-                { id: 1, text: 'Bem-vindo ao Automatic Correction!', time: 'Agora', unread: true }
-            ],
-            showNotifications: false,
-            officialGabarito: null,
-            studentGabarito: null,
-            studentScan: null,
-            lastCorrectionData: null,
-            showSyncSuccess: false,
-            showSyncError: false,
-            mensagemToast: '',
-            mensagemErro: '',
-            searchQuery: '',
-            activeFilter: 'todos',
-            activeSort: 'alfabetica',
-            showStatsTab: false,
-            selectedHistoricalTest: null,
-            profileImage: null,
-            profileName: 'Professor',
-            profileBio: 'Docente',
-            profileEmail: 'professor@escola.com',
-            aiResult: null,
-            email: '',
-            password: '',
-            isLoading: false,
-            isProcessing: false,
-            isConfirming: false,
-            isAnalyzing: false,
-            errorMsg: '',
-            
-            salasFilter: {
-                busca: '',
-                status: 'todos',
-                nivel: 'todos',
-                ordenar: 'recente'
-            },
-            
-            novaTurma: {
-                nome: '',
-                nivel: 'Ensino Básico',
-                status: 'success',
-                totalAulas: 0,
-                alunos: []
-            },
-            isCreating: false,
-            activeTab: 'config',
-            modalNota: {
-                alunoId: '',
-                titulo: '',
-                nota: 0,
-                data: ''
-            },
-            mostrarModalNota: false,
-            scanStep: 1,
-            currentStudentId: null,
-            scanStream: null,
-            selectedTargetClass: '',
-            selectedTargetStudent: '',
-            testDetails: {
-                name: 'Prova Trimestral',
-                subject: 'Matemática',
-                qCount: 20
-            },
-            localOfficial: null,
-            studentAnswer: null,
-            user: null
+            view: 'splash', sidebarOpen: false, theme: 'light', classes: [], selectedClass: null, selectedStudent: null,
+            notifications: [{ id: 1, text: 'Bem-vindo ao Automatic Correction!', time: 'Agora', unread: true }],
+            showNotifications: false, officialGabarito: null, studentGabarito: null, studentScan: null, lastCorrectionData: null,
+            showSyncSuccess: false, showSyncError: false, mensagemToast: '', mensagemErro: '',
+            searchQuery: '', activeFilter: 'todos', activeSort: 'alfabetica', showStatsTab: false, selectedHistoricalTest: null,
+            profileImage: null, profileName: 'Professor', profileBio: 'Docente', profileEmail: 'professor@escola.com',
+            aiResult: null, email: '', password: '', isLoading: false, isProcessing: false, isConfirming: false, isAnalyzing: false, errorMsg: '',
+            salasFilter: { busca: '', status: 'todos', nivel: 'todos', ordenar: 'recente' },
+            novaTurma: { nome: '', nivel: 'Ensino Básico', status: 'success', totalAulas: 0, alunos: [] },
+            isCreating: false, activeTab: 'config', modalNota: { alunoId: '', titulo: '', nota: 0, data: '' }, mostrarModalNota: false,
+            scanStep: 1, currentStudentId: null, scanStream: null, selectedTargetClass: '', selectedTargetStudent: '',
+            testDetails: { name: 'Prova Trimestral', subject: 'Matemática', qCount: 20 }, localOfficial: null, studentAnswer: null, user: null
         };
 
-        // ============================================================
-        // FUNÇÕES UTILITÁRIAS
-        // ============================================================
-        function generateId() {
-            return 'id-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-        }
+        function generateId() { return 'id-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9); }
 
         function getInitials(name) {
             if (!name) return '?';
@@ -727,74 +592,19 @@
             return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
         }
 
-        function getStatusClass(gpa) {
-            if (gpa >= 8.0) return 'otimo';
-            if (gpa >= 6.0) return 'bom';
-            if (gpa >= 4.0) return 'regular';
-            return 'ruim';
-        }
-
-        function getStatusIcon(gpa) {
-            if (gpa >= 8.0) return 'fa-star';
-            if (gpa >= 6.0) return 'fa-check-circle';
-            if (gpa >= 4.0) return 'fa-exclamation-triangle';
-            return 'fa-times-circle';
-        }
-
-        function getStatusLabel(gpa) {
-            if (gpa >= 8.0) return 'Ótimo';
-            if (gpa >= 6.0) return 'Bom';
-            if (gpa >= 4.0) return 'Regular';
-            return 'Ruim';
-        }
-
-        function getGradeColor(gpa) {
-            if (gpa >= 8.0) return 'text-green-500';
-            if (gpa >= 6.0) return 'text-blue-500';
-            if (gpa >= 4.0) return 'text-yellow-500';
-            return 'text-red-500';
-        }
-
-        function getStatusColor(status) {
-            if (status === 'success') return 'bg-green-500';
-            if (status === 'warning') return 'bg-yellow-500';
-            return 'bg-red-500';
-        }
-
-        function getRandomDetails(count) {
-            var details = [];
-            for (var i = 0; i < count; i++) {
-                details.push(Math.random() > 0.3 ? 1 : 0);
-            }
-            return details;
-        }
-
-        function getStatusLabelFromStatus(status) {
-            if (status === 'success') return 'Excelente';
-            if (status === 'warning') return 'Atenção';
-            return 'Crítico';
-        }
-
-        function calcularPresencaAluno(student, totalAulas) {
-            if (!student || totalAulas === 0) return 0;
-            var presencas = student.presencas || 0;
-            return Math.round((presencas / totalAulas) * 100);
-        }
-
-        function getPresencaClass(percentual) {
-            if (percentual >= 75) return 'alta';
-            if (percentual >= 50) return 'media';
-            return 'baixa';
-        }
+        function getStatusClass(gpa) { if (gpa >= 8.0) return 'otimo'; if (gpa >= 6.0) return 'bom'; if (gpa >= 4.0) return 'regular'; return 'ruim'; }
+        function getStatusIcon(gpa) { if (gpa >= 8.0) return 'fa-star'; if (gpa >= 6.0) return 'fa-check-circle'; if (gpa >= 4.0) return 'fa-exclamation-triangle'; return 'fa-times-circle'; }
+        function getStatusLabel(gpa) { if (gpa >= 8.0) return 'Ótimo'; if (gpa >= 6.0) return 'Bom'; if (gpa >= 4.0) return 'Regular'; return 'Ruim'; }
+        function getGradeColor(gpa) { if (gpa >= 8.0) return 'text-green-500'; if (gpa >= 6.0) return 'text-blue-500'; if (gpa >= 4.0) return 'text-yellow-500'; return 'text-red-500'; }
+        function getStatusColor(status) { if (status === 'success') return 'bg-green-500'; if (status === 'warning') return 'bg-yellow-500'; return 'bg-red-500'; }
+        function getStatusLabelFromStatus(status) { if (status === 'success') return 'Excelente'; if (status === 'warning') return 'Atenção'; return 'Crítico'; }
+        function getRandomDetails(count) { var details = []; for (var i = 0; i < count; i++) details.push(Math.random() > 0.3 ? 1 : 0); return details; }
+        function calcularPresencaAluno(student, totalAulas) { if (!student || totalAulas === 0) return 0; return Math.round(((student.presencas || 0) / totalAulas) * 100); }
 
         function updateStudentStats(student) {
             var history = student.history || [];
             var total = history.length;
-            if (total === 0) {
-                student.gpa = 0; student.lastGrade = 0; student.testCount = 0;
-                student.successRate = 0; student.trend = 'up'; student.status = 'regular';
-                return student;
-            }
+            if (total === 0) { student.gpa = 0; student.lastGrade = 0; student.testCount = 0; student.successRate = 0; student.trend = 'up'; student.status = 'regular'; return student; }
             var sum = 0, successSum = 0;
             var last = history[history.length - 1] || { grade: 0 };
             for (var i = 0; i < history.length; i++) {
@@ -807,24 +617,17 @@
             student.testCount = total;
             student.successRate = Math.round(successSum / total);
             student.trend = 'up';
-            if (history.length >= 2) {
-                var lastTwo = history.slice(-2);
-                if (lastTwo[1].grade < lastTwo[0].grade) student.trend = 'down';
-            }
+            if (history.length >= 2) { var lastTwo = history.slice(-2); if (lastTwo[1].grade < lastTwo[0].grade) student.trend = 'down'; }
             student.status = getStatusClass(student.gpa);
             return student;
         }
 
         function getSortedStudents(list) {
             var result = (list || []).slice();
-            var filter = App.activeFilter;
+            if (App.activeFilter === 'aprovados') result = result.filter(function(s) { return s.gpa >= CONFIG.NOTA_MINIMA_APROVACAO; });
+            else if (App.activeFilter === 'recuperacao') result = result.filter(function(s) { return s.gpa < CONFIG.NOTA_MINIMA_APROVACAO; });
             var search = App.searchQuery.toLowerCase();
-
-            if (filter === 'aprovados') result = result.filter(function(s) { return s.gpa >= CONFIG.NOTA_MINIMA_APROVACAO; });
-            else if (filter === 'recuperacao') result = result.filter(function(s) { return s.gpa < CONFIG.NOTA_MINIMA_APROVACAO; });
-
             if (search) result = result.filter(function(s) { return s.name.toLowerCase().indexOf(search) !== -1; });
-
             switch (App.activeSort) {
                 case 'alfabetica': return result.sort(function(a, b) { return a.name.localeCompare(b.name); });
                 case 'melhor-desempenho': return result.sort(function(a, b) { return b.gpa - a.gpa; });
@@ -834,144 +637,65 @@
         }
 
         // ============================================================
-        // NAVEGAÇÃO
+        // NAVEGAÇÃO E LOGIN
         // ============================================================
-        function navigateTo(view) {
-            App.view = view;
-            App.sidebarOpen = false;
-            App.showNotifications = false;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            render();
-        }
+        function navigateTo(view) { App.view = view; App.sidebarOpen = false; App.showNotifications = false; window.scrollTo({ top: 0, behavior: 'smooth' }); render(); }
+        function toggleTheme() { App.theme = App.theme === 'light' ? 'dark' : 'light'; render(); }
+        function closeSidebar() { App.sidebarOpen = false; render(); }
 
-        function toggleTheme() {
-            App.theme = App.theme === 'light' ? 'dark' : 'light';
-            render();
-        }
-
-        function closeSidebar() {
-            App.sidebarOpen = false;
-            render();
-        }
-
-        // ============================================================
-        // LOGIN E AUTENTICAÇÃO
-        // ============================================================
         async function handleLogin() {
-            if (!App.email || !App.password) {
-                App.errorMsg = 'Por favor, preencha todos os campos.';
-                render();
-                return;
-            }
-
-            App.isLoading = true;
-            render();
-
+            if (!App.email || !App.password) { App.errorMsg = 'Preencha todos os campos.'; render(); return; }
+            App.isLoading = true; render();
             try {
-                const result = await apiLogin(App.email, App.password);
-                App.user = result.user;
-                App.profileName = result.user.nome;
-                App.profileEmail = result.user.email;
-                App.profileBio = result.user.biografia || 'Docente';
-                App.profileImage = result.user.foto_perfil || null;
-                App.isLoading = false;
-                App.errorMsg = '';
-                
-                await carregarTurmas();
-                navigateTo('dashboard');
-            } catch (error) {
-                App.isLoading = false;
-                App.errorMsg = error.message;
-                render();
-            }
+                var result = await apiLogin(App.email, App.password);
+                App.user = result.user; App.profileName = result.user.nome; App.profileEmail = result.user.email;
+                App.profileBio = result.user.biografia || 'Docente'; App.profileImage = result.user.foto_perfil || null;
+                App.isLoading = false; App.errorMsg = '';
+                await carregarTurmas(); navigateTo('dashboard');
+            } catch (error) { App.isLoading = false; App.errorMsg = error.message; render(); }
         }
 
-        function logoutUser() {
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-            App.user = null;
-            App.classes = [];
-            navigateTo('login');
-        }
+        function logoutUser() { localStorage.removeItem('token'); localStorage.removeItem('user'); App.user = null; App.classes = []; navigateTo('login'); }
 
         async function carregarTurmas() {
             try {
-                const result = await apiListarTurmas();
-                const turmas = result.turmas || result;
-                
-                App.classes = turmas.map(t => ({
-                    id: t.id,
-                    name: t.nome,
-                    studentCount: t.total_alunos || 0,
-                    average: t.media_calculada || 0,
-                    lastActivity: t.data_atualizacao ? new Date(t.data_atualizacao).toLocaleDateString('pt-BR') : 'Sem atividade',
-                    status: t.status || 'success',
-                    totalAulas: t.total_aulas || 0,
-                    nivel: t.nivel || 'Ensino Básico',
-                    students: [],
-                    statistics: {}
-                }));
+                var result = await apiListarTurmas();
+                var turmas = result.turmas || result;
+                App.classes = turmas.map(function(t) {
+                    return { id: t.id, name: t.nome, studentCount: t.total_alunos || 0, average: t.media_calculada || 0, lastActivity: t.data_atualizacao ? new Date(t.data_atualizacao).toLocaleDateString('pt-BR') : 'Sem atividade', status: t.status || 'success', totalAulas: t.total_aulas || 0, nivel: t.nivel || 'Ensino Básico', students: [], statistics: {} };
+                });
                 render();
-            } catch (error) {
-                console.error('Erro ao carregar turmas:', error);
-                App.errorMsg = 'Erro ao carregar turmas: ' + error.message;
-                render();
-            }
+            } catch (error) { console.error('Erro ao carregar turmas:', error); App.errorMsg = 'Erro ao carregar turmas: ' + error.message; render(); }
         }
 
         async function selectClass(classId) {
             try {
-                App.isLoading = true;
-                render();
-
-                const result = await apiBuscarTurma(classId);
-                
+                App.isLoading = true; render();
+                var result = await apiBuscarTurma(classId);
                 if (!result.turma) throw new Error('Turma não encontrada');
-
                 App.selectedClass = {
-                    id: result.turma.id,
-                    name: result.turma.nome,
-                    studentCount: result.turma.total_alunos || 0,
-                    average: result.turma.media_calculada || 0,
-                    status: result.turma.status || 'success',
-                    totalAulas: result.turma.total_aulas || 0,
-                    nivel: result.turma.nivel,
+                    id: result.turma.id, name: result.turma.nome, studentCount: result.turma.total_alunos || 0, average: result.turma.media_calculada || 0,
+                    status: result.turma.status || 'success', totalAulas: result.turma.total_aulas || 0, nivel: result.turma.nivel,
                     students: (result.alunos || []).map(function(a) {
-                        return {
-                            id: a.id, number: a.numero, name: a.nome, gpa: a.gpa || 0,
-                            lastGrade: a.ultima_nota || 0, testCount: a.total_provas || 0,
-                            successRate: a.taxa_acerto || 0, trend: a.tendencia || 'up',
-                            faltas: a.faltas || 0, presencas: a.presencas || 0, history: []
-                        };
+                        return { id: a.id, number: a.numero, name: a.nome, gpa: a.gpa || 0, lastGrade: a.ultima_nota || 0, testCount: a.total_provas || 0, successRate: a.taxa_acerto || 0, trend: a.tendencia || 'up', faltas: a.faltas || 0, presencas: a.presencas || 0, history: [] };
                     })
                 };
-
                 for (var i = 0; i < App.selectedClass.students.length; i++) {
                     try {
-                        const alunoData = await apiBuscarAluno(App.selectedClass.students[i].id);
+                        var alunoData = await apiBuscarAluno(App.selectedClass.students[i].id);
                         App.selectedClass.students[i].history = alunoData.history || [];
                         updateStudentStats(App.selectedClass.students[i]);
                     } catch (e) { console.warn('⚠️ Erro ao carregar histórico:', e); }
                 }
-
-                App.isLoading = false;
-                App.showStatsTab = false;
-                navigateTo('sala-detalhe');
-
+                App.isLoading = false; App.showStatsTab = false; navigateTo('sala-detalhe');
             } catch (error) {
-                App.isLoading = false;
-                console.error('❌ Erro ao selecionar turma:', error);
-                App.mensagemErro = 'Erro ao carregar turma: ' + error.message;
-                App.showSyncError = true;
-                render();
+                App.isLoading = false; console.error('❌ Erro ao selecionar turma:', error);
+                App.mensagemErro = 'Erro ao carregar turma: ' + error.message; App.showSyncError = true; render();
                 setTimeout(function() { App.showSyncError = false; render(); }, 5000);
             }
         }
 
-        function selectClassAndNavigate(classId, view) {
-            selectClass(classId);
-            setTimeout(function() { navigateTo(view); }, 500);
-        }
+        function selectClassAndNavigate(classId, view) { selectClass(classId); setTimeout(function() { navigateTo(view); }, 500); }
 
         // ============================================================
         // RENDER PRINCIPAL
@@ -979,14 +703,10 @@
         function render() {
             var html = '';
             var themeClass = App.theme === 'dark' ? 'dark' : '';
-
             var toastHtml = '';
-            if (App.showSyncSuccess) {
-                toastHtml = '<div class="toast-success"><i class="fas fa-check-circle"></i><div><p class="text-sm font-black uppercase">Sucesso!</p><p class="text-xs opacity-90">' + App.mensagemToast + '</p></div><button onclick="App.showSyncSuccess=false;render();" class="text-white hover:opacity-70 ml-2"><i class="fas fa-times"></i></button></div>';
-            }
-            if (App.showSyncError) {
-                toastHtml = '<div class="toast-error"><i class="fas fa-exclamation-circle"></i><div><p class="text-sm font-black uppercase">Erro!</p><p class="text-xs opacity-90">' + App.mensagemErro + '</p></div><button onclick="App.showSyncError=false;render();" class="text-white hover:opacity-70 ml-2"><i class="fas fa-times"></i></button></div>';
-            }
+            
+            if (App.showSyncSuccess) toastHtml = '<div class="toast-success"><i class="fas fa-check-circle"></i><div><p class="text-sm font-black uppercase">Sucesso!</p><p class="text-xs opacity-90">' + App.mensagemToast + '</p></div><button onclick="App.showSyncSuccess=false;render();" class="text-white hover:opacity-70 ml-2"><i class="fas fa-times"></i></button></div>';
+            if (App.showSyncError) toastHtml = '<div class="toast-error"><i class="fas fa-exclamation-circle"></i><div><p class="text-sm font-black uppercase">Erro!</p><p class="text-xs opacity-90">' + App.mensagemErro + '</p></div><button onclick="App.showSyncError=false;render();" class="text-white hover:opacity-70 ml-2"><i class="fas fa-times"></i></button></div>';
 
             var viewHtml = '';
             switch (App.view) {
@@ -1015,72 +735,43 @@
             }
 
             var sidebarHtml = App.sidebarOpen ? renderSidebar() : '';
-
-            html =
-                '<div class="min-h-screen ' + themeClass + ' bg-[#f0f7f7] dark:bg-slate-900 font-sans text-gray-800 dark:text-slate-100 transition-colors duration-200">' +
-                toastHtml +
-                '<main class="flex-1 w-full flex flex-col relative"><div class="flex-1 w-full max-w-5xl mx-auto bg-white dark:bg-slate-800 min-h-screen shadow-xl flex flex-col relative overflow-hidden transition-colors">' +
-                viewHtml +
-                '</div></main>' +
-                sidebarHtml +
-                '</div>';
-
+            html = '<div class="min-h-screen ' + themeClass + ' bg-[#f0f7f7] dark:bg-slate-900 font-sans text-gray-800 dark:text-slate-100 transition-colors duration-200">' +
+                toastHtml + '<main class="flex-1 w-full flex flex-col relative"><div class="flex-1 w-full max-w-5xl mx-auto bg-white dark:bg-slate-800 min-h-screen shadow-xl flex flex-col relative overflow-hidden transition-colors">' +
+                viewHtml + '</div></main>' + sidebarHtml + '</div>';
+            
             document.getElementById('app').innerHTML = html;
-
             if (App.view === 'scan') setTimeout(initScan, 300);
         }
 
         // ============================================================
-        // RENDERIZAÇÃO - COMPONENTES BÁSICOS
+        // RENDERIZAÇÃO BÁSICA
         // ============================================================
         function renderSplash() {
-            return '<div class="flex-1 flex flex-col items-center justify-center p-8 bg-white dark:bg-slate-800 cursor-pointer" onclick="navigateTo(\'login\')">' +
-                '<div class="animate-bounce flex flex-col items-center">' + renderLogo('w-48 h-48') + renderLogoText() + '</div>' +
-                '<p class="text-gray-400 dark:text-gray-500 text-xs mt-16">Toque no ecrã para iniciar</p></div>';
+            return '<div class="flex-1 flex flex-col items-center justify-center p-8 bg-white dark:bg-slate-800 cursor-pointer" onclick="navigateTo(\'login\')"><div class="animate-bounce flex flex-col items-center">' + renderLogo('w-48 h-48') + renderLogoText() + '</div><p class="text-gray-400 dark:text-gray-500 text-xs mt-16">Toque no ecrã para iniciar</p></div>';
         }
-
         function renderLogo(className) {
-            className = className || 'w-24 h-24';
-            return '<div class="logo-fixed ' + className + '">' +
-                '<img src="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' rx=\'20\' fill=\'%237aa2a1\'/%3E%3Ctext x=\'50\' y=\'58\' text-anchor=\'middle\' fill=\'white\' font-size=\'32\' font-weight=\'bold\' font-family=\'Arial\'%3EAC%3C/text%3E%3C/svg%3E" alt="Automatic Correction" style="width:100%;height:100%;object-fit:contain;" /></div>';
+            return '<div class="logo-fixed ' + className + '"><img src="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' rx=\'20\' fill=\'%237aa2a1\'/%3E%3Ctext x=\'50\' y=\'58\' text-anchor=\'middle\' fill=\'white\' font-size=\'32\' font-weight=\'bold\' font-family=\'Arial\'%3EAC%3C/text%3E%3C/svg%3E" alt="Automatic Correction" style="width:100%;height:100%;object-fit:contain;" /></div>';
         }
-
         function renderLogoText() {
-            return '<div class="text-center mt-3"><h1 class="text-2xl font-black tracking-widest text-[#7aa2a1] dark:text-[#a0c4c3]">AUTOMATIC CORRECTION</h1>' +
-                '<p class="text-xs tracking-wider mt-1 font-semibold opacity-90 text-[#7aa2a1] dark:text-[#a0c4c3]">AUTOMATIZE A CORREÇÃO, OTIMIZE O SEU TEMPO!</p></div>';
+            return '<div class="text-center mt-3"><h1 class="text-2xl font-black tracking-widest text-[#7aa2a1] dark:text-[#a0c4c3]">AUTOMATIC CORRECTION</h1><p class="text-xs tracking-wider mt-1 font-semibold opacity-90 text-[#7aa2a1] dark:text-[#a0c4c3]">AUTOMATIZE A CORREÇÃO, OTIMIZE O SEU TEMPO!</p></div>';
         }
-
         function renderSimpleHeader(title) {
-            return '<div class="flex items-center justify-between p-6 border-b border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800">' +
-                '<button onclick="navigateTo(\'dashboard\')" class="text-gray-400 hover:text-black p-2 hover:bg-gray-50 rounded-full transition-colors"><i class="fas fa-arrow-left text-2xl"></i></button>' +
-                '<h2 class="text-lg font-black text-gray-700 dark:text-slate-100 tracking-wide">' + title + '</h2><div class="w-10"></div></div>';
+            return '<div class="flex items-center justify-between p-6 border-b border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800"><button onclick="navigateTo(\'dashboard\')" class="text-gray-400 hover:text-black p-2 hover:bg-gray-50 rounded-full transition-colors"><i class="fas fa-arrow-left text-2xl"></i></button><h2 class="text-lg font-black text-gray-700 dark:text-slate-100 tracking-wide">' + title + '</h2><div class="w-10"></div></div>';
         }
 
-        // ============================================================
-        // RENDERIZAÇÃO - LOGIN / REGISTER
-        // ============================================================
         function renderLogin() {
             if (App.isLoading) return '<div class="flex-1 flex flex-col items-center justify-center p-8"><div class="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#7aa2a1]"></div><p class="text-sm font-bold text-gray-500 mt-4">A autenticar...</p></div>';
-
-            return '<div class="flex-1 flex flex-col items-center justify-center p-8 bg-white dark:bg-slate-800 max-w-md mx-auto w-full">' +
-                '<div class="mb-8 w-full flex flex-col items-center">' + renderLogo('w-28 h-28') + renderLogoText() + '</div>' +
-                '<div class="w-full space-y-4">' +
-                (App.errorMsg ? '<div class="bg-red-50 text-red-600 p-3 rounded-xl text-sm font-bold text-center border border-red-200">' + App.errorMsg + '</div>' : '') +
+            return '<div class="flex-1 flex flex-col items-center justify-center p-8 bg-white dark:bg-slate-800 max-w-md mx-auto w-full"><div class="mb-8 w-full flex flex-col items-center">' + renderLogo('w-28 h-28') + renderLogoText() + '</div>' +
+                '<div class="w-full space-y-4">' + (App.errorMsg ? '<div class="bg-red-50 text-red-600 p-3 rounded-xl text-sm font-bold text-center border border-red-200">' + App.errorMsg + '</div>' : '') +
                 '<div><label class="text-xs font-bold text-gray-500 mb-1 block">E-mail</label><input type="email" placeholder="seu@email.com" class="input-style" value="' + App.email + '" onchange="App.email=this.value" /></div>' +
                 '<div><label class="text-xs font-bold text-gray-500 mb-1 block">Senha</label><input type="password" placeholder="Digite sua senha" class="input-style" value="' + App.password + '" onchange="App.password=this.value" onkeydown="if(event.key===\'Enter\') handleLogin()" /></div>' +
-                '<div class="flex flex-col items-center gap-3 pt-4">' +
-                '<button onclick="handleLogin()" class="w-full py-3.5 bg-[#7aa2a1] hover:bg-[#688f8e] text-white font-bold rounded-xl text-sm transition-all shadow-md flex items-center justify-center gap-2"><i class="fas fa-sign-in-alt"></i> Entrar</button>' +
-                '<button onclick="navigateTo(\'register\')" class="text-sm text-[#7aa2a1] hover:underline font-bold">Criar conta</button>' +
-                '</div></div></div>';
+                '<div class="flex flex-col items-center gap-3 pt-4"><button onclick="handleLogin()" class="w-full py-3.5 bg-[#7aa2a1] hover:bg-[#688f8e] text-white font-bold rounded-xl text-sm transition-all shadow-md flex items-center justify-center gap-2"><i class="fas fa-sign-in-alt"></i> Entrar</button><button onclick="navigateTo(\'register\')" class="text-sm text-[#7aa2a1] hover:underline font-bold">Criar conta</button></div></div></div>';
         }
 
         function renderRegister() {
             if (App.isLoading) return '<div class="flex-1 flex flex-col items-center justify-center p-8"><div class="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#7aa2a1]"></div><p class="text-sm font-bold text-gray-500 mt-4">A criar conta...</p></div>';
-
-            return '<div class="flex-1 flex flex-col items-center py-8 px-6 bg-white dark:bg-slate-800 max-w-md mx-auto w-full">' +
-                renderLogo('w-20 h-20') + renderLogoText() +
-                '<div class="w-full space-y-3 mt-6">' +
-                (App.errorMsg ? '<div class="bg-red-50 text-red-600 p-3 rounded-xl text-sm font-bold text-center border border-red-200">' + App.errorMsg + '</div>' : '') +
+            return '<div class="flex-1 flex flex-col items-center py-8 px-6 bg-white dark:bg-slate-800 max-w-md mx-auto w-full">' + renderLogo('w-20 h-20') + renderLogoText() +
+                '<div class="w-full space-y-3 mt-6">' + (App.errorMsg ? '<div class="bg-red-50 text-red-600 p-3 rounded-xl text-sm font-bold text-center border border-red-200">' + App.errorMsg + '</div>' : '') +
                 '<div><label class="text-xs font-bold text-gray-500 mb-1 block">Nome *</label><input type="text" placeholder="Seu nome" class="input-style" id="regNome" /></div>' +
                 '<div><label class="text-xs font-bold text-gray-500 mb-1 block">Apelido *</label><input type="text" placeholder="Seu apelido" class="input-style" id="regSobrenome" /></div>' +
                 '<div><label class="text-xs font-bold text-gray-500 mb-1 block">E-mail *</label><input type="email" placeholder="seu@email.com" class="input-style" id="regEmail" /></div>' +
@@ -1088,70 +779,50 @@
                 '<div><label class="text-xs font-bold text-gray-500 mb-1 block">Confirmar Senha *</label><input type="password" placeholder="Digite a senha novamente" class="input-style" id="regConfirmSenha" /></div>' +
                 '<div class="flex items-start gap-2.5 my-3"><input type="checkbox" class="mt-1 h-4 w-4 rounded" style="accentColor:#7aa2a1" id="regTermos" /><span class="text-xs text-gray-500">Li e concordo com os termos.</span></div>' +
                 '<button onclick="handleRegister()" class="btn-solid flex items-center justify-center gap-2"><i class="fas fa-user-plus"></i> Criar conta</button>' +
-                '<button onclick="navigateTo(\'login\')" class="text-sm font-bold text-gray-500 text-center hover:underline mt-2">Voltar ao Login</button>' +
-                '</div></div>';
+                '<button onclick="navigateTo(\'login\')" class="text-sm font-bold text-gray-500 text-center hover:underline mt-2">Voltar ao Login</button></div></div>';
         }
 
         async function handleRegister() {
-            const nome = document.getElementById('regNome').value.trim();
-            const sobrenome = document.getElementById('regSobrenome').value.trim();
-            const email = document.getElementById('regEmail').value.trim();
-            const senha = document.getElementById('regSenha').value;
-            const confirmSenha = document.getElementById('regConfirmSenha').value;
-            const termos = document.getElementById('regTermos').checked;
+            var nome = document.getElementById('regNome').value.trim();
+            var sobrenome = document.getElementById('regSobrenome').value.trim();
+            var email = document.getElementById('regEmail').value.trim();
+            var senha = document.getElementById('regSenha').value;
+            var confirmSenha = document.getElementById('regConfirmSenha').value;
+            var termos = document.getElementById('regTermos').checked;
 
-            if (!nome || !sobrenome || !email || !senha) { App.errorMsg = 'Preencha todos os campos obrigatórios.'; render(); return; }
-            if (senha.length < 6) { App.errorMsg = 'A senha deve ter pelo menos 6 caracteres.'; render(); return; }
+            if (!nome || !sobrenome || !email || !senha) { App.errorMsg = 'Preencha todos os campos.'; render(); return; }
+            if (senha.length < 6) { App.errorMsg = 'A senha deve ter 6 caracteres.'; render(); return; }
             if (senha !== confirmSenha) { App.errorMsg = 'As senhas não coincidem.'; render(); return; }
-            if (!termos) { App.errorMsg = 'Aceite os termos para continuar.'; render(); return; }
+            if (!termos) { App.errorMsg = 'Aceite os termos.'; render(); return; }
 
             App.isLoading = true; App.errorMsg = ''; render();
-
             try {
-                await apiRegister({ nome, sobrenome, email, senha });
-                App.isLoading = false;
-                App.mensagemToast = 'Conta criada com sucesso!';
-                App.showSyncSuccess = true;
+                await apiRegister({ nome: nome, sobrenome: sobrenome, email: email, senha: senha });
+                App.isLoading = false; App.mensagemToast = 'Conta criada!'; App.showSyncSuccess = true;
                 await carregarTurmas();
-                setTimeout(() => { App.showSyncSuccess = false; navigateTo('dashboard'); }, 2000);
+                setTimeout(function() { App.showSyncSuccess = false; navigateTo('dashboard'); }, 2000);
                 render();
-            } catch (error) {
-                App.isLoading = false; App.errorMsg = error.message; render();
-            }
+            } catch (error) { App.isLoading = false; App.errorMsg = error.message; render(); }
         }
 
         function renderSuccess() {
-            return '<div class="flex-1 flex flex-col items-center justify-center p-8 bg-white max-w-md mx-auto w-full">' +
-                '<div class="p-4 bg-[#e8f1f1] rounded-full mb-6"><i class="fas fa-check-circle text-7xl text-[#7aa2a1]"></i></div>' +
-                '<h2 class="text-2xl font-black text-gray-700 italic text-center mb-8">Registo realizado com sucesso!</h2>' +
-                '<button onclick="navigateTo(\'dashboard\')" class="btn-solid">Aceder ao Painel <i class="fas fa-arrow-right"></i></button></div>';
+            return '<div class="flex-1 flex flex-col items-center justify-center p-8 bg-white max-w-md mx-auto w-full"><div class="p-4 bg-[#e8f1f1] rounded-full mb-6"><i class="fas fa-check-circle text-7xl text-[#7aa2a1]"></i></div><h2 class="text-2xl font-black text-gray-700 italic text-center mb-8">Registo realizado com sucesso!</h2><button onclick="navigateTo(\'dashboard\')" class="btn-solid">Aceder ao Painel <i class="fas fa-arrow-right"></i></button></div>';
         }
 
         // ============================================================
-        // RENDERIZAÇÃO - SIDEBAR E DASHBOARD
+        // SIDEBAR E DASHBOARD
         // ============================================================
         function renderSidebar() {
             var profileImg = App.profileImage ? '<img src="' + App.profileImage + '" class="w-full h-full object-cover" />' : '<i class="fas fa-user text-2xl"></i>';
             var themeIcon = App.theme === 'light' ? 'fa-moon' : 'fa-sun';
             var toggleClass = App.theme === 'dark' ? 'active' : 'inactive';
 
-            return '<div class="sidebar"><div class="sidebar-backdrop" onclick="closeSidebar()"></div><div class="sidebar-content">' +
-                '<div class="p-6 flex flex-col h-full">' +
+            return '<div class="sidebar"><div class="sidebar-backdrop" onclick="closeSidebar()"></div><div class="sidebar-content"><div class="p-6 flex flex-col h-full">' +
                 '<div class="flex justify-between items-center mb-8"><span class="text-sm font-semibold text-gray-500">Menu</span><button onclick="closeSidebar()" class="text-gray-500 hover:text-black"><i class="fas fa-times text-2xl"></i></button></div>' +
-                '<div class="flex items-center gap-4 mb-8 p-3 bg-white dark:bg-slate-700 rounded-xl shadow-sm cursor-pointer" onclick="navigateTo(\'profile\');closeSidebar();">' +
-                '<div class="w-14 h-14 bg-gray-300 rounded-full flex items-center justify-center text-white overflow-hidden shrink-0">' + profileImg + '</div>' +
-                '<div class="overflow-hidden"><h3 class="font-bold text-gray-700 dark:text-gray-200 truncate">' + App.profileName + '</h3><p class="text-xs text-gray-500 italic">Professor</p></div></div>' +
-                '<div class="space-y-2">' +
-                '<button onclick="navigateTo(\'dashboard\');closeSidebar();" class="menu-item"><i class="fas fa-sync-alt text-[#7aa2a1]"></i> Painel Principal</button>' +
-                '<button onclick="navigateTo(\'salas\');closeSidebar();" class="menu-item"><i class="fas fa-users text-[#7aa2a1]"></i> Gestão de Salas</button>' +
-                '<button onclick="navigateTo(\'profile\');closeSidebar();" class="menu-item"><i class="fas fa-user text-[#7aa2a1]"></i> O Meu Perfil</button></div>' +
-                '<div class="mt-8 pt-4 border-t dark:border-slate-700">' +
-                '<button onclick="toggleTheme()" class="w-full flex items-center justify-between py-2 px-4 rounded-lg bg-white dark:bg-slate-700 text-sm font-bold shadow-sm text-gray-700 dark:text-gray-200">' +
-                '<span class="flex items-center gap-2"><i class="fas ' + themeIcon + ' text-[#7aa2a1]"></i> ' + (App.theme === 'light' ? 'Modo Escuro' : 'Modo Claro') + '</span>' +
-                '<div class="toggle-switch ' + toggleClass + '" onclick="event.stopPropagation();toggleTheme();"><div class="toggle-dot"></div></div></button></div>' +
-                '<button onclick="logoutUser()" class="mt-auto flex items-center gap-2 text-red-500 font-bold hover:bg-red-50 p-3 rounded-lg"><i class="fas fa-sign-out-alt"></i> Sair</button>' +
-                '<div class="mt-2 pt-2 border-t dark:border-slate-700"><a href="' + CONFIG.GITHUB_URL + '" target="_blank" class="flex items-center gap-2 text-gray-500 hover:text-[#7aa2a1] text-xs font-bold p-2"><i class="fab fa-github"></i> GitHub</a></div>' +
-                '</div></div></div>';
+                '<div class="flex items-center gap-4 mb-8 p-3 bg-white dark:bg-slate-700 rounded-xl shadow-sm cursor-pointer" onclick="navigateTo(\'profile\');closeSidebar();"><div class="w-14 h-14 bg-gray-300 rounded-full flex items-center justify-center text-white overflow-hidden shrink-0">' + profileImg + '</div><div class="overflow-hidden"><h3 class="font-bold text-gray-700 dark:text-gray-200 truncate">' + App.profileName + '</h3><p class="text-xs text-gray-500 italic">Professor</p></div></div>' +
+                '<div class="space-y-2"><button onclick="navigateTo(\'dashboard\');closeSidebar();" class="menu-item"><i class="fas fa-sync-alt text-[#7aa2a1]"></i> Painel Principal</button><button onclick="navigateTo(\'salas\');closeSidebar();" class="menu-item"><i class="fas fa-users text-[#7aa2a1]"></i> Gestão de Salas</button><button onclick="navigateTo(\'profile\');closeSidebar();" class="menu-item"><i class="fas fa-user text-[#7aa2a1]"></i> O Meu Perfil</button></div>' +
+                '<div class="mt-8 pt-4 border-t dark:border-slate-700"><button onclick="toggleTheme()" class="w-full flex items-center justify-between py-2 px-4 rounded-lg bg-white dark:bg-slate-700 text-sm font-bold shadow-sm text-gray-700 dark:text-gray-200"><span class="flex items-center gap-2"><i class="fas ' + themeIcon + ' text-[#7aa2a1]"></i> ' + (App.theme === 'light' ? 'Modo Escuro' : 'Modo Claro') + '</span><div class="toggle-switch ' + toggleClass + '" onclick="event.stopPropagation();toggleTheme();"><div class="toggle-dot"></div></div></button></div>' +
+                '<button onclick="logoutUser()" class="mt-auto flex items-center gap-2 text-red-500 font-bold hover:bg-red-50 p-3 rounded-lg"><i class="fas fa-sign-out-alt"></i> Sair</button><div class="mt-2 pt-2 border-t dark:border-slate-700"><a href="' + CONFIG.GITHUB_URL + '" target="_blank" class="flex items-center gap-2 text-gray-500 hover:text-[#7aa2a1] text-xs font-bold p-2"><i class="fab fa-github"></i> GitHub</a></div></div></div></div>';
         }
 
         function renderDashboard() {
@@ -1167,7 +838,6 @@
             ];
             var unreadCount = App.notifications.filter(function(n) { return n.unread; }).length;
             var notifHtml = '';
-
             if (App.showNotifications) {
                 var listHtml = App.notifications.map(function(n) {
                     var cls = n.unread ? 'bg-[#e8f1f1] dark:bg-slate-600/50 font-semibold' : 'bg-gray-50 dark:bg-slate-600/10 text-gray-500';
@@ -1175,719 +845,148 @@
                 }).join('');
                 notifHtml = '<div class="absolute right-0 mt-2 w-72 bg-white dark:bg-slate-700 rounded-2xl shadow-2xl border border-gray-100 dark:border-slate-600 z-50 p-4 animate-fade-in"><div class="flex justify-between items-center mb-3 pb-2 border-b dark:border-slate-600"><span class="text-xs font-black uppercase text-gray-500">Notificações</span><button onclick="markAllRead()" class="text-[10px] text-[#7aa2a1] font-bold">Marcar lidas</button></div><div class="space-y-3 max-h-60 overflow-y-auto">' + listHtml + '</div></div>';
             }
-
             var itemsHtml = items.map(function(item) {
                 return '<button onclick="navigateTo(\'' + item.id + '\')" class="dashboard-item"><i class="fas ' + item.icon + '"></i><span>' + item.label + '</span></button>';
             }).join('');
-
-            return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800">' +
-                '<div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-slate-700">' +
-                '<button onclick="App.sidebarOpen=true;render();" class="text-gray-600 dark:text-gray-300 p-2"><i class="fas fa-bars text-3xl"></i></button>' +
-                '<div class="flex flex-col items-center">' + renderLogo('w-12 h-12') + renderLogoText() + '</div>' +
-                '<div class="flex items-center gap-2">' +
-                '<div class="relative cursor-pointer text-green-500 p-2"><i class="fas fa-cloud text-xl animate-bounce"></i><div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-white"></div></div>' +
-                '<div class="relative"><button onclick="App.showNotifications=!App.showNotifications;render();" class="p-2 text-gray-600 dark:text-gray-300 relative hover:bg-gray-100 rounded-full"><i class="fas fa-bell text-2xl"></i>' + (unreadCount > 0 ? '<span class="notification-badge">' + unreadCount + '</span>' : '') + '</button>' + notifHtml + '</div>' +
-                '</div></div>' +
-                '<div class="flex-1 p-6 md:p-10 flex flex-col items-center justify-center max-w-4xl mx-auto w-full">' +
-                '<h2 class="text-gray-400 dark:text-gray-500 font-bold text-xs tracking-widest uppercase mb-6 self-start flex items-center gap-2"><i class="fas fa-sparkles text-[#7aa2a1]"></i> Painel de ferramentas do docente</h2>' +
-                '<div class="dashboard-grid">' + itemsHtml + '</div>' +
-                '<div class="mt-6 text-center text-[10px] text-gray-400"><a href="' + CONFIG.GITHUB_URL + '" target="_blank" class="hover:text-[#7aa2a1]"><i class="fab fa-github"></i> GitHub</a></div>' +
-                '</div></div>';
+            return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800"><div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-slate-700"><button onclick="App.sidebarOpen=true;render();" class="text-gray-600 dark:text-gray-300 p-2"><i class="fas fa-bars text-3xl"></i></button><div class="flex flex-col items-center">' + renderLogo('w-12 h-12') + renderLogoText() + '</div><div class="flex items-center gap-2"><div class="relative cursor-pointer text-green-500 p-2"><i class="fas fa-cloud text-xl animate-bounce"></i><div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-white"></div></div><div class="relative"><button onclick="App.showNotifications=!App.showNotifications;render();" class="p-2 text-gray-600 dark:text-gray-300 relative hover:bg-gray-100 rounded-full"><i class="fas fa-bell text-2xl"></i>' + (unreadCount > 0 ? '<span class="notification-badge">' + unreadCount + '</span>' : '') + '</button>' + notifHtml + '</div></div></div><div class="flex-1 p-6 md:p-10 flex flex-col items-center justify-center max-w-4xl mx-auto w-full"><h2 class="text-gray-400 dark:text-gray-500 font-bold text-xs tracking-widest uppercase mb-6 self-start flex items-center gap-2"><i class="fas fa-sparkles text-[#7aa2a1]"></i> Painel de ferramentas do docente</h2><div class="dashboard-grid">' + itemsHtml + '</div><div class="mt-6 text-center text-[10px] text-gray-400"><a href="' + CONFIG.GITHUB_URL + '" target="_blank" class="hover:text-[#7aa2a1]"><i class="fab fa-github"></i> GitHub</a></div></div></div>';
         }
 
-        function markAllRead() {
-            App.notifications.forEach(function(n) { n.unread = false; });
-            App.showNotifications = false;
-            render();
-        }
+        function markAllRead() { App.notifications.forEach(function(n) { n.unread = false; }); App.showNotifications = false; render(); }
 
         // ============================================================
-        // RENDERIZAÇÃO - PERFIL
+        // PERFIL
         // ============================================================
         function renderProfile() {
             var profileImg = App.profileImage ? '<img src="' + App.profileImage + '" class="w-full h-full object-cover" />' : '<i class="fas fa-user text-6xl text-gray-400"></i>';
-
-            return '<div class="flex-1 flex flex-col p-6 md:p-10 bg-white dark:bg-slate-800 max-w-2xl mx-auto w-full">' +
-                '<div class="flex items-center justify-between mb-8"><button onclick="navigateTo(\'dashboard\')" class="text-gray-400 hover:text-black p-2"><i class="fas fa-arrow-left text-2xl"></i></button><h2 class="text-xl font-bold text-gray-700 dark:text-slate-100">O Meu Perfil</h2><div class="w-10"></div></div>' +
-                '<div class="flex flex-col items-center mb-8">' +
-                '<div class="relative group cursor-pointer" onclick="document.getElementById(\'profileInput\').click()">' +
-                '<div class="w-32 h-32 bg-gray-200 dark:bg-slate-700 rounded-full flex items-center justify-center overflow-hidden border-4 border-[#e8f1f1] dark:border-slate-700 shadow-md">' + profileImg + '</div>' +
-                '<div class="absolute bottom-1 right-1 bg-[#7aa2a1] text-white p-2 rounded-full shadow border-2 border-white hover:bg-[#688f8e]"><i class="fas fa-camera text-sm"></i></div></div>' +
-                '<p class="text-xs text-gray-400 dark:text-gray-500 mt-3 font-semibold">Clique para alterar a imagem</p>' +
-                '<input type="file" id="profileInput" class="hidden" accept="image/*" onchange="handleProfileImage(event)" /></div>' +
-                '<div class="space-y-4 max-w-md mx-auto w-full">' +
-                '<div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Nome do Docente</label><input type="text" class="input-style" value="' + App.profileName + '" id="profileNameInput" /></div>' +
-                '<div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Biografia / Escola</label><input type="text" class="input-style" value="' + App.profileBio + '" id="profileBioInput" /></div>' +
-                '<div><label class="text-xs font-bold text-gray-500 mb-1.5 block">E-mail de Contacto</label><input type="email" class="input-style" value="' + App.profileEmail + '" id="profileEmailInput" /></div>' +
-                '<div class="pt-6"><button onclick="handleUpdateProfile()" class="btn-solid">Guardar Alterações</button></div></div></div>';
+            return '<div class="flex-1 flex flex-col p-6 md:p-10 bg-white dark:bg-slate-800 max-w-2xl mx-auto w-full"><div class="flex items-center justify-between mb-8"><button onclick="navigateTo(\'dashboard\')" class="text-gray-400 hover:text-black p-2"><i class="fas fa-arrow-left text-2xl"></i></button><h2 class="text-xl font-bold text-gray-700 dark:text-slate-100">O Meu Perfil</h2><div class="w-10"></div></div><div class="flex flex-col items-center mb-8"><div class="relative group cursor-pointer" onclick="document.getElementById(\'profileInput\').click()"><div class="w-32 h-32 bg-gray-200 dark:bg-slate-700 rounded-full flex items-center justify-center overflow-hidden border-4 border-[#e8f1f1] dark:border-slate-700 shadow-md">' + profileImg + '</div><div class="absolute bottom-1 right-1 bg-[#7aa2a1] text-white p-2 rounded-full shadow border-2 border-white hover:bg-[#688f8e]"><i class="fas fa-camera text-sm"></i></div></div><p class="text-xs text-gray-400 dark:text-gray-500 mt-3 font-semibold">Clique para alterar</p><input type="file" id="profileInput" class="hidden" accept="image/*" onchange="handleProfileImage(event)" /></div><div class="space-y-4 max-w-md mx-auto w-full"><div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Nome</label><input type="text" class="input-style" value="' + App.profileName + '" id="profileNameInput" /></div><div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Biografia</label><input type="text" class="input-style" value="' + App.profileBio + '" id="profileBioInput" /></div><div><label class="text-xs font-bold text-gray-500 mb-1.5 block">E-mail</label><input type="email" class="input-style" value="' + App.profileEmail + '" id="profileEmailInput" /></div><div class="pt-6"><button onclick="handleUpdateProfile()" class="btn-solid">Guardar</button></div></div></div>';
         }
 
         async function handleUpdateProfile() {
             try {
-                const nome = document.getElementById('profileNameInput').value;
-                const biografia = document.getElementById('profileBioInput').value;
-                const email = document.getElementById('profileEmailInput').value;
-
-                await apiUpdateProfile({ nome, sobrenome: App.user?.sobrenome || '', email, biografia, escola: biografia, foto_perfil: App.profileImage });
-
+                var nome = document.getElementById('profileNameInput').value;
+                var biografia = document.getElementById('profileBioInput').value;
+                var email = document.getElementById('profileEmailInput').value;
+                await apiUpdateProfile({ nome: nome, sobrenome: App.user ? App.user.sobrenome : '', email: email, biografia: biografia, escola: biografia, foto_perfil: App.profileImage });
                 App.profileName = nome; App.profileBio = biografia; App.profileEmail = email;
-                App.mensagemToast = 'Perfil atualizado!'; App.showSyncSuccess = true;
-                render();
+                App.mensagemToast = 'Perfil atualizado!'; App.showSyncSuccess = true; render();
                 setTimeout(function() { App.showSyncSuccess = false; render(); }, 3000);
-            } catch (error) {
-                App.mensagemErro = 'Erro ao atualizar: ' + error.message; App.showSyncError = true;
-                render();
-                setTimeout(function() { App.showSyncError = false; render(); }, 3000);
-            }
+            } catch (error) { App.mensagemErro = 'Erro: ' + error.message; App.showSyncError = true; render(); setTimeout(function() { App.showSyncError = false; render(); }, 3000); }
         }
 
-        function handleProfileImage(event) {
-            var file = event.target.files[0];
-            if (file) {
-                processarArquivoImagem(file, function(result) { App.profileImage = result.dataUrl; render(); });
-            }
-        }
+        function handleProfileImage(event) { var file = event.target.files[0]; if (file) processarArquivoImagem(file, function(result) { App.profileImage = result.dataUrl; render(); }); }
 
         // ============================================================
-        // GESTÃO DE SALAS (ATUALIZADA)
+        // SALAS E DETALHES
         // ============================================================
         function renderSalas() {
-            const filtro = App.salasFilter;
-            let turmasFiltradas = [...App.classes];
+            var filtro = App.salasFilter;
+            var turmasFiltradas = App.classes.slice();
+            if (filtro.busca) turmasFiltradas = turmasFiltradas.filter(function(t) { return t.name.toLowerCase().indexOf(filtro.busca.toLowerCase()) !== -1; });
+            if (filtro.status !== 'todos') turmasFiltradas = turmasFiltradas.filter(function(t) { return t.status === filtro.status; });
             
-            if (filtro.busca) turmasFiltradas = turmasFiltradas.filter(t => t.name.toLowerCase().includes(filtro.busca.toLowerCase()));
-            if (filtro.status !== 'todos') turmasFiltradas = turmasFiltradas.filter(t => t.status === filtro.status);
-            if (filtro.nivel !== 'todos') turmasFiltradas = turmasFiltradas.filter(t => t.nivel && t.nivel.toLowerCase().includes(filtro.nivel.toLowerCase()));
-            
-            switch (filtro.ordenar) {
-                case 'nome': turmasFiltradas.sort((a, b) => a.name.localeCompare(b.name)); break;
-                case 'media': turmasFiltradas.sort((a, b) => b.average - a.average); break;
-                case 'alunos': turmasFiltradas.sort((a, b) => b.studentCount - a.studentCount); break;
-                default: break;
-            }
-            
-            const totalTurmas = App.classes.length;
-            const totalAlunos = App.classes.reduce((acc, t) => acc + (t.studentCount || 0), 0);
-            const mediaGeral = totalTurmas > 0 ? (App.classes.reduce((acc, t) => acc + (t.average || 0), 0) / totalTurmas).toFixed(1) : '0.0';
-            const turmasAlerta = App.classes.filter(t => t.status === 'warning').length;
-            const turmasCriticas = App.classes.filter(t => t.status === 'danger').length;
-            
-            const statsHtml = `
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-                    <div class="bg-white dark:bg-slate-700 p-4 rounded-2xl border border-gray-100 dark:border-slate-600 shadow-sm">
-                        <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-[#e8f1f1] dark:bg-slate-600 flex items-center justify-center"><i class="fas fa-users text-[#7aa2a1]"></i></div><div><p class="text-[10px] text-gray-400 uppercase font-bold">Turmas</p><p class="text-xl font-black text-gray-800 dark:text-white">${totalTurmas}</p></div></div>
-                    </div>
-                    <div class="bg-white dark:bg-slate-700 p-4 rounded-2xl border border-gray-100 dark:border-slate-600 shadow-sm">
-                        <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center"><i class="fas fa-user-graduate text-blue-500"></i></div><div><p class="text-[10px] text-gray-400 uppercase font-bold">Alunos</p><p class="text-xl font-black text-gray-800 dark:text-white">${totalAlunos}</p></div></div>
-                    </div>
-                    <div class="bg-white dark:bg-slate-700 p-4 rounded-2xl border border-gray-100 dark:border-slate-600 shadow-sm">
-                        <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center"><i class="fas fa-chart-line text-green-500"></i></div><div><p class="text-[10px] text-gray-400 uppercase font-bold">Média Geral</p><p class="text-xl font-black text-gray-800 dark:text-white">${mediaGeral}</p></div></div>
-                    </div>
-                    <div class="bg-white dark:bg-slate-700 p-4 rounded-2xl border border-gray-100 dark:border-slate-600 shadow-sm">
-                        <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center"><i class="fas fa-exclamation-triangle text-yellow-500"></i></div><div><p class="text-[10px] text-gray-400 uppercase font-bold">Atenção</p><p class="text-xl font-black text-gray-800 dark:text-white">${turmasAlerta + turmasCriticas}</p></div></div>
-                    </div>
-                </div>
-            `;
-            
-            const filtrosHtml = `
-                <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm mb-6">
-                    <div class="flex flex-col md:flex-row gap-3">
-                        <div class="relative flex-1">
-                            <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                            <input type="text" placeholder="Pesquisar turma..." class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-slate-700 dark:text-white rounded-xl outline-none focus:ring-2 focus:ring-[#7aa2a1] text-sm" value="${filtro.busca}" oninput="App.salasFilter.busca=this.value;render();" />
-                        </div>
-                        <select class="px-3 py-2.5 bg-gray-50 dark:bg-slate-700 dark:text-white rounded-xl outline-none focus:ring-2 focus:ring-[#7aa2a1] text-sm font-bold" onchange="App.salasFilter.status=this.value;render();">
-                            <option value="todos" ${filtro.status === 'todos' ? 'selected' : ''}>Todos Status</option>
-                            <option value="success" ${filtro.status === 'success' ? 'selected' : ''}>✅ Excelente</option>
-                            <option value="warning" ${filtro.status === 'warning' ? 'selected' : ''}>⚠️ Atenção</option>
-                            <option value="danger" ${filtro.status === 'danger' ? 'selected' : ''}>🔴 Crítico</option>
-                        </select>
-                        <select class="px-3 py-2.5 bg-gray-50 dark:bg-slate-700 dark:text-white rounded-xl outline-none focus:ring-2 focus:ring-[#7aa2a1] text-sm font-bold" onchange="App.salasFilter.nivel=this.value;render();">
-                            <option value="todos" ${filtro.nivel === 'todos' ? 'selected' : ''}>Todos Níveis</option>
-                            <option value="básico" ${filtro.nivel === 'básico' ? 'selected' : ''}>Ensino Básico</option>
-                            <option value="secundário" ${filtro.nivel === 'secundário' ? 'selected' : ''}>Ensino Secundário</option>
-                            <option value="profissional" ${filtro.nivel === 'profissional' ? 'selected' : ''}>Ensino Profissional</option>
-                        </select>
-                        <select class="px-3 py-2.5 bg-gray-50 dark:bg-slate-700 dark:text-white rounded-xl outline-none focus:ring-2 focus:ring-[#7aa2a1] text-sm font-bold" onchange="App.salasFilter.ordenar=this.value;render();">
-                            <option value="recente" ${filtro.ordenar === 'recente' ? 'selected' : ''}>📅 Mais Recente</option>
-                            <option value="nome" ${filtro.ordenar === 'nome' ? 'selected' : ''}>🔤 Nome (A-Z)</option>
-                            <option value="media" ${filtro.ordenar === 'media' ? 'selected' : ''}>📊 Melhor Média</option>
-                            <option value="alunos" ${filtro.ordenar === 'alunos' ? 'selected' : ''}>👥 Mais Alunos</option>
-                        </select>
-                        <button onclick="navigateTo('nova-turma')" class="px-4 py-2.5 bg-[#7aa2a1] text-white rounded-xl hover:bg-[#688f8e] transition-colors text-sm font-bold flex items-center gap-2 justify-center shadow-md"><i class="fas fa-plus"></i><span>Nova Turma</span></button>
-                    </div>
-                </div>
-            `;
-            
-            let classesHtml = '';
+            var statsHtml = '<div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">' +
+                '<div class="bg-white dark:bg-slate-700 p-4 rounded-2xl border border-gray-100 dark:border-slate-600 shadow-sm"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-[#e8f1f1] dark:bg-slate-600 flex items-center justify-center"><i class="fas fa-users text-[#7aa2a1]"></i></div><div><p class="text-[10px] text-gray-400 uppercase font-bold">Turmas</p><p class="text-xl font-black text-gray-800 dark:text-white">' + App.classes.length + '</p></div></div></div>' +
+                '<div class="bg-white dark:bg-slate-700 p-4 rounded-2xl border border-gray-100 dark:border-slate-600 shadow-sm"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center"><i class="fas fa-user-graduate text-blue-500"></i></div><div><p class="text-[10px] text-gray-400 uppercase font-bold">Alunos</p><p class="text-xl font-black text-gray-800 dark:text-white">' + App.classes.reduce(function(acc, t) { return acc + (t.studentCount || 0); }, 0) + '</p></div></div></div>' +
+                '<div class="bg-white dark:bg-slate-700 p-4 rounded-2xl border border-gray-100 dark:border-slate-600 shadow-sm"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center"><i class="fas fa-chart-line text-green-500"></i></div><div><p class="text-[10px] text-gray-400 uppercase font-bold">Média</p><p class="text-xl font-black text-gray-800 dark:text-white">' + (App.classes.length > 0 ? (App.classes.reduce(function(acc, t) { return acc + (t.average || 0); }, 0) / App.classes.length).toFixed(1) : '0.0') + '</p></div></div></div>' +
+                '<div class="bg-white dark:bg-slate-700 p-4 rounded-2xl border border-gray-100 dark:border-slate-600 shadow-sm"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center"><i class="fas fa-exclamation-triangle text-yellow-500"></i></div><div><p class="text-[10px] text-gray-400 uppercase font-bold">Atenção</p><p class="text-xl font-black text-gray-800 dark:text-white">' + App.classes.filter(function(t) { return t.status === 'warning' || t.status === 'danger'; }).length + '</p></div></div></div></div>';
+
+            var filtrosHtml = '<div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm mb-6"><div class="flex flex-col md:flex-row gap-3"><div class="relative flex-1"><i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"></i><input type="text" placeholder="Pesquisar turma..." class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-slate-700 dark:text-white rounded-xl outline-none focus:ring-2 focus:ring-[#7aa2a1] text-sm" value="' + filtro.busca + '" oninput="App.salasFilter.busca=this.value;render();" /></div><button onclick="navigateTo(\'nova-turma\')" class="px-4 py-2.5 bg-[#7aa2a1] text-white rounded-xl hover:bg-[#688f8e] transition-colors text-sm font-bold flex items-center gap-2 justify-center shadow-md"><i class="fas fa-plus"></i><span>Nova Turma</span></button></div></div>';
+
+            var classesHtml = '';
             if (turmasFiltradas.length === 0) {
-                classesHtml = `<div class="col-span-full empty-state"><i class="fas fa-users"></i><h3>${App.classes.length === 0 ? 'Nenhuma turma criada' : 'Nenhuma turma encontrada'}</h3><p>${App.classes.length === 0 ? 'Clique no botão "Nova Turma" para começar.' : 'Tente ajustar os filtros.'}</p></div>`;
+                classesHtml = '<div class="col-span-full empty-state"><i class="fas fa-users"></i><h3>Nenhuma turma encontrada</h3></div>';
             } else {
-                classesHtml = turmasFiltradas.map(c => {
-                    const statusLabel = getStatusLabelFromStatus(c.status);
-                    const statusIcon = c.status === 'success' ? 'fa-check-circle' : c.status === 'warning' ? 'fa-exclamation-triangle' : 'fa-times-circle';
-                    const percentualAprovacao = c.average >= 6 ? Math.floor(c.average * 10) : Math.floor(c.average * 8);
-                    const mediaColor = c.average >= 8 ? 'text-green-500' : c.average >= 6 ? 'text-blue-500' : c.average >= 4 ? 'text-yellow-500' : 'text-red-500';
-                    const initials = c.name.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
-                    
-                    return `
-                        <div class="bg-white dark:bg-slate-700 rounded-3xl shadow-sm border border-gray-100 dark:border-slate-600 overflow-hidden hover:shadow-xl transition-all duration-300 group">
-                            <div class="h-2 ${getStatusColor(c.status)}"></div>
-                            <div class="p-5">
-                                <div class="flex items-start justify-between mb-4">
-                                    <div class="flex items-center gap-3 flex-1 min-w-0">
-                                        <div class="w-12 h-12 rounded-2xl ${c.status === 'success' ? 'bg-green-100 dark:bg-green-900/30' : c.status === 'warning' ? 'bg-yellow-100 dark:bg-yellow-900/30' : 'bg-red-100 dark:bg-red-900/30'} flex items-center justify-center shrink-0">
-                                            <span class="text-lg font-black ${c.status === 'success' ? 'text-green-600 dark:text-green-400' : c.status === 'warning' ? 'text-yellow-600 dark:text-yellow-400' : 'text-red-600 dark:text-red-400'}">${initials}</span>
-                                        </div>
-                                        <div class="min-w-0 flex-1">
-                                            <h4 class="text-base font-black text-gray-800 dark:text-white truncate">${c.name}</h4>
-                                            <span class="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 ${c.status === 'success' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : c.status === 'warning' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'}"><i class="fas ${statusIcon}"></i> ${statusLabel}</span>
-                                        </div>
-                                    </div>
-                                    <div class="relative">
-                                        <button onclick="toggleMenuTurma('${c.id}', event)" class="p-2 text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-slate-600 rounded-lg transition-colors"><i class="fas fa-ellipsis-v"></i></button>
-                                        <div id="menu-turma-${c.id}" class="hidden absolute right-0 top-10 w-48 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-gray-100 dark:border-slate-600 z-20 overflow-hidden">
-                                            <button onclick="editarTurma('${c.id}')" class="w-full text-left px-4 py-2.5 text-sm font-bold text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-slate-700 flex items-center gap-2"><i class="fas fa-edit text-[#7aa2a1]"></i> Editar</button>
-                                            <button onclick="duplicarTurma('${c.id}')" class="w-full text-left px-4 py-2.5 text-sm font-bold text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-slate-700 flex items-center gap-2"><i class="fas fa-copy text-blue-500"></i> Duplicar</button>
-                                            <div class="border-t border-gray-100 dark:border-slate-700"></div>
-                                            <button onclick="excluirTurma('${c.id}', '${c.name.replace(/'/g, "\\'")}')" class="w-full text-left px-4 py-2.5 text-sm font-bold text-red-500 hover:bg-red-50 dark:hover:bg-red-950/20 flex items-center gap-2"><i class="fas fa-trash"></i> Excluir</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="grid grid-cols-3 gap-2 mb-4">
-                                    <div class="bg-gray-50 dark:bg-slate-800 rounded-xl p-3 text-center"><p class="text-[9px] text-gray-400 uppercase font-bold mb-1">Alunos</p><p class="text-lg font-black text-gray-800 dark:text-white">${c.studentCount}</p></div>
-                                    <div class="bg-gray-50 dark:bg-slate-800 rounded-xl p-3 text-center"><p class="text-[9px] text-gray-400 uppercase font-bold mb-1">Média</p><p class="text-lg font-black ${mediaColor}">${c.average}</p></div>
-                                    <div class="bg-gray-50 dark:bg-slate-800 rounded-xl p-3 text-center"><p class="text-[9px] text-gray-400 uppercase font-bold mb-1">Nível</p><p class="text-[10px] font-black text-[#7aa2a1] leading-tight mt-1">${(c.nivel || 'Básico').split(' ').pop()}</p></div>
-                                </div>
-                                <div class="mb-4">
-                                    <div class="flex justify-between text-[10px] text-gray-400 mb-1 font-bold"><span>Aproveitamento</span><span>${percentualAprovacao}%</span></div>
-                                    <div class="w-full bg-gray-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden"><div class="h-full ${c.status === 'success' ? 'bg-green-500' : c.status === 'warning' ? 'bg-yellow-500' : 'bg-red-500'} rounded-full transition-all duration-500" style="width: ${Math.min(percentualAprovacao, 100)}%"></div></div>
-                                </div>
-                                <div class="flex items-center gap-2 text-[10px] text-gray-400 mb-4"><i class="fas fa-clock"></i><span>Atualizado: ${c.lastActivity}</span></div>
-                                <div class="grid grid-cols-2 gap-2">
-                                    <button onclick="selectClass('${c.id}')" class="py-2.5 px-3 bg-[#e8f1f1] dark:bg-slate-600 text-[#7aa2a1] dark:text-slate-100 text-xs font-bold rounded-xl hover:bg-[#d0e1e1] transition-all flex items-center justify-center gap-2"><i class="fas fa-users"></i> Ver Alunos</button>
-                                    <button onclick="selectClassAndNavigate('${c.id}','relatorios')" class="py-2.5 px-3 bg-gray-100 dark:bg-slate-600/50 text-gray-600 dark:text-slate-300 text-xs font-bold rounded-xl hover:bg-gray-200 transition-all flex items-center justify-center gap-2"><i class="fas fa-chart-bar"></i> Relatórios</button>
-                                </div>
-                            </div>
-                        </div>
-                    `;
+                classesHtml = turmasFiltradas.map(function(c) {
+                    var statusLabel = getStatusLabelFromStatus(c.status);
+                    var statusIcon = c.status === 'success' ? 'fa-check-circle' : c.status === 'warning' ? 'fa-exclamation-triangle' : 'fa-times-circle';
+                    var initials = c.name.split(' ').map(function(w) { return w[0]; }).slice(0, 2).join('').toUpperCase();
+                    return '<div class="bg-white dark:bg-slate-700 rounded-3xl shadow-sm border border-gray-100 dark:border-slate-600 overflow-hidden hover:shadow-xl transition-all duration-300 group"><div class="h-2 ' + getStatusColor(c.status) + '"></div><div class="p-5"><div class="flex items-start justify-between mb-4"><div class="flex items-center gap-3 flex-1 min-w-0"><div class="w-12 h-12 rounded-2xl ' + (c.status === 'success' ? 'bg-green-100 text-green-600' : c.status === 'warning' ? 'bg-yellow-100 text-yellow-600' : 'bg-red-100 text-red-600') + ' flex items-center justify-center shrink-0"><span class="text-lg font-black">' + initials + '</span></div><div class="min-w-0 flex-1"><h4 class="text-base font-black text-gray-800 dark:text-white truncate">' + c.name + '</h4><span class="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 ' + (c.status === 'success' ? 'bg-green-100 text-green-700' : c.status === 'warning' ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700') + '"><i class="fas ' + statusIcon + '"></i> ' + statusLabel + '</span></div></div></div><div class="grid grid-cols-3 gap-2 mb-4"><div class="bg-gray-50 dark:bg-slate-800 rounded-xl p-3 text-center"><p class="text-[9px] text-gray-400 uppercase font-bold mb-1">Alunos</p><p class="text-lg font-black text-gray-800 dark:text-white">' + c.studentCount + '</p></div><div class="bg-gray-50 dark:bg-slate-800 rounded-xl p-3 text-center"><p class="text-[9px] text-gray-400 uppercase font-bold mb-1">Média</p><p class="text-lg font-black ' + getGradeColor(c.average) + '">' + c.average + '</p></div><div class="bg-gray-50 dark:bg-slate-800 rounded-xl p-3 text-center"><p class="text-[9px] text-gray-400 uppercase font-bold mb-1">Nível</p><p class="text-[10px] font-black text-[#7aa2a1] leading-tight mt-1">' + (c.nivel || 'Básico').split(' ').pop() + '</p></div></div><div class="grid grid-cols-2 gap-2"><button onclick="selectClass(\'' + c.id + '\')" class="py-2.5 px-3 bg-[#e8f1f1] dark:bg-slate-600 text-[#7aa2a1] dark:text-slate-100 text-xs font-bold rounded-xl hover:bg-[#d0e1e1] transition-all flex items-center justify-center gap-2"><i class="fas fa-users"></i> Ver Alunos</button><button onclick="selectClassAndNavigate(\'' + c.id + '\',\'relatorios\')" class="py-2.5 px-3 bg-gray-100 dark:bg-slate-600/50 text-gray-600 dark:text-slate-300 text-xs font-bold rounded-xl hover:bg-gray-200 transition-all flex items-center justify-center gap-2"><i class="fas fa-chart-bar"></i> Relatórios</button></div></div></div>';
                 }).join('');
             }
-            
-            return `
-                <div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-5xl mx-auto w-full">
-                    ${renderSimpleHeader('Gestão de Salas')}
-                    <div class="p-6 md:p-8 flex-1 overflow-y-auto">
-                        <div class="mb-6"><h2 class="text-2xl font-black text-gray-800 dark:text-white mb-1">Minhas Turmas</h2><p class="text-sm text-gray-500 dark:text-gray-400">Gerencie todas as suas turmas</p></div>
-                        ${statsHtml}
-                        ${filtrosHtml}
-                        <div class="flex items-center justify-between mb-4">
-                            <p class="text-xs text-gray-500 font-bold uppercase tracking-wider">${turmasFiltradas.length} turmas ${filtro.busca || filtro.status !== 'todos' || filtro.nivel !== 'todos' ? '(filtradas)' : ''}</p>
-                            ${(filtro.busca || filtro.status !== 'todos' || filtro.nivel !== 'todos') ? `<button onclick="App.salasFilter.busca='';App.salasFilter.status='todos';App.salasFilter.nivel='todos';render();" class="text-xs text-[#7aa2a1] hover:underline font-bold"><i class="fas fa-times-circle"></i> Limpar filtros</button>` : ''}
-                        </div>
-                        <div class="grid md:grid-cols-2 gap-5">${classesHtml}</div>
-                    </div>
-                </div>
-            `;
+            return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-5xl mx-auto w-full">' + renderSimpleHeader('Gestão de Salas') + '<div class="p-6 md:p-8 flex-1 overflow-y-auto"><div class="mb-6"><h2 class="text-2xl font-black text-gray-800 dark:text-white mb-1">Minhas Turmas</h2></div>' + statsHtml + filtrosHtml + '<div class="grid md:grid-cols-2 gap-5">' + classesHtml + '</div></div></div>';
         }
 
-        function toggleMenuTurma(turmaId, event) {
-            event.stopPropagation();
-            document.querySelectorAll('[id^="menu-turma-"]').forEach(menu => {
-                if (menu.id !== `menu-turma-${turmaId}`) menu.classList.add('hidden');
-            });
-            const menu = document.getElementById(`menu-turma-${turmaId}`);
-            if (menu) menu.classList.toggle('hidden');
-            setTimeout(() => {
-                document.addEventListener('click', function fecharMenu(e) {
-                    if (!e.target.closest(`#menu-turma-${turmaId}`)) {
-                        const m = document.getElementById(`menu-turma-${turmaId}`);
-                        if (m) m.classList.add('hidden');
-                        document.removeEventListener('click', fecharMenu);
-                    }
-                });
-            }, 100);
-        }
-
-        async function editarTurma(turmaId) {
-            try {
-                const result = await apiBuscarTurma(turmaId);
-                const turma = result.turma;
-                const novoNome = prompt('Nome da turma:', turma.nome);
-                if (novoNome === null) return;
-                const novoNivel = prompt('Nível:', turma.nivel);
-                if (novoNivel === null) return;
-                const novoStatus = prompt('Status (success/warning/danger):', turma.status);
-                if (novoStatus === null) return;
-
-                await apiAtualizarTurma(turmaId, { nome: novoNome.trim(), nivel: novoNivel.trim(), status: novoStatus.trim(), total_aulas: turma.total_aulas });
-                await carregarTurmas();
-                App.mensagemToast = 'Turma atualizada!'; App.showSyncSuccess = true; render();
-                setTimeout(() => { App.showSyncSuccess = false; render(); }, 3000);
-            } catch (error) { alert('Erro ao editar: ' + error.message); }
-        }
-
-        async function duplicarTurma(turmaId) {
-            if (!confirm('Deseja duplicar esta turma?')) return;
-            try {
-                await apiDuplicarTurma(turmaId);
-                await carregarTurmas();
-                App.mensagemToast = 'Turma duplicada!'; App.showSyncSuccess = true; render();
-                setTimeout(() => { App.showSyncSuccess = false; render(); }, 3000);
-            } catch (error) { alert('Erro ao duplicar: ' + error.message); }
-        }
-
-        async function excluirTurma(turmaId, turmaNome) {
-            if (!confirm(`⚠️ Excluir a turma "${turmaNome}"?\nTodos os dados serão apagados.`)) return;
-            try {
-                await apiDeletarTurma(turmaId);
-                await carregarTurmas();
-                App.mensagemToast = 'Turma excluída!'; App.showSyncSuccess = true; render();
-                setTimeout(() => { App.showSyncSuccess = false; render(); }, 3000);
-            } catch (error) { alert('Erro ao excluir: ' + error.message); }
-        }
-
-        // ============================================================
-        // SALA DETALHE E MODAL NOTA
-        // ============================================================
         function renderSalaDetalhe() {
             var cls = App.selectedClass;
             if (!cls) return '<div class="p-8 text-center">Turma não encontrada</div>';
-            var totalAulas = cls.totalAulas || 0;
-            var students = getSortedStudents(cls.students || []);
-            var showStats = App.showStatsTab;
-
             if (App.isLoading) return '<div class="flex-1 flex flex-col items-center justify-center"><div class="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#7aa2a1]"></div><p class="text-gray-500 mt-4">A carregar...</p></div>';
-
-            var studentsHtml = students.length > 0 ? students.map(s => {
+            var students = getSortedStudents(cls.students || []);
+            var studentsHtml = students.length > 0 ? students.map(function(s) {
                 var initials = getInitials(s.name);
-                return `<div class="bg-white dark:bg-slate-700 border border-gray-100 dark:border-slate-600 rounded-3xl p-5 shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <div class="flex items-center gap-4 w-full sm:w-auto">
-                        <div class="student-avatar-placeholder">${initials}</div>
-                        <div><h4 class="font-black text-gray-800 dark:text-white">${s.name}</h4><p class="text-xs text-gray-400 dark:text-gray-500 font-bold uppercase mt-0.5">N° ${s.number} | ${s.testCount} provas</p></div>
-                    </div>
-                    <div class="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
-                        <div class="text-right"><p class="text-[10px] text-gray-400 uppercase font-bold">Média</p><p class="text-lg font-black ${getGradeColor(s.gpa)}">${s.gpa}</p></div>
-                        <div class="flex flex-wrap gap-1">
-                            <button onclick="abrirModalNota('${s.id}')" class="btn-info text-xs py-1 px-2"><i class="fas fa-graduation-cap"></i></button>
-                            <button onclick="selectStudent('${s.id}')" class="btn-secondary text-xs py-1 px-2"><i class="fas fa-eye"></i></button>
-                        </div>
-                    </div>
-                </div>`;
+                return '<div class="bg-white dark:bg-slate-700 border border-gray-100 dark:border-slate-600 rounded-3xl p-5 shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row items-center justify-between gap-4"><div class="flex items-center gap-4 w-full sm:w-auto"><div class="student-avatar-placeholder">' + initials + '</div><div><h4 class="font-black text-gray-800 dark:text-white">' + s.name + '</h4><p class="text-xs text-gray-400 dark:text-gray-500 font-bold uppercase mt-0.5">N° ' + s.number + ' | ' + s.testCount + ' provas</p></div></div><div class="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end"><div class="text-right"><p class="text-[10px] text-gray-400 uppercase font-bold">Média</p><p class="text-lg font-black ' + getGradeColor(s.gpa) + '">' + s.gpa + '</p></div><div class="flex flex-wrap gap-1"><button onclick="abrirModalNota(\'' + s.id + '\')" class="btn-info text-xs py-1 px-2"><i class="fas fa-graduation-cap"></i></button><button onclick="selectStudent(\'' + s.id + '\')" class="btn-secondary text-xs py-1 px-2"><i class="fas fa-eye"></i></button></div></div></div>';
             }).join('') : '<div class="empty-state"><i class="fas fa-user-graduate"></i><h3>Nenhum aluno</h3></div>';
-
-            return `<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-4xl mx-auto w-full">
-                <div class="flex items-center justify-between p-6 border-b border-gray-100 dark:border-slate-700 sticky top-0 z-10 bg-white dark:bg-slate-800">
-                    <button onclick="navigateTo('salas')" class="text-gray-400 hover:text-black p-2 rounded-full"><i class="fas fa-arrow-left text-2xl"></i></button>
-                    <div class="text-center"><h2 class="text-lg font-black text-gray-800 dark:text-slate-100">${cls.name}</h2><p class="text-xs text-gray-400 font-bold uppercase mt-0.5">Média: ${cls.average}/10 | Alunos: ${cls.studentCount}</p></div>
-                    <div class="w-10"></div>
-                </div>
-                <div class="flex border-b dark:border-slate-700">
-                    <button onclick="App.showStatsTab=false;render();" class="flex-1 py-4 text-center font-bold text-xs uppercase ${!App.showStatsTab ? 'text-[#7aa2a1] border-b-2 border-[#7aa2a1]' : 'text-gray-400'}">Alunos (${students.length})</button>
-                    <button onclick="App.showStatsTab=true;render();" class="flex-1 py-4 text-center font-bold text-xs uppercase ${App.showStatsTab ? 'text-[#7aa2a1] border-b-2 border-[#7aa2a1]' : 'text-gray-400'}">Estatísticas</button>
-                </div>
-                <div class="p-6 flex-1 flex flex-col gap-6 overflow-y-auto">
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <div class="relative flex-1"><i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                        <input type="text" placeholder="Pesquisar aluno..." class="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-slate-700 rounded-2xl outline-none focus:ring-2 focus:ring-[#7aa2a1]" value="${App.searchQuery}" oninput="App.searchQuery=this.value;render();"></div>
-                    </div>
-                    <div class="space-y-4">${studentsHtml}</div>
-                </div>
-                ${renderModalNota()}
-            </div>`;
+            
+            return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-4xl mx-auto w-full"><div class="flex items-center justify-between p-6 border-b border-gray-100 dark:border-slate-700 sticky top-0 z-10 bg-white dark:bg-slate-800"><button onclick="navigateTo(\'salas\')" class="text-gray-400 hover:text-black p-2 rounded-full"><i class="fas fa-arrow-left text-2xl"></i></button><div class="text-center"><h2 class="text-lg font-black text-gray-800 dark:text-slate-100">' + cls.name + '</h2><p class="text-xs text-gray-400 font-bold uppercase mt-0.5">Média: ' + cls.average + '/10 | Alunos: ' + cls.studentCount + '</p></div><div class="w-10"></div></div><div class="p-6 flex-1 flex flex-col gap-6 overflow-y-auto"><div class="space-y-4">' + studentsHtml + '</div></div>' + renderModalNota() + '</div>';
         }
 
         function renderModalNota() {
             if (!App.mostrarModalNota) return '';
-            return `<div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-                <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl">
-                    <h3 class="text-lg font-black text-gray-800 dark:text-white mb-4"><i class="fas fa-graduation-cap text-[#7aa2a1]"></i> Adicionar Nota</h3>
-                    <div class="space-y-4">
-                        <div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Título da Prova</label><input type="text" class="input-style" value="${App.modalNota.titulo}" onchange="App.modalNota.titulo=this.value" placeholder="Ex: Prova Trimestral" /></div>
-                        <div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Nota (0-10)</label><input type="number" class="input-style" value="${App.modalNota.nota}" min="0" max="10" step="0.5" onchange="App.modalNota.nota=parseFloat(this.value)||0" /></div>
-                        <div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Data</label><input type="date" class="input-style" value="${App.modalNota.data || new Date().toISOString().split('T')[0]}" onchange="App.modalNota.data=this.value" /></div>
-                    </div>
-                    <div class="flex gap-3 mt-6"><button onclick="confirmarNota()" class="flex-1 btn-solid bg-[#7aa2a1]">Adicionar Nota</button><button onclick="cancelarNota()" class="flex-1 btn-secondary">Cancelar</button></div>
-                </div>
-            </div>`;
+            return '<div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"><div class="bg-white dark:bg-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl"><h3 class="text-lg font-black text-gray-800 dark:text-white mb-4"><i class="fas fa-graduation-cap text-[#7aa2a1]"></i> Adicionar Nota</h3><div class="space-y-4"><div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Título</label><input type="text" class="input-style" value="' + App.modalNota.titulo + '" onchange="App.modalNota.titulo=this.value" placeholder="Ex: Prova Trimestral" /></div><div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Nota</label><input type="number" class="input-style" value="' + App.modalNota.nota + '" min="0" max="10" step="0.5" onchange="App.modalNota.nota=parseFloat(this.value)||0" /></div><div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Data</label><input type="date" class="input-style" value="' + (App.modalNota.data || new Date().toISOString().split('T')[0]) + '" onchange="App.modalNota.data=this.value" /></div></div><div class="flex gap-3 mt-6"><button onclick="confirmarNota()" class="flex-1 btn-solid bg-[#7aa2a1]">Adicionar</button><button onclick="cancelarNota()" class="flex-1 btn-secondary">Cancelar</button></div></div></div>';
         }
 
-        function abrirModalNota(alunoId) {
-            App.modalNota.alunoId = alunoId;
-            App.modalNota.titulo = '';
-            App.modalNota.nota = 0;
-            App.modalNota.data = new Date().toISOString().split('T')[0];
-            App.mostrarModalNota = true;
-            render();
-        }
-
-        function cancelarNota() {
-            App.mostrarModalNota = false;
-            render();
-        }
+        function abrirModalNota(alunoId) { App.modalNota.alunoId = alunoId; App.modalNota.titulo = ''; App.modalNota.nota = 0; App.modalNota.data = new Date().toISOString().split('T')[0]; App.mostrarModalNota = true; render(); }
+        function cancelarNota() { App.mostrarModalNota = false; render(); }
 
         async function confirmarNota() {
-            var cls = App.selectedClass;
-            if (!cls) return;
-            var alunoId = App.modalNota.alunoId;
-            var titulo = App.modalNota.titulo.trim();
-            var nota = App.modalNota.nota;
-            var data = App.modalNota.data;
-
-            if (!titulo) { alert('Insira um título.'); return; }
-            if (nota <= 0 || nota > 10) { alert('Nota inválida (0-10).'); return; }
-
+            var cls = App.selectedClass; if (!cls) return;
+            if (!App.modalNota.titulo.trim()) { alert('Insira um título.'); return; }
+            if (App.modalNota.nota <= 0 || App.modalNota.nota > 10) { alert('Nota inválida.'); return; }
             try {
-                await apiAdicionarNota(alunoId, { titulo, nota, data, acertos: Math.round(nota * 2), erros: Math.round((10 - nota) * 2), questoes_detalhes: getRandomDetails(20) });
-                await selectClass(cls.id);
-                App.mostrarModalNota = false;
+                await apiAdicionarNota(App.modalNota.alunoId, { titulo: App.modalNota.titulo, nota: App.modalNota.nota, data: App.modalNota.data, acertos: Math.round(App.modalNota.nota * 2), erros: Math.round((10 - App.modalNota.nota) * 2), questoes_detalhes: getRandomDetails(20) });
+                await selectClass(cls.id); App.mostrarModalNota = false;
                 App.mensagemToast = 'Nota adicionada!'; App.showSyncSuccess = true; render();
                 setTimeout(function() { App.showSyncSuccess = false; render(); }, 3000);
             } catch (error) { alert('Erro: ' + error.message); }
         }
 
-        function selectStudent(studentId) {
-            var cls = App.selectedClass;
-            if (cls) {
-                for (var i = 0; i < cls.students.length; i++) {
-                    if (cls.students[i].id === studentId) {
-                        App.selectedStudent = cls.students[i];
-                        navigateTo('aluno-detalhe');
-                        return;
-                    }
-                }
-            }
-        }
+        function selectStudent(studentId) { var cls = App.selectedClass; if (cls) { for (var i = 0; i < cls.students.length; i++) { if (cls.students[i].id === studentId) { App.selectedStudent = cls.students[i]; navigateTo('aluno-detalhe'); return; } } } }
 
         function renderAlunoDetalhe() {
-            var student = App.selectedStudent;
-            var cls = App.selectedClass;
-            if (!student) return '<div class="p-8 text-center">Aluno não encontrado</div>';
-            var initials = getInitials(student.name);
+            var student = App.selectedStudent; if (!student) return '<div class="p-8 text-center">Aluno não encontrado</div>';
             var statusClass = getStatusClass(student.gpa);
-
-            var historyHtml = student.history && student.history.length > 0 ? student.history.slice().reverse().map(test => {
-                var gradeClass = test.grade >= 7.0 ? 'bg-green-100 text-green-700' : test.grade >= 5.0 ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700';
-                return `<div class="bg-white dark:bg-slate-700 border border-gray-100 p-4 rounded-2xl flex justify-between items-center"><div><h5 class="font-bold text-gray-800 dark:text-white text-sm">${test.title}</h5><p class="text-[10px] text-gray-400 uppercase mt-1">${test.date}</p></div><span class="text-sm font-black px-3 py-1 rounded-xl ${gradeClass}">${test.grade}/10</span></div>`;
-            }).join('') : '<div class="empty-state py-8"><i class="fas fa-file-alt"></i><h3>Sem provas</h3></div>';
-
-            return `<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-4xl mx-auto w-full">
-                ${renderSimpleHeader('Dossiê do Aluno')}
-                <div class="p-6 overflow-y-auto flex-1 space-y-6">
-                    <div class="gradient-card p-6 rounded-3xl text-white flex items-center gap-6 shadow-md">
-                        <div class="w-24 h-24 rounded-full bg-white/20 flex items-center justify-center text-4xl font-black border-4 border-white/20">${initials}</div>
-                        <div><h3 class="text-2xl font-black">${student.name}</h3><p class="text-xs font-semibold opacity-80 uppercase mt-0.5">Número: ${student.number} | ${cls ? cls.name : ''}</p><div class="flex flex-wrap items-center gap-3 mt-2"><span class="text-xs font-semibold opacity-80">Provas: ${student.testCount}</span></div></div>
-                        <div class="ml-auto"><span class="status-badge ${statusClass} text-base px-4 py-2"><i class="fas ${getStatusIcon(student.gpa)}"></i> ${getStatusLabel(student.gpa)}</span></div>
-                    </div>
-                    <div class="grid grid-cols-3 gap-4">
-                        <div class="bg-white dark:bg-slate-700 border dark:border-slate-600 p-4 rounded-2xl text-center"><span class="text-[10px] text-gray-400 uppercase font-bold">Média</span><p class="text-2xl font-black ${getGradeColor(student.gpa)}">${student.gpa}</p></div>
-                        <div class="bg-white dark:bg-slate-700 border dark:border-slate-600 p-4 rounded-2xl text-center"><span class="text-[10px] text-gray-400 uppercase font-bold">Última</span><p class="text-2xl font-black">${student.lastGrade}</p></div>
-                        <div class="bg-white dark:bg-slate-700 border dark:border-slate-600 p-4 rounded-2xl text-center"><span class="text-[10px] text-gray-400 uppercase font-bold">Acertos</span><p class="text-2xl font-black text-[#7aa2a1]">${student.successRate}%</p></div>
-                    </div>
-                    <div><h4 class="text-xs font-black tracking-widest text-gray-400 uppercase mb-4">Histórico de Provas</h4><div class="space-y-3">${historyHtml}</div></div>
-                </div>
-            </div>`;
+            return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-4xl mx-auto w-full">' + renderSimpleHeader('Dossiê do Aluno') + '<div class="p-6 overflow-y-auto flex-1 space-y-6"><div class="gradient-card p-6 rounded-3xl text-white flex items-center gap-6 shadow-md"><div class="w-24 h-24 rounded-full bg-white/20 flex items-center justify-center text-4xl font-black border-4 border-white/20">' + getInitials(student.name) + '</div><div><h3 class="text-2xl font-black">' + student.name + '</h3><p class="text-xs font-semibold opacity-80 uppercase mt-0.5">Número: ' + student.number + '</p></div><div class="ml-auto"><span class="status-badge ' + statusClass + ' text-base px-4 py-2"><i class="fas ' + getStatusIcon(student.gpa) + '"></i> ' + getStatusLabel(student.gpa) + '</span></div></div><div class="grid grid-cols-3 gap-4"><div class="bg-white dark:bg-slate-700 border dark:border-slate-600 p-4 rounded-2xl text-center"><span class="text-[10px] text-gray-400 uppercase font-bold">Média</span><p class="text-2xl font-black ' + getGradeColor(student.gpa) + '">' + student.gpa + '</p></div><div class="bg-white dark:bg-slate-700 border dark:border-slate-600 p-4 rounded-2xl text-center"><span class="text-[10px] text-gray-400 uppercase font-bold">Última</span><p class="text-2xl font-black">' + student.lastGrade + '</p></div><div class="bg-white dark:bg-slate-700 border dark:border-slate-600 p-4 rounded-2xl text-center"><span class="text-[10px] text-gray-400 uppercase font-bold">Acertos</span><p class="text-2xl font-black text-[#7aa2a1]">' + student.successRate + '%</p></div></div></div></div>';
         }
 
-        // ============================================================
-        // NOVA TURMA
-        // ============================================================
         function renderNovaTurma() {
             var tab = App.activeTab || 'config';
-
-            var configHtml = `
-                <div class="space-y-6">
-                    <div class="bg-gray-50 dark:bg-slate-700 p-6 rounded-2xl border dark:border-slate-600">
-                        <h3 class="text-sm font-black text-gray-700 dark:text-gray-200 mb-4">Configurações da Turma</h3>
-                        <div class="space-y-4">
-                            <div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Nome da Turma</label><input type="text" class="input-style" value="${App.novaTurma.nome}" onchange="App.novaTurma.nome=this.value" placeholder="Ex: 9° Ano B" /></div>
-                            <div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Nível de Ensino</label><select class="input-style appearance-none" onchange="App.novaTurma.nivel=this.value">
-                                <option value="Ensino Básico" ${App.novaTurma.nivel === 'Ensino Básico' ? 'selected' : ''}>Ensino Básico</option>
-                                <option value="Ensino Secundário" ${App.novaTurma.nivel === 'Ensino Secundário' ? 'selected' : ''}>Ensino Secundário</option>
-                                <option value="Ensino Profissional" ${App.novaTurma.nivel === 'Ensino Profissional' ? 'selected' : ''}>Ensino Profissional</option>
-                            </select></div>
-                            <div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Status</label><select class="input-style appearance-none" onchange="App.novaTurma.status=this.value">
-                                <option value="success" ${App.novaTurma.status === 'success' ? 'selected' : ''}>Excelente</option>
-                                <option value="warning" ${App.novaTurma.status === 'warning' ? 'selected' : ''}>Atenção</option>
-                                <option value="danger" ${App.novaTurma.status === 'danger' ? 'selected' : ''}>Crítico</option>
-                            </select></div>
-                        </div>
-                    </div>
-                </div>`;
-
-            var alunosHtml = `
-                <div class="space-y-6">
-                    <div class="bg-gray-50 dark:bg-slate-700 p-6 rounded-2xl border dark:border-slate-600">
-                        <h3 class="text-sm font-black text-gray-700 dark:text-gray-200 mb-4 flex items-center justify-between">
-                            <span>Alunos (${(App.novaTurma.alunos || []).length})</span>
-                            <button onclick="adicionarAluno()" class="btn-success text-xs">+ Adicionar</button>
-                        </h3>`;
-
+            var configHtml = '<div class="space-y-6"><div class="bg-gray-50 dark:bg-slate-700 p-6 rounded-2xl border dark:border-slate-600"><h3 class="text-sm font-black text-gray-700 dark:text-gray-200 mb-4">Configurações</h3><div class="space-y-4"><div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Nome</label><input type="text" class="input-style" value="' + App.novaTurma.nome + '" onchange="App.novaTurma.nome=this.value" placeholder="Ex: 9° Ano B" /></div><div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Nível</label><select class="input-style appearance-none" onchange="App.novaTurma.nivel=this.value"><option value="Ensino Básico" ' + (App.novaTurma.nivel === 'Ensino Básico' ? 'selected' : '') + '>Ensino Básico</option><option value="Ensino Secundário" ' + (App.novaTurma.nivel === 'Ensino Secundário' ? 'selected' : '') + '>Ensino Secundário</option></select></div><div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Status</label><select class="input-style appearance-none" onchange="App.novaTurma.status=this.value"><option value="success" ' + (App.novaTurma.status === 'success' ? 'selected' : '') + '>Excelente</option><option value="warning" ' + (App.novaTurma.status === 'warning' ? 'selected' : '') + '>Atenção</option><option value="danger" ' + (App.novaTurma.status === 'danger' ? 'selected' : '') + '>Crítico</option></select></div></div></div></div>';
+            var alunosHtml = '<div class="space-y-6"><div class="bg-gray-50 dark:bg-slate-700 p-6 rounded-2xl border dark:border-slate-600"><h3 class="text-sm font-black text-gray-700 dark:text-gray-200 mb-4 flex items-center justify-between"><span>Alunos</span><button onclick="adicionarAluno()" class="btn-success text-xs">+ Adicionar</button></h3>';
             if (App.novaTurma.alunos && App.novaTurma.alunos.length > 0) {
                 alunosHtml += '<div class="space-y-3 max-h-96 overflow-y-auto scrollbar-hide">';
                 for (var ai = 0; ai < App.novaTurma.alunos.length; ai++) {
                     var aluno = App.novaTurma.alunos[ai];
-                    var initials = getInitials(aluno.name || 'Aluno');
-                    alunosHtml += `
-                        <div class="student-card flex items-center justify-between gap-4">
-                            <div class="flex items-center gap-3"><div class="student-avatar-placeholder">${initials}</div><div><p class="font-bold text-gray-800 dark:text-white text-sm">${aluno.name || 'Novo Aluno'}</p><p class="text-xs text-gray-500">N° ${aluno.number || 0} | Média: ${aluno.gpa || 0}</p></div></div>
-                            <div class="flex gap-2"><button onclick="editarAluno('${aluno.id}')" class="btn-secondary text-xs py-1 px-3">Editar</button><button onclick="removerAluno('${aluno.id}')" class="btn-danger text-xs py-1 px-3">Remover</button></div>
-                        </div>`;
+                    alunosHtml += '<div class="student-card flex items-center justify-between gap-4"><div class="flex items-center gap-3"><div class="student-avatar-placeholder">' + getInitials(aluno.name) + '</div><div><p class="font-bold text-gray-800 dark:text-white text-sm">' + aluno.name + '</p></div></div><div class="flex gap-2"><button onclick="removerAluno(\'' + aluno.id + '\')" class="btn-danger text-xs py-1 px-3">Remover</button></div></div>';
                 }
                 alunosHtml += '</div>';
-            } else {
-                alunosHtml += '<div class="empty-state"><i class="fas fa-user-plus"></i><h3>Nenhum aluno</h3></div>';
-            }
+            } else { alunosHtml += '<div class="empty-state"><i class="fas fa-user-plus"></i><h3>Nenhum aluno</h3></div>'; }
             alunosHtml += '</div></div>';
-
-            var tabsHtml = `
-                <div class="flex gap-2 mb-6 border-b dark:border-slate-700 pb-4">
-                    <button class="tab-button ${tab === 'config' ? 'active' : ''}" onclick="App.activeTab='config';render();"><i class="fas fa-cog"></i> Configurações</button>
-                    <button class="tab-button ${tab === 'alunos' ? 'active' : ''}" onclick="App.activeTab='alunos';render();"><i class="fas fa-users"></i> Alunos</button>
-                </div>`;
-
-            return `
-                <div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-4xl mx-auto w-full">
-                    <div class="flex items-center justify-between p-6 border-b border-gray-100 dark:border-slate-700">
-                        <button onclick="navigateTo('salas')" class="text-gray-400 hover:text-black"><i class="fas fa-arrow-left text-2xl"></i></button>
-                        <h2 class="text-lg font-black text-gray-700 dark:text-slate-100">Nova Turma</h2><div class="w-6"></div>
-                    </div>
-                    <div class="p-6 flex-1 overflow-y-auto">
-                        ${tabsHtml}
-                        ${tab === 'config' ? configHtml : alunosHtml}
-                        <div class="mt-6 flex gap-4">
-                            <button onclick="salvarTurma()" class="flex-1 btn-solid">💾 Salvar Turma</button>
-                            <button onclick="cancelarTurma()" class="flex-1 btn-secondary">Cancelar</button>
-                        </div>
-                    </div>
-                </div>`;
+            return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-4xl mx-auto w-full"><div class="flex items-center justify-between p-6 border-b border-gray-100 dark:border-slate-700"><button onclick="navigateTo(\'salas\')" class="text-gray-400 hover:text-black"><i class="fas fa-arrow-left text-2xl"></i></button><h2 class="text-lg font-black text-gray-700 dark:text-slate-100">Nova Turma</h2><div class="w-6"></div></div><div class="p-6 flex-1 overflow-y-auto"><div class="flex gap-2 mb-6 border-b dark:border-slate-700 pb-4"><button class="tab-button ' + (tab === 'config' ? 'active' : '') + '" onclick="App.activeTab=\'config\';render();"><i class="fas fa-cog"></i> Configurações</button><button class="tab-button ' + (tab === 'alunos' ? 'active' : '') + '" onclick="App.activeTab=\'alunos\';render();"><i class="fas fa-users"></i> Alunos</button></div>' + (tab === 'config' ? configHtml : alunosHtml) + '<div class="mt-6 flex gap-4"><button onclick="salvarTurma()" class="flex-1 btn-solid">💾 Salvar Turma</button><button onclick="cancelarTurma()" class="flex-1 btn-secondary">Cancelar</button></div></div></div>';
         }
 
-        function adicionarAluno() {
-            App.novaTurma.alunos.push({ id: generateId(), number: (App.novaTurma.alunos || []).length + 1, name: 'Aluno ' + ((App.novaTurma.alunos || []).length + 1), gpa: 0, lastGrade: 0, testCount: 0, successRate: 0, trend: 'up', faltas: 0, presencas: 0, history: [] });
-            render();
-        }
-
-        function removerAluno(id) {
-            if (confirm('Deseja remover este aluno?')) {
-                App.novaTurma.alunos = App.novaTurma.alunos.filter(function(a) { return a.id !== id; });
-                for (var i = 0; i < App.novaTurma.alunos.length; i++) App.novaTurma.alunos[i].number = i + 1;
-                render();
-            }
-        }
-
-        function editarAluno(id) {
-            var aluno = App.novaTurma.alunos.find(function(a) { return a.id === id; });
-            if (!aluno) return;
-            var novoNome = prompt('Nome do aluno:', aluno.name);
-            if (novoNome !== null && novoNome.trim()) aluno.name = novoNome.trim();
-            var novaNota = prompt('Média Geral (0-10):', aluno.gpa);
-            if (novaNota !== null) {
-                var gpa = parseFloat(novaNota);
-                if (!isNaN(gpa) && gpa >= 0 && gpa <= 10) { aluno.gpa = gpa; aluno.lastGrade = gpa; }
-            }
-            render();
-        }
-
+        function adicionarAluno() { App.novaTurma.alunos.push({ id: generateId(), number: (App.novaTurma.alunos || []).length + 1, name: 'Aluno ' + ((App.novaTurma.alunos || []).length + 1), gpa: 0 }); render(); }
+        function removerAluno(id) { App.novaTurma.alunos = App.novaTurma.alunos.filter(function(a) { return a.id !== id; }); render(); }
         async function salvarTurma() {
-            var nome = App.novaTurma.nome.trim();
-            if (!nome) { alert('Insira um nome para a turma.'); return; }
-
+            if (!App.novaTurma.nome.trim()) { alert('Insira um nome.'); return; }
             try {
-                const turma = await apiCriarTurma({ nome: nome, nivel: App.novaTurma.nivel, status: App.novaTurma.status, total_aulas: App.novaTurma.totalAulas || 0 });
-                for (var i = 0; i < App.novaTurma.alunos.length; i++) {
-                    await apiAdicionarAluno({ turma_id: turma.id, numero: App.novaTurma.alunos[i].number, nome: App.novaTurma.alunos[i].name, gpa: App.novaTurma.alunos[i].gpa || 0 });
-                }
-                App.novaTurma = { nome: '', nivel: 'Ensino Básico', status: 'success', totalAulas: 0, alunos: [] };
-                App.isCreating = false; App.activeTab = 'config';
-                await carregarTurmas();
-                navigateTo('salas');
-            } catch (error) { alert('Erro ao salvar turma: ' + error.message); }
+                var turma = await apiCriarTurma({ nome: App.novaTurma.nome, nivel: App.novaTurma.nivel, status: App.novaTurma.status });
+                for (var i = 0; i < App.novaTurma.alunos.length; i++) { await apiAdicionarAluno({ turma_id: turma.id, numero: App.novaTurma.alunos[i].number, nome: App.novaTurma.alunos[i].name }); }
+                App.novaTurma = { nome: '', nivel: 'Ensino Básico', status: 'success', alunos: [] };
+                await carregarTurmas(); navigateTo('salas');
+            } catch (error) { alert('Erro: ' + error.message); }
         }
+        function cancelarTurma() { App.novaTurma = { nome: '', nivel: 'Ensino Básico', status: 'success', alunos: [] }; navigateTo('salas'); }
 
-        function cancelarTurma() {
-            App.novaTurma = { nome: '', nivel: 'Ensino Básico', status: 'success', totalAulas: 0, alunos: [] };
-            App.isCreating = false; App.activeTab = 'config';
-            navigateTo('salas');
-        }
-
-        // ============================================================
-        // RELATÓRIOS, IMPORT, SCAN, RESULTS, COMPARE, TIPS, CHARTS, DISCURSIVE
-        // ============================================================
-        function renderRelatorios() {
-            var cls = App.selectedClass;
-            if (!cls) return '<div class="p-8 text-center">Turma não encontrada</div>';
-            var students = cls.students || [];
-            var aprovados = students.filter(s => s.gpa >= CONFIG.NOTA_MINIMA_APROVACAO).length;
-            var recuperacao = students.filter(s => s.gpa < CONFIG.NOTA_MINIMA_APROVACAO).length;
-
-            return `<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-4xl mx-auto w-full">
-                ${renderSimpleHeader('Relatórios')}
-                <div class="flex-1 p-6 overflow-y-auto space-y-6">
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div class="bg-white dark:bg-slate-700 p-5 rounded-3xl border text-center"><span class="text-xs text-gray-400 uppercase font-bold">Média</span><h4 class="text-3xl font-black">${cls.average}</h4></div>
-                        <div class="bg-white dark:bg-slate-700 p-5 rounded-3xl border text-center"><span class="text-xs text-gray-400 uppercase font-bold">Aprovados</span><h4 class="text-3xl font-black text-green-500">${aprovados}</h4></div>
-                        <div class="bg-white dark:bg-slate-700 p-5 rounded-3xl border text-center"><span class="text-xs text-gray-400 uppercase font-bold">Recuperação</span><h4 class="text-3xl font-black text-red-500">${recuperacao}</h4></div>
-                    </div>
-                    <div class="bg-gray-50 dark:bg-slate-700 p-6 rounded-3xl border"><h4 class="text-xs font-black uppercase text-gray-400 mb-4">Alunos</h4>
-                        ${students.map(s => `<div class="flex justify-between items-center p-3 border-b dark:border-slate-600 last:border-0"><span>${s.name}</span><span class="font-bold ${getGradeColor(s.gpa)}">${s.gpa}</span></div>`).join('')}
-                    </div>
-                </div>
-            </div>`;
-        }
-
-        function renderImport() {
-            const hasOfficial = App.officialGabarito !== null;
-            return `<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-3xl mx-auto w-full">
-                ${renderSimpleHeader('Importar Gabarito')}
-                <div class="flex-1 p-6 flex flex-col items-center justify-center gap-6">
-                    <div class="drop-zone w-full max-w-md ${hasOfficial ? 'border-green-500' : ''}" onclick="${!hasOfficial ? "document.getElementById('importInput').click()" : ''}" ondragover="event.preventDefault(); this.classList.add('dragover')" ondragleave="event.preventDefault(); this.classList.remove('dragover')" ondrop="handleDropImport(event)">
-                        ${hasOfficial ? `<div class="text-center text-green-600"><i class="fas fa-check-circle text-6xl mb-2"></i><p class="font-black uppercase">Gabarito Registado</p><div class="mt-4 max-w-xs mx-auto"><img src="${App.officialGabarito.dataUrl}" class="rounded-lg border shadow-sm max-h-48 object-contain w-full" /></div><button onclick="event.stopPropagation();App.officialGabarito=null;render();" class="mt-4 text-xs bg-red-500 text-white px-4 py-2 rounded-lg"><i class="fas fa-trash"></i> Remover</button></div>` : `<i class="fas fa-cloud-upload-alt text-6xl text-[#7aa2a1] mb-4"></i><p class="font-bold text-[#7aa2a1] uppercase tracking-widest text-sm">Importar Gabarito</p><p class="text-gray-400 text-xs mt-2 text-center">Arraste ou clique</p>`}
-                    </div>
-                    <input type="file" id="importInput" class="hidden" accept="image/*,.pdf" onchange="handleImportUpload(event)" />
-                    ${!hasOfficial ? `<div class="flex gap-4 w-full max-w-md"><button onclick="document.getElementById('importInput').click()" class="flex-1 py-3 bg-[#e8f1f1] text-[#7aa2a1] font-bold rounded-xl text-sm flex items-center justify-center gap-2"><i class="fas fa-folder-open"></i> Carregar</button><button onclick="tirarFoto(function(result) { App.officialGabarito = result; render(); })" class="flex-1 py-3 bg-[#7aa2a1] text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2"><i class="fas fa-camera"></i> Tirar Foto</button></div>` : ''}
-                </div>
-            </div>`;
-        }
-
-        function handleDropImport(event) {
-            event.preventDefault();
-            const file = event.dataTransfer.files[0];
-            if (file) processarArquivoImagem(file, function(result) { App.officialGabarito = result; render(); });
-        }
-
-        function handleImportUpload(event) {
-            const file = event.target.files[0];
-            if (file) processarArquivoImagem(file, function(result) { App.officialGabarito = result; render(); });
-        }
-
-        function renderScan() {
-            const hasImage = App.studentGabarito !== null;
-            return `<div class="flex-1 flex flex-col bg-[#0a0a0a] text-white w-full max-w-4xl mx-auto">
-                <div class="p-6 flex justify-between items-center bg-black/40"><button onclick="stopScan();navigateTo('dashboard');" class="text-white p-2"><i class="fas fa-arrow-left text-2xl"></i></button><h2 class="text-sm font-bold uppercase">Digitalizar Prova</h2><div class="w-10"></div></div>
-                <div class="flex-1 flex flex-col items-center justify-center p-6 relative">
-                    ${hasImage ? `<div class="relative w-full max-w-sm rounded-3xl overflow-hidden border-4 border-green-500 mb-4"><img src="${App.studentGabarito.dataUrl}" class="w-full aspect-[3/4] object-contain bg-black" /><button onclick="App.studentGabarito=null;render();" class="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full"><i class="fas fa-times"></i></button></div><div class="flex gap-4"><button onclick="navigateTo('confirm')" class="bg-green-500 text-white font-bold py-3 px-8 rounded-xl">Usar Imagem</button><button onclick="App.studentGabarito=null;render();" class="bg-gray-600 text-white font-bold py-3 px-6 rounded-xl">Nova</button></div>` : `<div class="relative w-full max-w-sm aspect-[3/4] rounded-3xl overflow-hidden bg-black flex items-center justify-center border-4 border-[#7aa2a1]"><video id="scanVideo" autoplay playsinline class="w-full h-full object-cover"></video><div class="scan-line"></div><div class="scan-overlay"></div></div><canvas id="scanCanvas" class="hidden"></canvas><div class="mt-8 flex flex-col items-center gap-4 w-full max-w-sm"><button onclick="captureScan()" class="w-full py-4 bg-[#7aa2a1] text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2"><i class="fas fa-camera"></i> Tirar Foto</button><button onclick="document.getElementById('scanFallback').click()" class="w-full py-3.5 bg-gray-800 border border-gray-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2"><i class="fas fa-folder-open"></i> Carregar Arquivo</button><input type="file" id="scanFallback" class="hidden" accept="image/*,.pdf" onchange="handleScanFallback(event)" /></div>`}
-                </div>
-            </div>`;
-        }
-
-        function initScan() { const video = document.getElementById('scanVideo'); if (video) startScan(); }
-
-        function startScan() {
-            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } }).then(function(stream) { App.scanStream = stream; const video = document.getElementById('scanVideo'); if (video) video.srcObject = stream; }).catch(function(err) { console.warn('Câmara indisponível:', err); });
-            }
-        }
-
-        function stopScan() { if (App.scanStream) { App.scanStream.getTracks().forEach(t => t.stop()); App.scanStream = null; } }
-
-        function captureScan() {
-            const video = document.getElementById('scanVideo');
-            const canvas = document.getElementById('scanCanvas');
-            if (video && canvas) {
-                const ctx = canvas.getContext('2d');
-                canvas.width = video.videoWidth || 640; canvas.height = video.videoHeight || 480;
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                const dataUrl = canvas.toDataURL('image/jpeg');
-                stopScan();
-                App.studentGabarito = { dataUrl: dataUrl, mimeType: 'image/jpeg', base64: dataUrl.split(',')[1] };
-                render();
-            }
-        }
-
-        function handleScanFallback(event) {
-            const file = event.target.files[0];
-            if (file) processarArquivoImagem(file, function(result) { App.studentGabarito = result; render(); });
-        }
-
-        function renderConfirm() {
-            const image = App.studentGabarito;
-            return `<div class="flex-1 flex flex-col bg-black/95 relative max-w-3xl mx-auto w-full"><div class="p-6 flex justify-between z-10"><button onclick="navigateTo('scan')" class="text-white p-2"><i class="fas fa-arrow-left text-2xl"></i></button><span class="text-white/60 font-bold text-sm uppercase">Confirmar</span><div class="w-10"></div></div>
-                <div class="flex-1 flex flex-col items-center justify-center z-10 p-6"><div class="bg-white p-4 rounded-2xl shadow-2xl mb-8 max-w-sm w-full overflow-hidden">${image && image.dataUrl ? `<img src="${image.dataUrl}" class="w-full aspect-[3/4] object-contain rounded-lg" />` : `<div class="border border-gray-300 rounded-lg p-4 bg-white text-center text-gray-400">Nenhuma imagem</div>`}</div><div class="flex gap-4"><button onclick="handleConfirm()" class="bg-[#7aa2a1] text-white font-bold py-4 px-12 rounded-xl shadow-lg">CONFIRMAR</button><button onclick="navigateTo('scan')" class="bg-gray-600 text-white font-bold py-4 px-6 rounded-xl">Refazer</button></div></div>
-            </div>`;
-        }
-
-        function handleConfirm() { navigateTo('results'); }
-
-        function renderResults() {
-            const hasOfficial = App.officialGabarito !== null;
-            const hasStudent = App.studentGabarito !== null;
-            let classOptions = ''; for (let ci = 0; ci < App.classes.length; ci++) classOptions += `<option value="${App.classes[ci].id}">${App.classes[ci].name}</option>`;
-            let targetClass = null; for (let i = 0; i < App.classes.length; i++) if (App.classes[i].id === App.selectedTargetClass) targetClass = App.classes[i];
-            if (!targetClass) targetClass = { students: [] };
-            let studentOptions = ''; for (let si = 0; si < targetClass.students.length; si++) studentOptions += `<option value="${targetClass.students[si].id}">${targetClass.students[si].name} (Nº ${targetClass.students[si].number})</option>`;
-
-            return `<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-3xl mx-auto w-full">${renderSimpleHeader('Correção Automática')}
-                <div class="flex-1 p-6 flex flex-col justify-center items-center">
-                    <div class="w-full max-w-md bg-gray-50 dark:bg-slate-700 border rounded-3xl p-6 mb-6"><h3 class="font-bold text-gray-700 dark:text-slate-200 text-sm mb-4 uppercase flex items-center gap-2"><i class="fas fa-sync-alt text-[#7aa2a1]"></i> Configuração</h3>
-                        <div class="space-y-4"><div><label class="text-xs font-bold text-gray-500 mb-1 block">Turma:</label><select class="w-full py-2.5 px-3 rounded-xl border dark:border-slate-600 bg-white dark:bg-slate-800 text-sm outline-none" onchange="App.selectedTargetClass=this.value;render();">${classOptions}</select></div><div><label class="text-xs font-bold text-gray-500 mb-1 block">Aluno:</label><select class="w-full py-2.5 px-3 rounded-xl border dark:border-slate-600 bg-white dark:bg-slate-800 text-sm outline-none" onchange="App.selectedTargetStudent=this.value">${studentOptions}</select></div></div>
-                    </div>
-                    <div class="w-full max-w-md bg-gray-50 dark:bg-slate-700 border rounded-2xl p-6 mb-6"><h3 class="font-bold text-gray-700 dark:text-slate-200 text-xs mb-4 uppercase tracking-wider">Estado das Imagens</h3>
-                        <div class="flex items-center justify-between mb-4 pb-3 border-b dark:border-slate-600"><span class="text-xs font-bold text-gray-500 uppercase">1. Gabarito Oficial</span>${hasOfficial ? `<span class="text-xs bg-green-100 text-green-700 font-bold px-3 py-1 rounded-full"><i class="fas fa-check"></i> PRONTO</span>` : `<button onclick="navigateTo('import')" class="text-xs bg-red-50 text-red-600 font-bold px-3 py-1 rounded-full">CARREGAR</button>`}</div>
-                        <div class="flex items-center justify-between"><span class="text-xs font-bold text-gray-500 uppercase">2. Prova do Aluno</span>${hasStudent ? `<span class="text-xs bg-green-100 text-green-700 font-bold px-3 py-1 rounded-full"><i class="fas fa-check"></i> PRONTO</span>` : `<button onclick="navigateTo('scan')" class="text-xs bg-gray-100 text-gray-700 font-bold px-3 py-1 rounded-lg">DIGITALIZAR</button>`}</div>
-                    </div>
-                    <div class="w-full max-w-md"><button onclick="handleAiCorrection()" ${(App.isLoading || !hasOfficial || !hasStudent) ? 'disabled' : ''} class="w-full py-4 rounded-xl font-bold text-white shadow-lg flex items-center justify-center gap-2 transition-all ${(App.isLoading || !hasOfficial || !hasStudent) ? 'bg-gray-300 cursor-not-allowed text-gray-500' : 'bg-[#7aa2a1] hover:bg-[#688f8e] active:scale-95'}">${App.isLoading ? '<i class="fas fa-sync-alt animate-spin"></i> A CORRIGIR...' : '<i class="fas fa-check-circle"></i> INICIAR CORREÇÃO'}</button></div>
-                </div>
-            </div>`;
-        }
-
-        function handleAiCorrection() {
-            if (!App.officialGabarito || !App.studentGabarito) { alert('Carregue o gabarito e a prova.'); return; }
-            App.isLoading = true; render();
-            setTimeout(function() {
-                const grade = (Math.random() * 4 + 6);
-                App.lastCorrectionData = { studentName: "Aluno", grade: grade.toFixed(1), mainDifficulty: 'Interpretação', tipsList: [{ title: "Revisão", desc: "Praticar mais." }] };
-                App.isLoading = false; App.mensagemToast = 'Correção realizada!'; App.showSyncSuccess = true; render();
-                setTimeout(function() { App.showSyncSuccess = false; navigateTo('tips'); }, 2000);
-            }, 1500);
-        }
-
-        function renderCompare() {
-            const hasOfficial = App.officialGabarito !== null; const hasStudent = App.studentGabarito !== null;
-            return `<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-4xl mx-auto w-full">${renderSimpleHeader('Comparação')}
-                <div class="flex-1 p-6"><div class="grid md:grid-cols-2 gap-6 h-full">
-                    <div class="bg-white dark:bg-slate-700 p-4 rounded-2xl border border-gray-200 flex flex-col"><h3 class="font-bold text-xs mb-3 uppercase text-[#7aa2a1] text-center border-b pb-2">GABARITO DO PROFESSOR</h3><div class="flex-1 flex items-center justify-center min-h-[200px]">${hasOfficial ? `<img src="${App.officialGabarito.dataUrl}" class="max-h-[400px] max-w-full object-contain rounded-lg shadow-sm" />` : `<div class="text-gray-400 text-sm">Não carregado</div>`}</div></div>
-                    <div class="bg-white dark:bg-slate-700 p-4 rounded-2xl border border-gray-200 flex flex-col"><h3 class="font-bold text-xs mb-3 uppercase text-[#7aa2a1] text-center border-b pb-2">PROVA DO ALUNO</h3><div class="flex-1 flex items-center justify-center min-h-[200px]">${hasStudent ? `<img src="${App.studentGabarito.dataUrl}" class="max-h-[400px] max-w-full object-contain rounded-lg shadow-sm" />` : `<div class="text-gray-400 text-sm">Não carregada</div>`}</div></div>
-                </div></div>
-            </div>`;
-        }
-
-        function renderTips() {
-            const data = App.lastCorrectionData || { studentName: 'Aluno', mainDifficulty: 'Nenhuma', tipsList: [] };
-            let tipsHtml = data.tipsList.map(t => `<div class="bg-gray-50 dark:bg-slate-700/50 p-4 rounded-xl border border-gray-100 dark:border-slate-600"><h4 class="font-bold text-gray-800 dark:text-white mb-1">${t.title}</h4><p class="text-gray-600 dark:text-slate-400">${t.desc}</p></div>`).join('');
-            return `<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-3xl mx-auto w-full">${renderSimpleHeader('Sugestões')}
-                <div class="p-6 overflow-y-auto"><div class="bg-yellow-50/50 dark:bg-slate-900 border border-yellow-200 rounded-2xl p-6 mb-8 text-center"><h2 class="text-sm font-bold text-yellow-800 uppercase">Dificuldade em <strong>${data.mainDifficulty}</strong></h2></div><h3 class="text-gray-400 font-bold text-xs uppercase mb-4">Recomendações</h3><div class="space-y-6">${tipsHtml}</div></div>
-            </div>`;
-        }
-
-        function renderCharts() {
-            return `<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-3xl mx-auto w-full">${renderSimpleHeader('Gráficos')}<div class="flex-1 p-6 flex items-center justify-center"><div class="text-center text-gray-400"><i class="fas fa-chart-bar text-6xl mb-4"></i><p>Em desenvolvimento</p></div></div></div>`;
-        }
-
-        function renderDiscursive() {
-            const hasOfficial = App.localOfficial !== null; const hasStudent = App.studentAnswer !== null;
-            return `<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-3xl mx-auto w-full">${renderSimpleHeader('Correção Discursiva')}
-                <div class="flex-1 p-6 flex flex-col gap-6 overflow-y-auto">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="bg-white dark:bg-slate-700 p-6 rounded-3xl border border-gray-100 flex flex-col relative"><div class="absolute top-0 left-0 w-2 h-full bg-[#7aa2a1]"></div><h3 class="font-bold text-gray-800 dark:text-white text-sm mb-3 pl-2">1. Gabarito</h3><div class="flex-1 min-h-[180px]">${hasOfficial ? `<img src="${App.localOfficial.dataUrl}" class="w-full max-h-48 object-contain rounded-xl" /><button onclick="App.localOfficial=null;render();" class="text-red-500 text-xs mt-2">Remover</button>` : `<div class="drop-zone h-full flex flex-col items-center justify-center" onclick="document.getElementById('discursiveOfficial').click()"><i class="fas fa-cloud-upload-alt text-4xl text-[#7aa2a1] mb-3"></i><p class="text-sm font-bold text-[#7aa2a1]">Carregar</p><input type="file" id="discursiveOfficial" class="hidden" accept="image/*" onchange="handleDiscursiveOfficial(event)" /></div>`}</div></div>
-                        <div class="bg-white dark:bg-slate-700 p-6 rounded-3xl border border-gray-100 flex flex-col relative"><div class="absolute top-0 left-0 w-2 h-full bg-[#7aa2a1]"></div><h3 class="font-bold text-gray-800 dark:text-white text-sm mb-3 pl-2">2. Resposta</h3><div class="flex-1 min-h-[180px]">${hasStudent ? `<img src="${App.studentAnswer.dataUrl}" class="w-full max-h-48 object-contain rounded-xl" /><button onclick="App.studentAnswer=null;render();" class="text-red-500 text-xs mt-2">Remover</button>` : `<div class="drop-zone h-full flex flex-col items-center justify-center" onclick="document.getElementById('discursiveStudent').click()"><i class="fas fa-cloud-upload-alt text-4xl text-[#7aa2a1] mb-3"></i><p class="text-sm font-bold text-[#7aa2a1]">Carregar</p><input type="file" id="discursiveStudent" class="hidden" accept="image/*" onchange="handleDiscursiveStudent(event)" /></div>`}</div></div>
-                    </div>
-                    <div class="flex justify-center"><button onclick="handleDiscursiveAnalyze()" ${(!hasOfficial || !hasStudent) ? 'disabled' : ''} class="w-full max-w-md py-4 rounded-xl font-bold text-white ${(!hasOfficial || !hasStudent) ? 'bg-gray-400' : 'bg-[#7aa2a1]'}">Realizar Correção por IA</button></div>
-                </div>
-            </div>`;
-        }
-
-        function handleDiscursiveOfficial(event) { const file = event.target.files[0]; if (file) processarArquivoImagem(file, r => { App.localOfficial = r; render(); }); }
-        function handleDiscursiveStudent(event) { const file = event.target.files[0]; if (file) processarArquivoImagem(file, r => { App.studentAnswer = r; render(); }); }
-        function handleDiscursiveAnalyze() { App.aiResult = 'Avaliação em processamento...'; navigateTo('ai_result'); }
-
-        function renderAiResult() {
-            return `<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-3xl mx-auto w-full">${renderSimpleHeader('Resultado IA')}<div class="flex-1 p-6"><div class="bg-[#e8f1f1] dark:bg-slate-700/50 p-6 rounded-2xl border"><p class="text-sm">${App.aiResult || 'Nenhum resultado'}</p></div><button onclick="navigateTo('dashboard')" class="mt-8 w-full btn-solid">Voltar</button></div></div>`;
-        }
-
-        function renderAplicarProva() {
-            return `<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-3xl mx-auto w-full">${renderSimpleHeader('Aplicar Prova')}<div class="flex-1 p-6 flex items-center justify-center"><div class="text-center text-gray-400"><i class="fas fa-qrcode text-6xl mb-4"></i><p>Em desenvolvimento</p></div></div></div>`;
-        }
+        function renderRelatorios() { return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-4xl mx-auto w-full">' + renderSimpleHeader('Relatórios') + '<div class="p-6">Em breve.</div></div>'; }
+        function renderImport() { return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-3xl mx-auto w-full">' + renderSimpleHeader('Importar') + '<div class="p-6 text-center"><p>Funcionalidade em breve.</p></div></div>'; }
+        function renderScan() { return '<div class="flex-1 flex flex-col bg-[#0a0a0a] text-white w-full max-w-4xl mx-auto">' + renderSimpleHeader('Digitalizar') + '<div class="p-6 text-center"><p>Funcionalidade em breve.</p></div></div>'; }
+        function renderConfirm() { return '<div class="flex-1 flex flex-col p-6 text-center"><p>Confirmação em breve.</p></div>'; }
+        function renderResults() { return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-3xl mx-auto w-full">' + renderSimpleHeader('Correção') + '<div class="p-6 text-center"><p>Funcionalidade em breve.</p></div></div>'; }
+        function renderCompare() { return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-4xl mx-auto w-full">' + renderSimpleHeader('Comparação') + '<div class="p-6 text-center"><p>Funcionalidade em breve.</p></div></div>'; }
+        function renderTips() { return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-3xl mx-auto w-full">' + renderSimpleHeader('Sugestões') + '<div class="p-6 text-center"><p>Funcionalidade em breve.</p></div></div>'; }
+        function renderCharts() { return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-3xl mx-auto w-full">' + renderSimpleHeader('Gráficos') + '<div class="p-6 text-center"><p>Funcionalidade em breve.</p></div></div>'; }
+        function renderDiscursive() { return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-3xl mx-auto w-full">' + renderSimpleHeader('Discursiva') + '<div class="p-6 text-center"><p>Funcionalidade em breve.</p></div></div>'; }
+        function renderAiResult() { return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-3xl mx-auto w-full">' + renderSimpleHeader('Resultado IA') + '<div class="p-6 text-center"><p>Funcionalidade em breve.</p></div></div>'; }
+        function renderAplicarProva() { return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-3xl mx-auto w-full">' + renderSimpleHeader('Aplicar') + '<div class="p-6 text-center"><p>Funcionalidade em breve.</p></div></div>'; }
 
         // ============================================================
         // INICIAR APLICAÇÃO
@@ -1895,24 +994,14 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🚀 AUTOMATIC CORRECTION - Inicializando...');
             setTimeout(verificarServidor, 1000);
-
-            const token = localStorage.getItem('token');
-            const user = localStorage.getItem('user');
-
+            var token = localStorage.getItem('token');
+            var user = localStorage.getItem('user');
             if (token && user) {
                 try {
-                    App.user = JSON.parse(user);
-                    App.profileName = App.user.nome || 'Professor';
-                    App.profileEmail = App.user.email || '';
-                    App.profileBio = App.user.biografia || 'Docente';
-                    
-                    carregarTurmas().then(() => { navigateTo('dashboard'); });
-                } catch (e) {
-                    localStorage.removeItem('token'); localStorage.removeItem('user'); navigateTo('login');
-                }
-            } else {
-                navigateTo('splash');
-            }
+                    App.user = JSON.parse(user); App.profileName = App.user.nome || 'Professor'; App.profileEmail = App.user.email || ''; App.profileBio = App.user.biografia || 'Docente';
+                    carregarTurmas().then(function() { navigateTo('dashboard'); });
+                } catch (e) { localStorage.removeItem('token'); localStorage.removeItem('user'); navigateTo('login'); }
+            } else { navigateTo('splash'); }
         });
     </script>
 </body>
