@@ -888,10 +888,13 @@
                 top: 0, behavior: 'smooth' }); 
                 render(); }
         function toggleTheme() { 
-            App.theme = App.theme === 'light' ? 'dark' : 'light'; render(); }
+            App.theme = App.theme === 'light' ? 'dark' : 'light'; 
+            render(); 
+        }
         function closeSidebar() { 
             App.sidebarOpen = false; 
-            render(); }
+            render(); 
+        }
 
         async function handleLogin() {
             if (!App.email || !App.password) { App.errorMsg = 'Preencha todos os campos.'; render(); return; }
@@ -952,7 +955,7 @@
 
         // Abre e fecha o menu
         function toggleSidebar() {
-            App.sidebarOpen = false;
+            App.sidebarOpen = !App.sidebarOpen;
             render();
         }
 
