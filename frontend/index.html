@@ -972,64 +972,46 @@
         }
 
         function renderSidebar() {
-            if (!App.sidebarOpen) return ''; // Se estiver fechado, não renderiza nada
+            var profileImg = App.profileImage ?
+                '<img src="' + App.profileImage + '" alt="Perfil" class="w-full h-full object-cover" />' :
+                '<i class="fas fa-user text-2xl"></i>';
 
-            return `
-                <!-- Overlay escuro de fundo (fecha o menu ao clicar fora) -->
-                <div class="fixed inset-0 bg-black/50 z-40 transition-opacity" onclick="App.sidebarOpen = false; render();"></div>
+            var themeIcon = App.theme === 'light' ? 'fa-moon' : 'fa-sun';
+            var themeLabel = App.theme === 'light' ? 'Modo Escuro' : 'Modo Claro';
+            var toggleClass = App.theme === 'dark' ? 'active' : 'inactive';
 
-                <!-- Painel do Menu Lateral -->
-                <div class="fixed inset-y-0 right-0 w-72 bg-[#1e293b] text-white shadow-2xl z-50 flex flex-col transform transition-transform duration-300">
-                    
-                    <!-- Cabeçalho do Menu -->
-                    <div class="flex items-center justify-between p-5 border-b border-slate-700">
-                        <span class="text-lg font-bold">Menu</span>
-                        <!-- MUDANÇA AQUI: Fechando direto no clique -->
-                        <button onclick="App.sidebarOpen = false; render();" class="text-gray-400 hover:text-white p-2 rounded-lg hover:bg-slate-700 transition-colors">
-                            <i class="fas fa-times text-xl"></i>
-                        </button>
-                    </div>
-
-                    <!-- Perfil do Usuário -->
-                    <div class="p-5 flex items-center gap-4 border-b border-slate-700">
-                        <div class="w-12 h-12 rounded-full bg-slate-600 flex items-center justify-center">
-                            <i class="fas fa-user text-xl text-gray-300"></i>
-                        </div>
-                        <div>
-                            <p class="font-bold text-sm">${App.user && App.user.nome ? App.user.nome : 'João'}</p>
-                            <p class="text-xs text-gray-400">${App.user && App.user.biografia ? App.user.biografia : 'Professor'}</p>
-                        </div>
-                    </div>
-
-                    <!-- Links de Navegação -->
-                    <div class="flex-1 overflow-y-auto p-3 space-y-1">
-                        <!-- MUDANÇA AQUI: Fechando o menu antes de navegar -->
-                        <button onclick="App.sidebarOpen = false; navigateTo('dashboard');" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 transition-colors ${App.view === 'dashboard' ? 'bg-slate-700 text-[#7aa2a1]' : 'text-gray-300'}">
-                            <i class="fas fa-sync-alt w-5 text-center"></i> Painel Principal
-                        </button>
-                        
-                        <button onclick="App.sidebarOpen = false; navigateTo('salas');" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 transition-colors ${App.view === 'salas' || App.view === 'sala_detalhe' ? 'bg-slate-700 text-[#7aa2a1]' : 'text-gray-300'}">
-                            <i class="fas fa-users w-5 text-center"></i> Gestão de Salas
-                        </button>
-                        
-                        <button onclick="App.sidebarOpen = false; navigateTo('profile');" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 transition-colors ${App.view === 'profile' ? 'bg-slate-700 text-[#7aa2a1]' : 'text-gray-300'}">
-                            <i class="fas fa-user w-5 text-center"></i> O Meu Perfil
-                        </button>
-                    </div>
-
-                    <!-- Rodapé do Menu (Tema e Sair) -->
-                    <div class="p-3 border-t border-slate-700 space-y-1">
-                        <button onclick="App.theme = App.theme === 'dark' ? 'light' : 'dark'; render();" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 text-gray-300 transition-colors">
-                            <i class="fas fa-sun w-5 text-center"></i> Modo ${App.theme === 'dark' ? 'Claro' : 'Escuro'}
-                        </button>
-                        
-                        <button onclick="App.sidebarOpen = false; handleLogout();" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-red-900/30 text-red-400 transition-colors">
-                            <i class="fas fa-sign-out-alt w-5 text-center"></i> Sair
-                        </button>
-                    </div>
-                    
-                </div>
-            `;
+            return '<div class="sidebar">' +
+                // CORREÇÃO AQUI: Fecha direto no clique
+                '<div class="sidebar-backdrop" onclick="App.sidebarOpen = false; render();"></div>' +
+                '<div class="sidebar-content">' +
+                '<div class="p-6 flex flex-col h-full">' +
+                '<div class="flex justify-between items-center mb-8">' +
+                '<span class="text-sm font-semibold text-gray-500 dark:text-gray-400">Menu</span>' +
+                // CORREÇÃO AQUI: Fecha direto no clique
+                '<button onclick="App.sidebarOpen = false; render();" class="text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white"><i class="fas fa-times text-2xl"></i></button>' +
+                '</div>' +
+                '<div class="flex items-center gap-4 mb-8 p-3 bg-white dark:bg-slate-700 rounded-xl shadow-sm cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-600 transition-colors" onclick="navigateTo(\'profile\'); App.sidebarOpen = false; render();">' +
+                '<div class="w-14 h-14 bg-gray-300 rounded-full flex items-center justify-center text-white overflow-hidden shrink-0">' + profileImg + '</div>' +
+                '<div class="overflow-hidden"><h3 class="font-bold text-gray-700 dark:text-gray-200 leading-tight truncate">' + App.profileName + '</h3><p class="text-xs text-gray-500 dark:text-gray-400 italic mt-0.5 font-bold">Professor</p></div>' +
+                '</div>' +
+                '<div class="space-y-2">' +
+                // CORREÇÃO AQUI: Garante que o menu feche ao navegar
+                '<button onclick="navigateTo(\'dashboard\'); App.sidebarOpen = false; render();" class="menu-item"><i class="fas fa-sync-alt text-[#7aa2a1]"></i> Painel Principal</button>' +
+                '<button onclick="navigateTo(\'salas\'); App.sidebarOpen = false; render();" class="menu-item"><i class="fas fa-users text-[#7aa2a1]"></i> Gestão de Salas</button>' +
+                '<button onclick="navigateTo(\'profile\'); App.sidebarOpen = false; render();" class="menu-item"><i class="fas fa-user text-[#7aa2a1]"></i> O Meu Perfil</button>' +
+                '</div>' +
+                '<div class="mt-8 pt-4 border-t dark:border-slate-700">' +
+                '<button onclick="toggleTheme()" class="w-full flex items-center justify-between py-2 px-4 rounded-lg bg-white dark:bg-slate-700 text-sm font-bold shadow-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-slate-600 transition-colors">' +
+                '<span class="flex items-center gap-2"><i class="fas ' + themeIcon + ' text-[#7aa2a1]"></i> ' + themeLabel + '</span>' +
+                '<div class="toggle-switch ' + toggleClass + '" onclick="event.stopPropagation();toggleTheme();"><div class="toggle-dot"></div></div>' +
+                '</button></div>' +
+                '<button onclick="logoutUser()" class="mt-auto flex items-center gap-2 text-red-500 font-bold hover:bg-red-50 dark:hover:bg-red-950/20 p-3 rounded-lg transition-colors">' +
+                '<i class="fas fa-sign-out-alt"></i> Sair</button>' +
+                '<div class="mt-2 pt-2 border-t dark:border-slate-700">' +
+                '<a href="' + CONFIG.GITHUB_URL + '" target="_blank" class="flex items-center gap-2 text-gray-500 hover:text-[#7aa2a1] text-xs font-bold p-2 rounded-lg transition-colors">' +
+                '<i class="fab fa-github"></i> GitHub</a>' +
+                '</div>' +
+                '</div></div></div>';
         }
 
         function render() {
