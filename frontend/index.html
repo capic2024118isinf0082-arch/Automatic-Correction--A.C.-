@@ -972,61 +972,63 @@
         }
 
         function renderSidebar() {
-        if (!App.sidebarOpen) return ''; // Se estiver fechado, não renderiza nada
+            if (!App.sidebarOpen) return ''; // Se estiver fechado, não renderiza nada
 
-        return `
-            <!-- Overlay escuro de fundo (fecha o menu ao clicar fora) -->
-            <div class="fixed inset-0 bg-black/50 z-40 transition-opacity" onclick="closeSidebar()"></div>
+            return `
+                <!-- Overlay escuro de fundo (fecha o menu ao clicar fora) -->
+                <div class="fixed inset-0 bg-black/50 z-40 transition-opacity" onclick="App.sidebarOpen = false; render();"></div>
 
-            <!-- Painel do Menu Lateral -->
-            <div class="fixed inset-y-0 right-0 w-72 bg-[#1e293b] text-white shadow-2xl z-50 flex flex-col transform transition-transform duration-300">
+                <!-- Painel do Menu Lateral -->
+                <div class="fixed inset-y-0 right-0 w-72 bg-[#1e293b] text-white shadow-2xl z-50 flex flex-col transform transition-transform duration-300">
                     
-                <!-- Cabeçalho do Menu -->
-                <div class="flex items-center justify-between p-5 border-b border-slate-700">
-                    <span class="text-lg font-bold">Menu</span>
-                    <button onclick="closeSidebar()" class="text-gray-400 hover:text-white p-2 rounded-lg hover:bg-slate-700 transition-colors">
-                        <i class="fas fa-times text-xl"></i>
-                    </button>
-                </div>
-
-                <!-- Perfil do Usuário -->
-                <div class="p-5 flex items-center gap-4 border-b border-slate-700">
-                    <div class="w-12 h-12 rounded-full bg-slate-600 flex items-center justify-center">
-                        <i class="fas fa-user text-xl text-gray-300"></i>
+                    <!-- Cabeçalho do Menu -->
+                    <div class="flex items-center justify-between p-5 border-b border-slate-700">
+                        <span class="text-lg font-bold">Menu</span>
+                        <!-- MUDANÇA AQUI: Fechando direto no clique -->
+                        <button onclick="App.sidebarOpen = false; render();" class="text-gray-400 hover:text-white p-2 rounded-lg hover:bg-slate-700 transition-colors">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
                     </div>
-                    <div>
-                        <p class="font-bold text-sm">${App.user && App.user.nome ? App.user.nome : 'João'}</p>
-                        <p class="text-xs text-gray-400">${App.user && App.user.biografia ? App.user.biografia : 'Professor'}</p>
+
+                    <!-- Perfil do Usuário -->
+                    <div class="p-5 flex items-center gap-4 border-b border-slate-700">
+                        <div class="w-12 h-12 rounded-full bg-slate-600 flex items-center justify-center">
+                            <i class="fas fa-user text-xl text-gray-300"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm">${App.user && App.user.nome ? App.user.nome : 'João'}</p>
+                            <p class="text-xs text-gray-400">${App.user && App.user.biografia ? App.user.biografia : 'Professor'}</p>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Links de Navegação -->
-                <div class="flex-1 overflow-y-auto p-3 space-y-1">
-                    <button onclick="navigateTo('dashboard')" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 transition-colors ${App.view === 'dashboard' ? 'bg-slate-700 text-[#7aa2a1]' : 'text-gray-300'}">
-                        <i class="fas fa-sync-alt w-5 text-center"></i> Painel Principal
-                    </button>
-                    
-                    <button onclick="navigateTo('salas')" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 transition-colors ${App.view === 'salas' || App.view === 'sala_detalhe' ? 'bg-slate-700 text-[#7aa2a1]' : 'text-gray-300'}">
-                        <i class="fas fa-users w-5 text-center"></i> Gestão de Salas
-                    </button>
-                    
-                    <button onclick="navigateTo('profile')" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 transition-colors ${App.view === 'profile' ? 'bg-slate-700 text-[#7aa2a1]' : 'text-gray-300'}">
-                        <i class="fas fa-user w-5 text-center"></i> O Meu Perfil
-                    </button>
-                </div>
-
-                <!-- Rodapé do Menu (Tema e Sair) -->
-                <div class="p-3 border-t border-slate-700 space-y-1">
-                    <button onclick="App.theme = App.theme === 'dark' ? 'light' : 'dark'; render();" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 text-gray-300 transition-colors">
-                        <i class="fas fa-sun w-5 text-center"></i> Modo ${App.theme === 'dark' ? 'Claro' : 'Escuro'}
-                    </button>
+                    <!-- Links de Navegação -->
+                    <div class="flex-1 overflow-y-auto p-3 space-y-1">
+                        <!-- MUDANÇA AQUI: Fechando o menu antes de navegar -->
+                        <button onclick="App.sidebarOpen = false; navigateTo('dashboard');" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 transition-colors ${App.view === 'dashboard' ? 'bg-slate-700 text-[#7aa2a1]' : 'text-gray-300'}">
+                            <i class="fas fa-sync-alt w-5 text-center"></i> Painel Principal
+                        </button>
                         
-                    <button onclick="handleLogout()" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-red-900/30 text-red-400 transition-colors">
-                        <i class="fas fa-sign-out-alt w-5 text-center"></i> Sair
-                    </button>
-                </div>
+                        <button onclick="App.sidebarOpen = false; navigateTo('salas');" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 transition-colors ${App.view === 'salas' || App.view === 'sala_detalhe' ? 'bg-slate-700 text-[#7aa2a1]' : 'text-gray-300'}">
+                            <i class="fas fa-users w-5 text-center"></i> Gestão de Salas
+                        </button>
+                        
+                        <button onclick="App.sidebarOpen = false; navigateTo('profile');" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 transition-colors ${App.view === 'profile' ? 'bg-slate-700 text-[#7aa2a1]' : 'text-gray-300'}">
+                            <i class="fas fa-user w-5 text-center"></i> O Meu Perfil
+                        </button>
+                    </div>
+
+                    <!-- Rodapé do Menu (Tema e Sair) -->
+                    <div class="p-3 border-t border-slate-700 space-y-1">
+                        <button onclick="App.theme = App.theme === 'dark' ? 'light' : 'dark'; render();" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 text-gray-300 transition-colors">
+                            <i class="fas fa-sun w-5 text-center"></i> Modo ${App.theme === 'dark' ? 'Claro' : 'Escuro'}
+                        </button>
+                        
+                        <button onclick="App.sidebarOpen = false; handleLogout();" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-red-900/30 text-red-400 transition-colors">
+                            <i class="fas fa-sign-out-alt w-5 text-center"></i> Sair
+                        </button>
+                    </div>
                     
-            </div>
+                </div>
             `;
         }
 
