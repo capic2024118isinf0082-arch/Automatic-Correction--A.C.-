@@ -1,34 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="light">
+<html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automatic Correction</title>
-    
-    <!-- Tailwind CSS -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Automatic Correction - Corrija Provas com IA</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#7aa2a1',
-                        secondary: '#688f8e'
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        
-        /* Animação do Toast */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -37,111 +17,317 @@
             animation: fadeIn 0.3s ease-out forwards;
         }
 
-        /* Estilos customizados */
-        .btn-solid { @apply bg-[#7aa2a1] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#688f8e] transition-colors disabled:opacity-50; }
-        .btn-secondary { @apply bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-xl hover:bg-gray-300 transition-colors; }
-        .btn-success { @apply bg-green-500 text-white font-bold py-2 px-4 rounded-xl hover:bg-green-600 transition-colors; }
-        .btn-info { @apply bg-blue-500 text-white font-bold py-2 px-4 rounded-xl hover:bg-blue-600 transition-colors; }
-        .input-style { @apply w-full p-3 bg-gray-50 dark:bg-slate-700 border dark:border-slate-600 rounded-xl outline-none focus:ring-2 focus:ring-[#7aa2a1] dark:text-white; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #f0f7f7; color: #333333; }
+        
+        .input-style {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            background: #e8f1f1;
+            color: #333333;
+        }
+        .input-style:focus { border-color: #7aa2a1; }
+        .input-style::placeholder { color: #a0b4b4; }
+
+        .btn-solid {
+            width: 100%;
+            padding: 14px 20px;
+            background: #7aa2a1;
+            color: white;
+            font-weight: 700;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(122, 162, 161, 0.3);
+        }
+        .btn-solid:hover { background: #688f8e; transform: scale(0.98); }
+        .btn-solid:disabled { background: #b0c4c4; cursor: not-allowed; transform: none; }
+
+        .btn-secondary { padding: 12px 24px; background: #e8f1f1; color: #7aa2a1; font-weight: 700; border-radius: 12px; font-size: 13px; transition: all 0.3s; border: none; cursor: pointer; }
+        .btn-secondary:hover { background: #d0e1e1; }
+
+        .btn-danger { padding: 12px 24px; background: #fee2e2; color: #dc2626; font-weight: 700; border-radius: 12px; font-size: 13px; transition: all 0.3s; border: none; cursor: pointer; }
+        .btn-danger:hover { background: #fecaca; }
+
+        .btn-success { padding: 12px 24px; background: #d1fae5; color: #059669; font-weight: 700; border-radius: 12px; font-size: 13px; transition: all 0.3s; border: none; cursor: pointer; }
+        .btn-success:hover { background: #a7f3d0; }
+
+        .btn-info { padding: 12px 24px; background: #dbeafe; color: #2563eb; font-weight: 700; border-radius: 12px; font-size: 13px; transition: all 0.3s; border: none; cursor: pointer; }
+        .btn-info:hover { background: #bfdbfe; }
+
+        .dark { background: #0f172a; color: #e2e8f0; }
+        .dark .bg-white { background: #1e293b; }
+        .dark .bg-gray-50 { background: #1e293b; }
+        .dark .bg-gray-100 { background: #334155; }
+        .dark .border-gray-100 { border-color: #334155; }
+        .dark .border-gray-200 { border-color: #334155; }
+        .dark .text-gray-400 { color: #94a3b8; }
+        .dark .text-gray-500 { color: #94a3b8; }
+        .dark .text-gray-600 { color: #cbd5e1; }
+        .dark .text-gray-700 { color: #e2e8f0; }
+        .dark .text-gray-800 { color: #f1f5f9; }
+
+        .sidebar { position: fixed; inset: 0; z-index: 50; display: flex; }
+        .sidebar-backdrop { flex: 1; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); }
+        .sidebar-content { width: 320px; height: 100%; background: #f0f7f7; box-shadow: 0 20px 60px rgba(0,0,0,0.3); display: flex; flex-direction: column; animation: slideRight 0.3s ease-out; border-right: 2px solid #7aa2a1; }
+        .dark .sidebar-content { background: #1e293b; border-color: #334155; }
+        @keyframes slideRight { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounce { 0%,100% { transform: translateY(-25%); } 50% { transform: translateY(0); } }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .animate-fade-in { animation: fadeIn 0.2s ease-out; }
+        .animate-bounce { animation: bounce 1s infinite; }
+        .animate-spin { animation: spin 1s linear infinite; }
+
+        .gradient-card { background: linear-gradient(135deg, #7aa2a1, #4c7271); }
+
+        .toast-success { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 50; background: #22c55e; color: white; font-weight: 700; padding: 16px 24px; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 12px; border: 2px solid #4ade80; animation: bounce 1s infinite; }
+        .toast-error { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 50; background: #ef4444; color: white; font-weight: 700; padding: 16px 24px; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 12px; border: 2px solid #f87171; animation: bounce 1s infinite; }
+
+        .notification-badge { position: absolute; top: 6px; right: 6px; background: #ef4444; color: white; font-weight: 900; font-size: 9px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; animation: bounce 1s infinite; }
+
+        .menu-item { width: 100%; text-align: left; padding: 12px 16px; border-radius: 8px; transition: all 0.3s; font-weight: 700; display: flex; align-items: center; gap: 12px; background: transparent; border: none; cursor: pointer; color: #374151; }
+        .dark .menu-item { color: #e2e8f0; }
+        .menu-item:hover { background: white; }
+        .dark .menu-item:hover { background: #334155; }
+
+        .dashboard-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; width: 100%; }
+        @media (min-width: 640px) { .dashboard-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 768px) { .dashboard-grid { grid-template-columns: repeat(4, 1fr); } }
+
+        .dashboard-item { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; border-radius: 16px; aspect-ratio: 1; background: #7aa2a1; color: white; transition: all 0.3s; cursor: pointer; border: none; text-align: center; }
+        .dashboard-item:hover { transform: scale(1.03); box-shadow: 0 10px 30px rgba(122,162,161,0.3); }
+        .dashboard-item:active { transform: scale(0.95); }
+        .dark .dashboard-item { background: #334155; }
+        .dark .dashboard-item:hover { background: #475569; }
+        .dashboard-item i { font-size: 36px; margin-bottom: 12px; }
+        .dashboard-item span { font-size: 11px; font-weight: 700; white-space: pre-line; line-height: 1.4; }
+
+        .tab-button { padding: 10px 20px; border-radius: 12px; font-weight: 700; font-size: 13px; transition: all 0.3s; border: none; cursor: pointer; background: transparent; color: #6b7280; }
+        .tab-button.active { background: #7aa2a1; color: white; }
+        .tab-button:hover:not(.active) { background: #e8f1f1; }
+        .dark .tab-button { color: #94a3b8; }
+        .dark .tab-button:hover:not(.active) { background: #334155; }
+
+        .student-avatar-placeholder { width: 40px; height: 40px; border-radius: 50%; background: #7aa2a1; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0; }
+
+        .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; }
+        .status-badge.otimo { background: #d1fae5; color: #059669; }
+        .status-badge.bom { background: #dbeafe; color: #2563eb; }
+        .status-badge.regular { background: #fef3c7; color: #d97706; }
+        .status-badge.ruim { background: #fee2e2; color: #dc2626; }
+        .dark .status-badge.otimo { background: #064e3b; color: #6ee7b7; }
+        .dark .status-badge.bom { background: #1e3a5f; color: #93c5fd; }
+        .dark .status-badge.regular { background: #451a03; color: #fcd34d; }
+        .dark .status-badge.ruim { background: #450a0a; color: #fca5a5; }
+
+        .empty-state { text-align: center; padding: 40px 20px; color: #6b7280; }
+        .empty-state i { font-size: 48px; color: #d1d5db; display: block; margin-bottom: 16px; }
+        .empty-state h3 { font-size: 16px; font-weight: 700; color: #374151; margin-bottom: 8px; }
+        .empty-state p { font-size: 14px; max-width: 400px; margin: 0 auto; }
+        .dark .empty-state { color: #6b7280; }
+        .dark .empty-state h3 { color: #94a3b8; }
+
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+        input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+        input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+        .logo-fixed { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .logo-fixed img { width: 100%; height: 100%; object-fit: contain; }
+
+        .student-card { background: white; border-radius: 16px; padding: 16px; border: 1px solid #e5e7eb; transition: all 0.3s; }
+        .student-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .dark .student-card { background: #1e293b; border-color: #334155; }
+
+        #statusServidor { position: fixed; bottom: 10px; left: 10px; padding: 5px 15px; background: rgba(0,0,0,0.8); border-radius: 20px; color: white; font-size: 12px; z-index: 9999; font-family: 'Inter', sans-serif; }
+        .status-online { color: #22c55e; }
+        .status-offline { color: #ef4444; }
+        .status-checking { color: #eab308; }
+
+        @media (max-width: 640px) {
+            .sidebar-content { width: 280px; }
+            .dashboard-item { padding: 16px; }
+            .dashboard-item i { font-size: 28px; }
+        }
     </style>
 </head>
-<body class="bg-gray-50 dark:bg-slate-900 transition-colors duration-300">
-    <!-- Container Principal -->
+<body>
     <div id="app"></div>
 
-    <!-- BLOCO 1: CONFIGURAÇÃO -->
+        <!-- ============================================================
+    BLOCO 1: CONFIGURAÇÃO
+    ============================================================ -->
     <script>
+        // ============================================================
+        // AMBIENTES
+        // - development : máquina local (localhost/127.0.0.1)
+        // - production  : Render (backend real)
+        // - netlify     : frontend hospedado no Netlify (usa Render)
+        // Obs.: o domínio próprio "automatic-correction.com" ainda
+        // NÃO está ativo. Quando estiver, basta descomentar a linha
+        // marcada com [DOMÍNIO PRÓPRIO] abaixo.
+        // ============================================================
         const DOMAIN_CONFIG = {
-            render: 'https://automatic-correction-t5h6.onrender.com',
-            netlify: 'https://automaticcorrection.netlify.app',
-            development: 'http://localhost:3000'
+            development: 'http://localhost:3000',
+            render:      'https://automatic-correction-t5h6.onrender.com',
+            netlify:     'https://automaticcorrection.netlify.app',
+            // [DOMÍNIO PRÓPRIO] ative quando o DNS estiver configurado:
+            // customDomain: 'https://automatic-correction.com'
         };
 
         const hostname = window.location.hostname;
-        const isLocalhost = hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '';
-        
+
+        const isLocalhost =
+            hostname === 'localhost' ||
+            hostname === '127.0.0.1' ||
+            hostname === '' ||
+            hostname.startsWith('192.168.') ||
+            hostname.startsWith('10.');
+
+        // Detecta se está rodando dentro do Netlify (preview ou produção)
+        const isNetlify = hostname.endsWith('.netlify.app');
+
+        // Escolhe a URL base do backend
         let SITE_URL;
         let environmentLabel;
 
         if (isLocalhost) {
             SITE_URL = DOMAIN_CONFIG.development;
-            environmentLabel = 'Desenvolvimento (localhost)';
+            environmentLabel = '💻 Desenvolvimento (localhost)';
         } else {
+            // Produção: usa SEMPRE o Render (o domínio próprio ainda não está ativo)
             SITE_URL = DOMAIN_CONFIG.render;
-            environmentLabel = hostname.endsWith('.netlify.app') ? 'Produção (Netlify → Render)' : 'Produção (Render)';
+            environmentLabel = isNetlify
+                ? '🚀 Produção (Netlify → Render)'
+                : '🌐 Produção (Render)';
         }
 
+        // Remove barra final, se houver
         SITE_URL = SITE_URL.replace(/\/+$/, '');
+
         const API_URL = `${SITE_URL}/api`;
 
         const CONFIG = {
-            SITE_URL: SITE_URL,
-            API_URL: API_URL,
-            APP_NAME: 'Automatic Correction',
-            APP_VERSION: '1.2.0',
-            NOTA_MINIMA_APROVACAO: 6.0
+            SITE_URL:       SITE_URL,
+            API_URL:        API_URL,
+            RENDER_URL:     DOMAIN_CONFIG.render,
+            NETLIFY_URL:    DOMAIN_CONFIG.netlify,
+            APP_NAME:       'Automatic Correction',
+            APP_DOMAIN:     'automatic-correction.com',
+            GITHUB_URL:     'https://github.com/capic2024118isinf0082-arch/Automatic-Correction--A.C.-',
+            VERSION:        '1.1.0',
+            NOTA_MINIMA_APROVACAO: 6.0,
+            isLocalhost:    isLocalhost,
+            isNetlify:      isNetlify,
+            isProduction:   !isLocalhost
         };
 
-        window.CONFIG = CONFIG;
-        window.API_URL = API_URL;
-        window.SITE_URL = SITE_URL;
+        // Expõe globalmente (evita "API_URL is not defined" em outros blocos)
+        window.CONFIG      = CONFIG;
+        window.API_URL     = API_URL;
+        window.SITE_URL    = SITE_URL;
 
-        console.log(`%c AUTOMATIC CORRECTION v${CONFIG.APP_VERSION}`, 'color:#7aa2a1;font-weight:bold;font-size:14px');
-        console.log(`Ambiente: ${environmentLabel}`);
-        console.log(`API: ${API_URL}`);
+        console.log('%c🌐 AUTOMATIC CORRECTION', 'color:#7aa2a1;font-weight:bold;font-size:14px');
+        console.log(`📦 Versão:     ${CONFIG.VERSION}`);
+        console.log(`📡 Backend:    ${CONFIG.SITE_URL}`);
+        console.log(`🔗 API:        ${CONFIG.API_URL}`);
+        console.log(`🖥️  Frontend:   ${window.location.origin}`);
+        console.log(`📂 Ambiente:   ${environmentLabel}`);
     </script>
 
-    <!-- BLOCO 2: VERIFICAÇÃO DO SERVIDOR -->
+    <!-- ============================================================
+    BLOCO 2: VERIFICAÇÃO DO SERVIDOR
+    ============================================================ -->
     <script>
+        // Controla spam de log no console
         let _lastServerStatus = null;
-        async function verificarServidor() {
+
+        async function verificarServidor(silencioso) {
             const el = document.getElementById('statusServidor');
-            if (!el) return;
+            if (!el) return false;
+
             try {
+                // Timeout maior porque o Render gratuito "dorme" e
+                // pode levar ~50s para acordar na primeira chamada.
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 15000);
-                
-                const response = await fetch(`${CONFIG.API_URL}/health`, { 
-                    method: 'GET', 
-                    headers: {'Accept': 'application/json'}, 
-                    signal: controller.signal 
+                const timeoutId  = setTimeout(() => controller.abort(), 15000);
+
+                const response = await fetch(`${CONFIG.API_URL}/health`, {
+                    method:  'GET',
+                    headers: { 'Accept': 'application/json' },
+                    signal:  controller.signal
                 });
+
                 clearTimeout(timeoutId);
-                
+
                 if (response.ok) {
-                    el.className = 'fixed bottom-4 left-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg z-50';
-                    el.innerHTML = '● Servidor Online';
-                    if (_lastServerStatus !== 'online') { console.log('Backend online.'); _lastServerStatus = 'online'; }
+                    el.innerHTML = '🟢 Servidor Online';
+                    el.className = 'status-online';
+                    if (_lastServerStatus !== 'online') {
+                        console.log('✅ Backend online.');
+                        _lastServerStatus = 'online';
+                    }
+                    return true;
                 } else {
-                    el.className = 'fixed bottom-4 left-4 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg z-50';
-                    el.innerHTML = '● Servidor Instável';
-                    _lastServerStatus = 'degraded';
+                    el.innerHTML = '🟡 Servidor com problema';
+                    el.className = 'status-offline';
+                    if (_lastServerStatus !== 'degraded') {
+                        console.warn(`⚠️ Backend respondeu ${response.status}.`);
+                        _lastServerStatus = 'degraded';
+                    }
+                    return false;
                 }
             } catch (error) {
-                el.className = 'fixed bottom-4 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg z-50';
-                el.innerHTML = '● Servidor Offline';
-                _lastServerStatus = 'offline';
+                el.innerHTML = '🔴 Servidor Offline';
+                el.className = 'status-offline';
+
+                if (!silencioso && _lastServerStatus !== 'offline') {
+                    console.warn(
+                        '⚠️ Backend não acessível. Se estiver no Render gratuito, ' +
+                        'a primeira chamada pode levar ~50s para "acordar".',
+                        error.message
+                    );
+                    _lastServerStatus = 'offline';
+                }
+                return false;
             }
         }
 
-        // Cria o indicador
+        // Cria o indicador de status (canto inferior esquerdo)
         if (!document.getElementById('statusServidor')) {
             const statusDiv = document.createElement('div');
             statusDiv.id = 'statusServidor';
-            statusDiv.className = 'fixed bottom-4 left-4 bg-gray-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg z-50';
-            statusDiv.innerHTML = '● Verificando...';
+            statusDiv.innerHTML = '🔄 Verificando...';
+            statusDiv.className = 'status-checking';
             document.body.appendChild(statusDiv);
         }
-        
-        setTimeout(verificarServidor, 1000);
-        setInterval(verificarServidor, 30000);
+
+        // Verifica a cada 30s (era 10s — menos agressivo com o Render gratuito)
+        setInterval(() => verificarServidor(true), 30000);
+
+        // Primeira verificação após o carregamento
+        setTimeout(() => verificarServidor(false), 800);
     </script>
 
-    <!-- BLOCO 3: API -->
+        <!-- ============================================================
+    BLOCO 3: API
+    ============================================================ -->
     <script>
         window.API_URL = CONFIG.API_URL;
 
         function getToken() { return localStorage.getItem('token'); }
+
         function getHeaders() {
             const token = getToken();
             const headers = { 'Content-Type': 'application/json', 'Accept': 'application/json' };
@@ -149,63 +335,112 @@
             return headers;
         }
 
+        // ============================================================
         // AUTENTICAÇÃO
+        // ============================================================
         async function apiLogin(email, senha) {
-            const response = await fetch(`${API_URL}/auth/login`, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, senha })
-            });
-            const data = await response.json();
-            if (!response.ok) throw new Error(data.error || 'Erro ao fazer login');
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('user', JSON.stringify(data.user));
-            return data;
+            try {
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, senha })
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || 'Erro ao fazer login');
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                return data;
+            } catch (error) { console.error('❌ Erro no login:', error); throw error; }
         }
 
         async function apiRegister(dados) {
-            const response = await fetch(`${API_URL}/auth/register`, {
-                method: 'POST', headers: { 'Content-Type': 'application/json' },
+            try {
+                const response = await fetch(`${API_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        nome: dados.nome,
+                        sobrenome: dados.sobrenome,
+                        email: dados.email,
+                        senha: dados.senha,
+                        biografia: dados.biografia || 'Docente',
+                        escola: dados.escola || 'Escola'
+                    })
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || 'Erro ao registrar');
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                return data;
+            } catch (error) { console.error('❌ Erro no registro:', error); throw error; }
+        }
+
+        async function apiGetProfile() {
+            const response = await fetch(`${API_URL}/auth/profile`, { headers: getHeaders() });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Erro ao buscar perfil');
+            return data.user;
+        }
+
+        async function apiUpdateProfile(dados) {
+            const response = await fetch(`${API_URL}/auth/profile`, {
+                method: 'PUT',
+                headers: getHeaders(),
                 body: JSON.stringify(dados)
             });
             const data = await response.json();
-            if (!response.ok) throw new Error(data.error || 'Erro ao registrar');
-            localStorage.setItem('token', data.token);
+            if (!response.ok) throw new Error(data.error || 'Erro ao atualizar perfil');
             localStorage.setItem('user', JSON.stringify(data.user));
-            return data;
+            return data.user;
         }
 
+        // ============================================================
         // TURMAS
+        // ============================================================
         async function apiListarTurmas(filtros = {}) {
-            let url = `${API_URL}/turmas`;
-            const params = new URLSearchParams();
-            if (filtros.busca) params.append('busca', filtros.busca);
-            if (filtros.status && filtros.status !== 'todos') params.append('status', filtros.status);
-            if (params.toString()) url += `?${params.toString()}`;
-            const response = await fetch(url, { headers: getHeaders() });
-            const data = await response.json();
-            if (!response.ok) throw new Error(data.error || 'Erro ao listar turmas');
-            return data;
+            try {
+                let url = `${API_URL}/turmas`;
+                const params = new URLSearchParams();
+                if (filtros.busca) params.append('busca', filtros.busca);
+                if (filtros.status && filtros.status !== 'todos') params.append('status', filtros.status);
+                if (filtros.nivel && filtros.nivel !== 'todos') params.append('nivel', filtros.nivel);
+                if (filtros.ordenar) params.append('ordenar', filtros.ordenar);
+                if (params.toString()) url += `?${params.toString()}`;
+
+                const response = await fetch(url, { headers: getHeaders() });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || 'Erro ao listar turmas');
+                return data;
+            } catch (error) { console.error('❌ Erro ao listar turmas:', error); throw error; }
         }
 
         async function apiCriarTurma(dados) {
-            const response = await fetch(`${API_URL}/turmas`, {
-                method: 'POST', headers: getHeaders(), body: JSON.stringify(dados)
-            });
-            const data = await response.json();
-            if (!response.ok) throw new Error(data.error || 'Erro ao criar turma');
-            return data.turma;
+            try {
+                const response = await fetch(`${API_URL}/turmas`, {
+                    method: 'POST',
+                    headers: getHeaders(),
+                    body: JSON.stringify(dados)
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || 'Erro ao criar turma');
+                return data.turma;
+            } catch (error) { console.error('❌ Erro ao criar turma:', error); throw error; }
         }
 
         async function apiBuscarTurma(id) {
-            const response = await fetch(`${API_URL}/turmas/${id}`, { headers: getHeaders() });
-            const data = await response.json();
-            if (!response.ok) throw new Error(data.error || 'Erro ao buscar turma');
-            return data;
+            try {
+                const response = await fetch(`${API_URL}/turmas/${id}`, { headers: getHeaders() });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || data.message || 'Erro ao buscar turma');
+                return data;
+            } catch (error) { console.error('❌ Erro ao buscar turma:', error); throw error; }
         }
 
         async function apiAtualizarTurma(id, dados) {
             const response = await fetch(`${API_URL}/turmas/${id}`, {
-                method: 'PUT', headers: getHeaders(), body: JSON.stringify(dados)
+                method: 'PUT',
+                headers: getHeaders(),
+                body: JSON.stringify(dados)
             });
             const data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erro ao atualizar turma');
@@ -213,45 +448,137 @@
         }
 
         async function apiDeletarTurma(id) {
-            const response = await fetch(`${API_URL}/turmas/${id}`, { method: 'DELETE', headers: getHeaders() });
+            const response = await fetch(`${API_URL}/turmas/${id}`, {
+                method: 'DELETE',
+                headers: getHeaders()
+            });
             const data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erro ao deletar turma');
             return data;
         }
 
+        async function apiDuplicarTurma(id) {
+            const response = await fetch(`${API_URL}/turmas/${id}/duplicar`, {
+                method: 'POST',
+                headers: getHeaders()
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Erro ao duplicar turma');
+            return data.turma;
+        }
+
+        async function deletarTurma(id) {
+            if (!confirm('Tem certeza que deseja EXCLUIR esta turma? Todos os alunos e notas serão perdidos. Esta ação não pode ser desfeita.')) {
+                return;
+            }
+            
+            try {
+                await apiDeletarTurma(id);
+                App.mensagemToast = 'Turma excluída com sucesso!';
+                App.showSyncSuccess = true;
+                // Recarrega a lista de turmas
+                if (typeof carregarTurmas === 'function') await carregarTurmas();
+                navigateTo('salas');
+                setTimeout(function() { App.showSyncSuccess = false; render(); }, 3000);
+            } catch (error) {
+                App.mensagemErro = 'Erro ao excluir turma: ' + error.message;
+                App.showSyncError = true;
+                render();
+                setTimeout(function() { App.showSyncError = false; render(); }, 4000);
+            }
+        }
+
+        async function deletarAluno(id, turmaId) {
+            if (!confirm('Tem certeza que deseja remover este aluno da turma?')) {
+                return;
+            }
+
+            try {
+                await apiRemoverAluno(id);
+                App.mensagemToast = 'Aluno removido com sucesso!';
+                App.showSyncSuccess = true;
+                // Recarrega os detalhes da turma
+                if (typeof selectClass === 'function') await selectClass(turmaId);
+                setTimeout(function() { App.showSyncSuccess = false; render(); }, 3000);
+            } catch (error) {
+                App.mensagemErro = 'Erro ao remover aluno: ' + error.message;
+                App.showSyncError = true;
+                render();
+                setTimeout(function() { App.showSyncError = false; render(); }, 4000);
+            }
+        }
+
+        // ============================================================
+        // TURMAS — REGISTRAR AULA (persistente)
+        // ============================================================
+        // Incrementa total_aulas da turma no backend.
+        // Tenta primeiro enviar apenas { total_aulas }.
+        // Se o backend exigir o objeto completo (400), cai para
+        // apiAtualizarTurma com todos os campos.
         async function apiRegistrarAula(turmaId, totalAulasAtual, turmaCompleta) {
             const novoTotal = (parseInt(totalAulasAtual, 10) || 0) + 1;
+
+            // Tentativa 1 — payload mínimo
             try {
                 const response = await fetch(`${API_URL}/turmas/${turmaId}`, {
-                    method: 'PUT', headers: getHeaders(), body: JSON.stringify({ total_aulas: novoTotal })
+                    method: 'PUT',
+                    headers: getHeaders(),
+                    body: JSON.stringify({ total_aulas: novoTotal })
                 });
+
                 if (response.ok) {
                     const data = await response.json().catch(() => ({}));
                     return { total_aulas: novoTotal, turma: data.turma || null };
                 }
-            } catch (e) { /* Fallback abaixo */ }
-            
+
+                // 400/422 → backend exige mais campos; tenta fallback
+                if (response.status !== 400 && response.status !== 422) {
+                    const data = await response.json().catch(() => ({}));
+                    throw new Error(data.error || 'Erro ao registrar aula');
+                }
+            } catch (error) {
+                // Erro de rede ou status inesperado → tenta fallback também
+                if (error.name !== 'TypeError' && error.name !== 'AbortError') {
+                    // Se já é erro tratado de status, propaga depois do fallback
+                }
+            }
+
+            // Tentativa 2 — objeto completo (se tivermos os dados)
             if (turmaCompleta) {
                 const turmaAtualizada = await apiAtualizarTurma(turmaId, {
-                    nome: turmaCompleta.nome, nivel: turmaCompleta.nivel, status: turmaCompleta.status, total_aulas: novoTotal
+                    nome: turmaCompleta.nome,
+                    nivel: turmaCompleta.nivel,
+                    status: turmaCompleta.status,
+                    total_aulas: novoTotal
                 });
                 return { total_aulas: novoTotal, turma: turmaAtualizada };
             }
-            throw new Error('Não foi possível registrar a aula.');
+
+            throw new Error('Não foi possível registrar a aula: dados da turma incompletos.');
         }
 
+        // ============================================================
         // ALUNOS
+        // ============================================================
         async function apiAdicionarAluno(dados) {
             const response = await fetch(`${API_URL}/alunos`, {
-                method: 'POST', headers: getHeaders(), body: JSON.stringify(dados)
+                method: 'POST',
+                headers: getHeaders(),
+                body: JSON.stringify(dados)
             });
             const data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erro ao adicionar aluno');
             return data.aluno;
         }
 
+        // Wrapper semântico — adicionar aluno a uma turma já existente
         async function apiAdicionarAlunoTurma(turmaId, dados) {
-            const payload = { turma_id: turmaId, numero: dados.numero, nome: dados.nome, gpa: dados.gpa || 0 };
+            const payload = {
+                turma_id: turmaId,
+                numero: dados.numero,
+                nome: dados.nome,
+                gpa: dados.gpa || 0
+            };
             return apiAdicionarAluno(payload);
         }
 
@@ -269,164 +596,517 @@
             return data;
         }
 
+        async function apiAtualizarAluno(id, dados) {
+            const response = await fetch(`${API_URL}/alunos/${id}`, {
+                method: 'PUT',
+                headers: getHeaders(),
+                body: JSON.stringify(dados)
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Erro ao atualizar aluno');
+            return data.aluno;
+        }
+
         async function apiRemoverAluno(id) {
-            const response = await fetch(`${API_URL}/alunos/${id}`, { method: 'DELETE', headers: getHeaders() });
+            const response = await fetch(`${API_URL}/alunos/${id}`, {
+                method: 'DELETE',
+                headers: getHeaders()
+            });
             const data = await response.json();
             if (!response.ok) throw new Error(data.error || 'Erro ao remover aluno');
             return data;
         }
 
-        // CORREÇÃO (Futuro)
+        async function apiAdicionarNota(alunoId, dados) {
+            const response = await fetch(`${API_URL}/alunos/${alunoId}/nota`, {
+                method: 'POST',
+                headers: getHeaders(),
+                body: JSON.stringify(dados)
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Erro ao adicionar nota');
+            return data;
+        }
+
+        async function apiRegistrarPresenca(alunoId, dados) {
+            const response = await fetch(`${API_URL}/alunos/${alunoId}/presenca`, {
+                method: 'POST',
+                headers: getHeaders(),
+                body: JSON.stringify(dados)
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Erro ao registrar presença');
+            return data;
+        }
+
+        // ============================================================
+        // CORREÇÃO AUTOMÁTICA COM IA (endpoint futuro)
+        // ============================================================
+        // Tenta POST /correcoes enviando as duas imagens (base64).
+        // Se o backend ainda não tiver o endpoint, lança erro com
+        // .code = 'ENDPOINT_INDISPONIVEL' para o front tratar.
         async function apiCorrigirProva(payload) {
             try {
                 const response = await fetch(`${API_URL}/correcoes`, {
-                    method: 'POST', headers: getHeaders(), body: JSON.stringify(payload)
+                    method: 'POST',
+                    headers: getHeaders(),
+                    body: JSON.stringify({
+                        gabarito_oficial: payload.gabaritoOficial,
+                        prova_aluno: payload.provaAluno,
+                        turma_id: payload.turmaId || null,
+                        aluno_id: payload.alunoId || null,
+                        gabarito_tipo: payload.gabaritoTipo || 'image'
+                    })
                 });
-                if (response.status === 404 || response.status === 501) {
-                    const err = new Error('Endpoint indisponível'); err.code = 'ENDPOINT_INDISPONIVEL'; throw err;
+
+                if (response.status === 404 || response.status === 405 || response.status === 501) {
+                    const err = new Error('Endpoint de correção ainda não disponível no backend.');
+                    err.code = 'ENDPOINT_INDISPONIVEL';
+                    err.status = response.status;
+                    throw err;
                 }
-                const data = await response.json();
-                if (!response.ok) throw new Error(data.error || 'Erro na correção');
+
+                const data = await response.json().catch(() => ({}));
+                if (!response.ok) {
+                    const err = new Error(data.error || 'Erro ao corrigir prova');
+                    err.status = response.status;
+                    throw err;
+                }
                 return data;
             } catch (error) {
-                if (error.name === 'TypeError' || error.name === 'AbortError') error.code = 'ENDPOINT_INDISPONIVEL';
+                if (!error.code && (error.name === 'TypeError' || error.name === 'AbortError')) {
+                    error.code = 'ENDPOINT_INDISPONIVEL';
+                }
+                console.warn('⚠️ apiCorrigirProva:', error.message);
                 throw error;
             }
         }
 
+        // ============================================================
+        // CORREÇÃO DISCURSIVA COM IA (endpoint futuro)
+        // ============================================================
+        async function apiCorrecaoDiscursiva(payload) {
+            try {
+                const response = await fetch(`${API_URL}/correcoes/discursiva`, {
+                    method: 'POST',
+                    headers: getHeaders(),
+                    body: JSON.stringify({
+                        gabarito_oficial: payload.gabaritoOficial,
+                        resposta_aluno: payload.respostaAluno,
+                        turma_id: payload.turmaId || null,
+                        aluno_id: payload.alunoId || null
+                    })
+                });
+
+                if (response.status === 404 || response.status === 405 || response.status === 501) {
+                    const err = new Error('Endpoint de correção discursiva ainda não disponível no backend.');
+                    err.code = 'ENDPOINT_INDISPONIVEL';
+                    err.status = response.status;
+                    throw err;
+                }
+
+                const data = await response.json().catch(() => ({}));
+                if (!response.ok) {
+                    const err = new Error(data.error || 'Erro na correção discursiva');
+                    err.status = response.status;
+                    throw err;
+                }
+                return data;
+            } catch (error) {
+                if (!error.code && (error.name === 'TypeError' || error.name === 'AbortError')) {
+                    error.code = 'ENDPOINT_INDISPONIVEL';
+                }
+                console.warn('⚠️ apiCorrecaoDiscursiva:', error.message);
+                throw error;
+            }
+        }
+
+        // ============================================================
+        // APLICAR PROVA DIGITAL (endpoint futuro)
+        // ============================================================
         async function apiAplicarProva(payload) {
             try {
                 const response = await fetch(`${API_URL}/provas`, {
-                    method: 'POST', headers: getHeaders(), body: JSON.stringify(payload)
+                    method: 'POST',
+                    headers: getHeaders(),
+                    body: JSON.stringify({
+                        turma_id: payload.turmaId,
+                        titulo: payload.titulo,
+                        disciplina: payload.disciplina || null,
+                        total_questoes: payload.totalQuestoes || null,
+                        data_aplicacao: payload.dataAplicacao || new Date().toISOString().split('T')[0]
+                    })
                 });
-                if (response.status === 404 || response.status === 501) {
-                    const err = new Error('Endpoint indisponível'); err.code = 'ENDPOINT_INDISPONIVEL'; throw err;
+
+                if (response.status === 404 || response.status === 405 || response.status === 501) {
+                    const err = new Error('Endpoint de aplicação de prova ainda não disponível no backend.');
+                    err.code = 'ENDPOINT_INDISPONIVEL';
+                    err.status = response.status;
+                    throw err;
                 }
-                const data = await response.json();
-                if (!response.ok) throw new Error(data.error || 'Erro ao aplicar prova');
+
+                const data = await response.json().catch(() => ({}));
+                if (!response.ok) {
+                    const err = new Error(data.error || 'Erro ao aplicar prova');
+                    err.status = response.status;
+                    throw err;
+                }
                 return data;
             } catch (error) {
-                if (error.name === 'TypeError' || error.name === 'AbortError') error.code = 'ENDPOINT_INDISPONIVEL';
+                if (!error.code && (error.name === 'TypeError' || error.name === 'AbortError')) {
+                    error.code = 'ENDPOINT_INDISPONIVEL';
+                }
+                console.warn('⚠️ apiAplicarProva:', error.message);
                 throw error;
             }
         }
 
+        // ============================================================
+        // HELPER — Detectar endpoint indisponível
+        // ============================================================
         function isEndpointIndisponivel(error) {
             if (!error) return false;
             if (error.code === 'ENDPOINT_INDISPONIVEL') return true;
-            if (error.status === 404 || error.status === 501) return true;
+            if (error.status === 404 || error.status === 405 || error.status === 501) return true;
             if (error.name === 'TypeError' || error.name === 'AbortError') return true;
             return false;
         }
+
+        // ============================================================
+        // UPLOAD DE IMAGENS
+        // ============================================================
+        function processarArquivoImagem(file, callback) {
+            if (!file) return;
+
+            const tiposValidos = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'application/pdf'];
+            if (!tiposValidos.includes(file.type) && !file.type.startsWith('image/')) {
+                alert('Formato de arquivo não suportado. Use JPG, PNG, GIF, WEBP ou PDF.');
+                return;
+            }
+
+            if (file.size > 10 * 1024 * 1024) {
+                alert('Arquivo muito grande. Máximo 10MB.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onloadend = function() {
+                callback({
+                    dataUrl: reader.result,
+                    mimeType: file.type,
+                    base64: reader.result.split(',')[1],
+                    name: file.name,
+                    size: file.size
+                });
+            };
+            reader.onerror = function() {
+                alert('Erro ao ler o arquivo. Tente novamente.');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function tirarFoto(callback) {
+            if ('mediaDevices' in navigator && navigator.mediaDevices.getUserMedia) {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.capture = 'environment';
+                input.onchange = function(e) {
+                    if (e.target.files && e.target.files[0]) {
+                        processarArquivoImagem(e.target.files[0], callback);
+                    }
+                };
+                input.click();
+            } else {
+                alert('Seu dispositivo não suporta câmera. Use a opção "Carregar".');
+            }
+        }
     </script>
 
-    <!-- BLOCO 4: APP -->
+    <!-- ============================================================
+    BLOCO 4: APP - LÓGICA COMPLETA
+    ============================================================ -->
     <script>
-        // ==========================================
-        // ESTADO GLOBAL
-        // ==========================================
         var App = {
-            view: 'splash',
-            sidebarOpen: false,
-            theme: 'light',
-            classes: [],
-            selectedClass: null,
-            selectedStudent: null,
-            notifications: [],
-            officialGabarito: null,
-            studentGabarito: null,
-            lastCorrectionData: null,
-            showSyncSuccess: false,
-            showSyncError: false,
-            mensagemToast: '',
-            mensagemErro: '',
-            searchQuery: '',
-            activeSort: 'alfabetica',
-            showStatsTab: false,
-            profileImage: null,
-            profileName: 'Professor',
-            profileBio: 'Docente',
-            profileEmail: 'professor@escola.com',
-            email: '',
-            password: '',
-            isLoading: false,
-            isCorrecting: false,
-            errorMsg: '',
-            user: null,
-            novoAlunoModal: { aberto: false, turmaId: '', nome: '', numero: 0, gpa: 0 },
-            simulationMode: false,
-            ultimaCorrecao: null,
-            alunosPorTurma: {}
+            view: 'splash', sidebarOpen: false, theme: 'light', classes: [], selectedClass: null, selectedStudent: null,
+            notifications: [{ id: 1, text: 'Bem-vindo ao Automatic Correction!', time: 'Agora', unread: true }],
+            showNotifications: false, officialGabarito: null, studentGabarito: null, studentScan: null, lastCorrectionData: null,
+            showSyncSuccess: false, showSyncError: false, mensagemToast: '', mensagemErro: '',
+            searchQuery: '', activeFilter: 'todos', activeSort: 'alfabetica', showStatsTab: false, selectedHistoricalTest: null,
+            profileImage: null, profileName: 'Professor', profileBio: 'Docente', profileEmail: 'professor@escola.com',
+            aiResult: null, email: '', password: '', isLoading: false, isProcessing: false, isConfirming: false, isAnalyzing: false, errorMsg: '',
+            salasFilter: { busca: '', status: 'todos', nivel: 'todos', ordenar: 'recente' },
+            novaTurma: { nome: '', nivel: 'Ensino Básico', status: 'success', totalAulas: 0, alunos: [] },
+            isCreating: false, activeTab: 'config', modalNota: { alunoId: '', titulo: '', nota: 0, data: '' }, mostrarModalNota: false,
+            scanStep: 1, currentStudentId: null, scanStream: null, selectedTargetClass: '', selectedTargetStudent: '',
+            testDetails: { name: 'Prova Trimestral', subject: 'Matemática', qCount: 20 }, localOfficial: null, studentAnswer: null, user: null
         };
 
-        // ==========================================
-        // CONTROLE DO MENU E NAVEGAÇÃO
-        // ==========================================
+        function generateId() { return 'id-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9); }
+        function getInitials(name) { if (!name) return '?'; var parts = name.trim().split(' '); if (parts.length === 1) return parts[0].charAt(0).toUpperCase(); return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase(); }
+        function getStatusClass(gpa) { if (gpa >= 8.0) return 'otimo'; if (gpa >= 6.0) return 'bom'; if (gpa >= 4.0) return 'regular'; return 'ruim'; }
+        function getStatusIcon(gpa) { if (gpa >= 8.0) return 'fa-star'; if (gpa >= 6.0) return 'fa-check-circle'; if (gpa >= 4.0) return 'fa-exclamation-triangle'; return 'fa-times-circle'; }
+        function getStatusLabel(gpa) { if (gpa >= 8.0) return 'Ótimo'; if (gpa >= 6.0) return 'Bom'; if (gpa >= 4.0) return 'Regular'; return 'Ruim'; }
+        function getGradeColor(gpa) { if (gpa >= 8.0) return 'text-green-500'; if (gpa >= 6.0) return 'text-blue-500'; if (gpa >= 4.0) return 'text-yellow-500'; return 'text-red-500'; }
+        function getStatusColor(status) { if (status === 'success') return 'bg-green-500'; if (status === 'warning') return 'bg-yellow-500'; return 'bg-red-500'; }
+        function getStatusLabelFromStatus(status) { if (status === 'success') return 'Excelente'; if (status === 'warning') return 'Atenção'; return 'Crítico'; }
+        function getRandomDetails(count) { var details = []; for (var i = 0; i < count; i++) details.push(Math.random() > 0.3 ? 1 : 0); return details; }
+
+        function updateStudentStats(student) {
+            var history = student.history || []; var total = history.length;
+            if (total === 0) { student.gpa = 0; student.lastGrade = 0; student.testCount = 0; student.successRate = 0; student.trend = 'up'; student.status = 'regular'; return student; }
+            var sum = 0, successSum = 0; var last = history[history.length - 1] || { grade: 0 };
+            for (var i = 0; i < history.length; i++) {
+                sum += history[i].grade || 0;
+                var totalQ = (history[i].correct || 0) + (history[i].wrong || 0);
+                if (totalQ > 0) successSum += ((history[i].correct || 0) / totalQ) * 100;
+            }
+            student.gpa = parseFloat((sum / total).toFixed(1)); student.lastGrade = last.grade || 0; student.testCount = total; student.successRate = Math.round(successSum / total); student.trend = 'up';
+            if (history.length >= 2) { var lastTwo = history.slice(-2); if (lastTwo[1].grade < lastTwo[0].grade) student.trend = 'down'; }
+            student.status = getStatusClass(student.gpa); return student;
+        }
+
+        function getSortedStudents(list) {
+            var result = (list || []).slice();
+            if (App.activeFilter === 'aprovados') result = result.filter(function(s) { return s.gpa >= window.NOTA_MINIMA_APROVACAO; });
+            else if (App.activeFilter === 'recuperacao') result = result.filter(function(s) { return s.gpa < window.NOTA_MINIMA_APROVACAO; });
+            var search = App.searchQuery.toLowerCase();
+            if (search) result = result.filter(function(s) { return s.name.toLowerCase().indexOf(search) !== -1; });
+            switch (App.activeSort) {
+                case 'alfabetica': return result.sort(function(a, b) { return a.name.localeCompare(b.name); });
+                case 'melhor-desempenho': return result.sort(function(a, b) { return b.gpa - a.gpa; });
+                case 'pior-desempenho': return result.sort(function(a, b) { return a.gpa - b.gpa; });
+                default: return result;
+            }
+        }
+
+        function navigateTo(view) { 
+            App.view = view; 
+            App.sidebarOpen = false; 
+            App.showNotifications = false; 
+            window.scrollTo({ 
+                top: 0, behavior: 'smooth' }); 
+                render(); }
+        function toggleTheme() { 
+            App.theme = App.theme === 'light' ? 'dark' : 'light'; render(); }
+        function closeSidebar() { 
+            App.sidebarOpen = false; 
+            render(); }
+
+        async function handleLogin() {
+            if (!App.email || !App.password) { App.errorMsg = 'Preencha todos os campos.'; render(); return; }
+            App.isLoading = true; render();
+            try {
+                var result = await apiLogin(App.email, App.password);
+                App.user = result.user; App.profileName = result.user.nome; App.profileEmail = result.user.email;
+                App.profileBio = result.user.biografia || 'Docente'; App.profileImage = result.user.foto_perfil || null;
+                App.isLoading = false; App.errorMsg = '';
+                await carregarTurmas(); navigateTo('dashboard');
+            } catch (error) { App.isLoading = false; App.errorMsg = error.message; render(); }
+        }
+
+        function logoutUser() { localStorage.removeItem('token'); localStorage.removeItem('user'); App.user = null; App.classes = []; navigateTo('login'); }
+
+        async function carregarTurmas() {
+            try {
+                var result = await apiListarTurmas(); var turmas = result.turmas || result;
+                App.classes = turmas.map(function(t) {
+                    return { id: t.id, name: t.nome, studentCount: t.total_alunos || 0, average: t.media_calculada || 0, lastActivity: t.data_atualizacao ? new Date(t.data_atualizacao).toLocaleDateString('pt-BR') : 'Sem atividade', status: t.status || 'success', totalAulas: t.total_aulas || 0, nivel: t.nivel || 'Ensino Básico', students: [], statistics: {} };
+                });
+                render();
+            } catch (error) { console.error('Erro:', error); App.errorMsg = 'Erro ao carregar turmas: ' + error.message; render(); }
+        }
+
+        async function selectClass(classId) {
+            try {
+                App.isLoading = true; render();
+                var result = await apiBuscarTurma(classId);
+                if (!result.turma) throw new Error('Turma não encontrada');
+                App.selectedClass = {
+                    id: result.turma.id, name: result.turma.nome, studentCount: result.turma.total_alunos || 0, average: result.turma.media_calculada || 0,
+                    status: result.turma.status || 'success', totalAulas: result.turma.total_aulas || 0, nivel: result.turma.nivel,
+                    students: (result.alunos || []).map(function(a) {
+                        return { id: a.id, number: a.numero, name: a.nome, gpa: a.gpa || 0, lastGrade: a.ultima_nota || 0, testCount: a.total_provas || 0, successRate: a.taxa_acerto || 0, trend: a.tendencia || 'up', faltas: a.faltas || 0, presencas: a.presencas || 0, history: [] };
+                    })
+                };
+                for (var i = 0; i < App.selectedClass.students.length; i++) {
+                    try {
+                        var alunoData = await apiBuscarAluno(App.selectedClass.students[i].id);
+                        App.selectedClass.students[i].history = alunoData.history || [];
+                        updateStudentStats(App.selectedClass.students[i]);
+                    } catch (e) { console.warn('⚠️ Erro:', e); }
+                }
+                App.isLoading = false; App.showStatsTab = false; navigateTo('sala-detalhe');
+            } catch (error) {
+                App.isLoading = false; console.error('❌ Erro:', error);
+                App.mensagemErro = 'Erro ao carregar turma: ' + error.message; App.showSyncError = true; render();
+                setTimeout(function() { App.showSyncError = false; render(); }, 5000);
+            }
+        }
+
+        function selectClassAndNavigate(classId, view) { selectClass(classId); setTimeout(function() { navigateTo(view); }, 500); }
+        
+        // ===================================================================================
+        // CONTROLE DO MENU LATERAL (SIDEBAR)
+        // ===================================================================================
+
+        // Abre e fecha o menu
         function toggleSidebar() {
             App.sidebarOpen = !App.sidebarOpen;
             render();
         }
 
-        function navigateTo(view) {
-            App.view = view;
-            App.sidebarOpen = false; // Força o fechamento do menu ao navegar
-            App.errorMsg = '';
-            render();
-        }
-
-        function handleLogout() {
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-            App.user = null;
-            App.view = 'login';
+        // Fecha o menu (usado no botão "X" e no fundo escuro)
+        function closeSidebar() {
             App.sidebarOpen = false;
             render();
         }
 
-        // ==========================================
-        // RENDERIZAÇÃO PRINCIPAL
-        // ==========================================
+        // Navega para uma tela e FECHA o menu automaticamente
+        function navigateTo(view) {
+            App.view = view;
+            App.sidebarOpen = false; // <-- Isso resolve o problema de o menu ficar aberto ao trocar de tela
+            // Se estiver mudando de tela, limpa mensagens de erro antigas
+            App.errorMsg = '';
+            render();
+        }
+
+        function renderSidebar() {
+            if (!App.sidebarOpen) return ''; // Se estiver fechado, não renderiza nada
+
+            return `
+                <!-- Overlay escuro de fundo (fecha o menu ao clicar fora) -->
+                <div class="fixed inset-0 bg-black/50 z-40 transition-opacity" onclick="App.sidebarOpen = false; render();"></div>
+
+                <!-- Painel do Menu Lateral -->
+                <div class="fixed inset-y-0 right-0 w-72 bg-[#1e293b] text-white shadow-2xl z-50 flex flex-col transform transition-transform duration-300">
+                    
+                    <!-- Cabeçalho do Menu -->
+                    <div class="flex items-center justify-between p-5 border-b border-slate-700">
+                        <span class="text-lg font-bold">Menu</span>
+                        <!-- MUDANÇA AQUI: Fechando direto no clique -->
+                        <button onclick="App.sidebarOpen = false; render();" class="text-gray-400 hover:text-white p-2 rounded-lg hover:bg-slate-700 transition-colors">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+
+                    <!-- Perfil do Usuário -->
+                    <div class="p-5 flex items-center gap-4 border-b border-slate-700">
+                        <div class="w-12 h-12 rounded-full bg-slate-600 flex items-center justify-center">
+                            <i class="fas fa-user text-xl text-gray-300"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm">${App.user && App.user.nome ? App.user.nome : 'João'}</p>
+                            <p class="text-xs text-gray-400">${App.user && App.user.biografia ? App.user.biografia : 'Professor'}</p>
+                        </div>
+                    </div>
+
+                    <!-- Links de Navegação -->
+                    <div class="flex-1 overflow-y-auto p-3 space-y-1">
+                        <!-- MUDANÇA AQUI: Fechando o menu antes de navegar -->
+                        <button onclick="App.sidebarOpen = false; navigateTo('dashboard');" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 transition-colors ${App.view === 'dashboard' ? 'bg-slate-700 text-[#7aa2a1]' : 'text-gray-300'}">
+                            <i class="fas fa-sync-alt w-5 text-center"></i> Painel Principal
+                        </button>
+                        
+                        <button onclick="App.sidebarOpen = false; navigateTo('salas');" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 transition-colors ${App.view === 'salas' || App.view === 'sala_detalhe' ? 'bg-slate-700 text-[#7aa2a1]' : 'text-gray-300'}">
+                            <i class="fas fa-users w-5 text-center"></i> Gestão de Salas
+                        </button>
+                        
+                        <button onclick="App.sidebarOpen = false; navigateTo('profile');" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 transition-colors ${App.view === 'profile' ? 'bg-slate-700 text-[#7aa2a1]' : 'text-gray-300'}">
+                            <i class="fas fa-user w-5 text-center"></i> O Meu Perfil
+                        </button>
+                    </div>
+
+                    <!-- Rodapé do Menu (Tema e Sair) -->
+                    <div class="p-3 border-t border-slate-700 space-y-1">
+                        <button onclick="App.theme = App.theme === 'dark' ? 'light' : 'dark'; render();" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 text-gray-300 transition-colors">
+                            <i class="fas fa-sun w-5 text-center"></i> Modo ${App.theme === 'dark' ? 'Claro' : 'Escuro'}
+                        </button>
+                        
+                        <button onclick="App.sidebarOpen = false; handleLogout();" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-red-900/30 text-red-400 transition-colors">
+                            <i class="fas fa-sign-out-alt w-5 text-center"></i> Sair
+                        </button>
+                    </div>
+                    
+                </div>
+            `;
+        }
+
         function render() {
             var appDiv = document.getElementById('app');
             if (!appDiv) return;
 
             // Aplica o tema
-            if (App.theme === 'dark') document.documentElement.classList.add('dark');
-            else document.documentElement.classList.remove('dark');
-
-            var html = '';
-            switch (App.view) {
-                case 'splash': html = renderSplash(); break;
-                case 'login': html = renderLogin(); break;
-                case 'register': html = renderRegister(); break;
-                case 'dashboard': html = renderDashboard(); break;
-                case 'salas': html = renderSalas(); break;
-                case 'sala_detalhe': html = renderSalaDetalhe(); break;
-                case 'results': html = renderResults(); break;
-                case 'charts': html = renderCharts(); break;
-                case 'compare': html = renderCompare(); break;
-                case 'apply_exam': html = renderAplicarProva(); break;
-                case 'profile': html = renderProfile(); break;
-                default: html = `<div class="p-10 text-center text-red-500">Tela não encontrada: ${App.view}</div>`;
+            if (App.theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
             }
 
-            // Monta a estrutura principal
+            // Renderiza a tela correta
+            var html = '';
+            switch (App.view) {
+                case 'splash':
+                    html = typeof renderSplash === 'function' ? renderSplash() : '<div class="p-10 text-center">Carregando...</div>';
+                    break;
+                case 'login':
+                    html = typeof renderLogin === 'function' ? renderLogin() : '<div class="p-10 text-center">Tela de Login</div>';
+                    break;
+                case 'register':
+                    html = typeof renderRegister === 'function' ? renderRegister() : '<div class="p-10 text-center">Tela de Cadastro</div>';
+                    break;
+                case 'dashboard':
+                    html = typeof renderDashboard === 'function' ? renderDashboard() : '<div class="p-10 text-center">Dashboard</div>';
+                    break;
+                case 'salas':
+                    html = typeof renderSalas === 'function' ? renderSalas() : '<div class="p-10 text-center">Gestão de Salas</div>';
+                    break;
+                case 'sala_detalhe':
+                    html = renderSalaDetalhe(); // Atualizada na Parte 3
+                    break;
+                case 'import':
+                    html = typeof renderImport === 'function' ? renderImport() : '<div class="p-10 text-center">Importar Gabarito</div>';
+                    break;
+                case 'scan':
+                    html = typeof renderScan === 'function' ? renderScan() : '<div class="p-10 text-center">Digitalizar Prova</div>';
+                    break;
+                case 'results':
+                    html = renderResults(); // Atualizada na Parte 3
+                    break;
+                case 'charts':
+                    html = renderCharts(); // Atualizada na Parte 4
+                    break;
+                case 'compare':
+                    html = renderCompare(); // Atualizada na Parte 4
+                    break;
+                case 'apply_exam':
+                    html = renderAplicarProva(); // Atualizada na Parte 4
+                    break;
+                case 'profile':
+                    html = typeof renderProfile === 'function' ? renderProfile() : '<div class="p-10 text-center">Perfil</div>';
+                    break;
+                default:
+                    html = '<div class="p-10 text-center text-red-500">Tela não encontrada: ' + App.view + '</div>';
+            }
+
+            // Adiciona o container principal e o sistema de Toasts (Notificações)
             appDiv.innerHTML = `
                 <div class="flex h-screen bg-gray-50 dark:bg-slate-900 transition-colors duration-300">
-                    ${renderSidebar()}
+                    ${App.view !== 'splash' && App.view !== 'login' && App.view !== 'register' ? (typeof renderSidebar === 'function' ? renderSidebar() : '') : ''}
                     <main class="flex-1 flex flex-col overflow-hidden relative">
                         ${html}
                     </main>
                 </div>
 
-                <!-- Toasts (Notificações) -->
+                <!-- Toast de Sucesso -->
                 ${App.showSyncSuccess ? `
                     <div class="fixed bottom-6 right-6 bg-green-500 text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 animate-fade-in z-[100]">
                         <i class="fas fa-check-circle text-xl"></i>
-                        <span class="font-bold text-sm">${App.mensagemToast || 'Sucesso!'}</span>
+                        <span class="font-bold text-sm">${App.mensagemToast || 'Operação realizada com sucesso!'}</span>
                     </div>
                 ` : ''}
 
+                <!-- Toast de Erro -->
                 ${App.showSyncError ? `
                     <div class="fixed bottom-6 right-6 bg-red-500 text-white px-6 py-3 rounded-xl shadow-2xl flex items-center gap-3 animate-fade-in z-[100]">
                         <i class="fas fa-exclamation-circle text-xl"></i>
@@ -436,238 +1116,733 @@
             `;
         }
 
-        // ==========================================
-        // SIDEBAR (MENU LATERAL)
-        // ==========================================
-        function renderSidebar() {
-            if (!App.sidebarOpen) return '';
-            return `
-                <div class="fixed inset-0 bg-black/50 z-40 transition-opacity" onclick="App.sidebarOpen = false; render();"></div>
-                <div class="fixed inset-y-0 right-0 w-72 bg-[#1e293b] text-white shadow-2xl z-50 flex flex-col transform transition-transform duration-300">
-                    <div class="flex items-center justify-between p-5 border-b border-slate-700">
-                        <span class="text-lg font-bold">Menu</span>
-                        <button onclick="App.sidebarOpen = false; render();" class="text-gray-400 hover:text-white p-2 rounded-lg hover:bg-slate-700 transition-colors">
-                            <i class="fas fa-times text-xl"></i>
-                        </button>
-                    </div>
-                    <div class="p-5 flex items-center gap-4 border-b border-slate-700">
-                        <div class="w-12 h-12 rounded-full bg-slate-600 flex items-center justify-center">
-                            <i class="fas fa-user text-xl text-gray-300"></i>
-                        </div>
-                        <div>
-                            <p class="font-bold text-sm">${(App.user && App.user.nome) ? App.user.nome : 'João'}</p>
-                            <p class="text-xs text-gray-400">Professor</p>
-                        </div>
-                    </div>
-                    <div class="flex-1 overflow-y-auto p-3 space-y-1">
-                        <button onclick="App.sidebarOpen = false; navigateTo('dashboard');" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 transition-colors ${App.view === 'dashboard' ? 'bg-slate-700 text-[#7aa2a1]' : 'text-gray-300'}">
-                            <i class="fas fa-sync-alt w-5 text-center"></i> Painel Principal
-                        </button>
-                        <button onclick="App.sidebarOpen = false; navigateTo('salas');" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 transition-colors ${App.view === 'salas' || App.view === 'sala_detalhe' ? 'bg-slate-700 text-[#7aa2a1]' : 'text-gray-300'}">
-                            <i class="fas fa-users w-5 text-center"></i> Gestão de Salas
-                        </button>
-                        <button onclick="App.sidebarOpen = false; navigateTo('profile');" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 transition-colors ${App.view === 'profile' ? 'bg-slate-700 text-[#7aa2a1]' : 'text-gray-300'}">
-                            <i class="fas fa-user w-5 text-center"></i> O Meu Perfil
-                        </button>
-                    </div>
-                    <div class="p-3 border-t border-slate-700 space-y-1">
-                        <button onclick="App.theme = App.theme === 'dark' ? 'light' : 'dark'; render();" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-slate-700 text-gray-300 transition-colors">
-                            <i class="fas fa-sun w-5 text-center"></i> Modo ${App.theme === 'dark' ? 'Claro' : 'Escuro'}
-                        </button>
-                        <button onclick="App.sidebarOpen = false; handleLogout();" class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-red-900/30 text-red-400 transition-colors">
-                            <i class="fas fa-sign-out-alt w-5 text-center"></i> Sair
-                        </button>
-                    </div>
-                </div>
-            `;
-        }
+        function renderSplash() { return '<div class="flex-1 flex flex-col items-center justify-center p-8 bg-white dark:bg-slate-800 cursor-pointer" onclick="navigateTo(\'login\')"><div class="animate-bounce flex flex-col items-center">' + renderLogo('w-48 h-48') + renderLogoText() + '</div><p class="text-gray-400 dark:text-gray-500 text-xs mt-16">Toque no ecrã para iniciar</p></div>'; }
+        function renderLogo(className) { return '<div class="logo-fixed ' + className + '"><img src="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' rx=\'20\' fill=\'%237aa2a1\'/%3E%3Ctext x=\'50\' y=\'58\' text-anchor=\'middle\' fill=\'white\' font-size=\'32\' font-weight=\'bold\' font-family=\'Arial\'%3EAC%3C/text%3E%3C/svg%3E" alt="Automatic Correction" style="width:100%;height:100%;object-fit:contain;" /></div>'; }
+        function renderLogoText() { return '<div class="text-center mt-3"><h1 class="text-2xl font-black tracking-widest text-[#7aa2a1] dark:text-[#a0c4c3]">AUTOMATIC CORRECTION</h1><p class="text-xs tracking-wider mt-1 font-semibold opacity-90 text-[#7aa2a1] dark:text-[#a0c4c3]">AUTOMATIZE A CORREÇÃO, OTIMIZE O SEU TEMPO!</p></div>'; }
+        function renderSimpleHeader(title) { return '<div class="flex items-center justify-between p-6 border-b border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800"><button onclick="navigateTo(\'dashboard\')" class="text-gray-400 hover:text-black p-2 hover:bg-gray-50 rounded-full transition-colors"><i class="fas fa-arrow-left text-2xl"></i></button><h2 class="text-lg font-black text-gray-700 dark:text-slate-100 tracking-wide">' + title + '</h2><div class="w-10"></div></div>'; }
 
-        // ==========================================
-        // TELAS BÁSICAS E HEADER
-        // ==========================================
-        function renderSplash() {
-            return `
-                <div class="flex-1 flex flex-col items-center justify-center bg-slate-900 text-white">
-                    <div class="w-20 h-20 bg-[#7aa2a1] rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fas fa-check-double text-4xl"></i>
-                    </div>
-                    <h1 class="text-3xl font-black mb-2">Automatic Correction</h1>
-                    <p class="text-gray-400 mb-8">Correção inteligente de provas</p>
-                    <button onclick="navigateTo('login')" class="bg-[#7aa2a1] text-white px-8 py-3 rounded-xl font-bold hover:bg-[#688f8e] transition-colors">
-                        Começar <i class="fas fa-arrow-right ml-2"></i>
-                    </button>
-                </div>
-            `;
-        }
-
-        function renderSimpleHeader(title) {
-            return `
-                <div class="flex items-center justify-between p-4 border-b border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800">
-                    <button onclick="navigateTo('dashboard')" class="text-gray-500 hover:text-black dark:hover:text-white p-2">
-                        <i class="fas fa-arrow-left text-xl"></i>
-                    </button>
-                    <h2 class="font-bold text-gray-800 dark:text-white">${title}</h2>
-                    <button onclick="toggleSidebar()" class="text-gray-500 hover:text-black dark:hover:text-white p-2">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
-            `;
-        }
-
-        // ==========================================
-        // TELAS DE ACESSO (LOGIN / REGISTRO)
-        // ==========================================
         function renderLogin() {
-            return `
-                <div class="flex-1 flex flex-col items-center justify-center p-6 bg-slate-900 text-white">
-                    <div class="w-full max-w-sm">
-                        <h1 class="text-2xl font-black mb-6 text-center">Entrar</h1>
-                        <div class="space-y-4">
-                            <input type="email" id="loginEmail" placeholder="E-mail" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-700 outline-none focus:ring-2 focus:ring-[#7aa2a1] text-white">
-                            <input type="password" id="loginSenha" placeholder="Senha" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-700 outline-none focus:ring-2 focus:ring-[#7aa2a1] text-white">
-                            <button onclick="handleLogin()" class="w-full py-3 bg-[#7aa2a1] rounded-xl font-bold hover:bg-[#688f8e] transition-colors">Entrar</button>
-                        </div>
-                        <p class="text-center text-sm text-gray-400 mt-4">Não tem conta? <a href="#" onclick="navigateTo('register')" class="text-[#7aa2a1] font-bold hover:underline">Cadastre-se</a></p>
-                    </div>
-                </div>
-            `;
+            if (App.isLoading) return '<div class="flex-1 flex flex-col items-center justify-center p-8"><div class="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#7aa2a1]"></div><p class="text-sm font-bold text-gray-500 mt-4">A autenticar...</p></div>';
+            return '<div class="flex-1 flex flex-col items-center justify-center p-8 bg-white dark:bg-slate-800 max-w-md mx-auto w-full"><div class="mb-8 w-full flex flex-col items-center">' + renderLogo('w-28 h-28') + renderLogoText() + '</div>' +
+                '<div class="w-full space-y-4">' + (App.errorMsg ? '<div class="bg-red-50 text-red-600 p-3 rounded-xl text-sm font-bold text-center border border-red-200">' + App.errorMsg + '</div>' : '') +
+                '<div><label class="text-xs font-bold text-gray-500 mb-1 block">E-mail</label><input type="email" placeholder="seu@email.com" class="input-style" value="' + App.email + '" onchange="App.email=this.value" /></div>' +
+                '<div><label class="text-xs font-bold text-gray-500 mb-1 block">Senha</label><input type="password" placeholder="Digite sua senha" class="input-style" value="' + App.password + '" onchange="App.password=this.value" onkeydown="if(event.key===\'Enter\') handleLogin()" /></div>' +
+                '<div class="flex flex-col items-center gap-3 pt-4"><button onclick="handleLogin()" class="w-full py-3.5 bg-[#7aa2a1] hover:bg-[#688f8e] text-white font-bold rounded-xl text-sm transition-all shadow-md flex items-center justify-center gap-2"><i class="fas fa-sign-in-alt"></i> Entrar</button><button onclick="navigateTo(\'register\')" class="text-sm text-[#7aa2a1] hover:underline font-bold">Criar conta</button></div></div></div>';
         }
 
         function renderRegister() {
-            return `
-                <div class="flex-1 flex flex-col items-center justify-center p-6 bg-slate-900 text-white">
-                    <div class="w-full max-w-sm">
-                        <h1 class="text-2xl font-black mb-6 text-center">Criar Conta</h1>
-                        <div class="space-y-4">
-                            <input type="text" id="regNome" placeholder="Nome" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-700 outline-none focus:ring-2 focus:ring-[#7aa2a1] text-white">
-                            <input type="email" id="regEmail" placeholder="E-mail" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-700 outline-none focus:ring-2 focus:ring-[#7aa2a1] text-white">
-                            <input type="password" id="regSenha" placeholder="Senha" class="w-full p-3 bg-slate-800 rounded-xl border border-slate-700 outline-none focus:ring-2 focus:ring-[#7aa2a1] text-white">
-                            <button onclick="handleRegister()" class="w-full py-3 bg-[#7aa2a1] rounded-xl font-bold hover:bg-[#688f8e] transition-colors">Cadastrar</button>
-                        </div>
-                        <p class="text-center text-sm text-gray-400 mt-4">Já tem conta? <a href="#" onclick="navigateTo('login')" class="text-[#7aa2a1] font-bold hover:underline">Entrar</a></p>
-                    </div>
-                </div>
-            `;
-        }
-
-        async function handleLogin() {
-            const email = document.getElementById('loginEmail').value;
-            const senha = document.getElementById('loginSenha').value;
-            if (!email || !senha) return alert('Preencha todos os campos.');
-            try {
-                const data = await apiLogin(email, senha);
-                App.user = data.user;
-                App.view = 'dashboard';
-                render();
-            } catch (error) { alert(error.message); }
+            if (App.isLoading) return '<div class="flex-1 flex flex-col items-center justify-center p-8"><div class="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#7aa2a1]"></div><p class="text-sm font-bold text-gray-500 mt-4">A criar conta...</p></div>';
+            return '<div class="flex-1 flex flex-col items-center py-8 px-6 bg-white dark:bg-slate-800 max-w-md mx-auto w-full">' + renderLogo('w-20 h-20') + renderLogoText() +
+                '<div class="w-full space-y-3 mt-6">' + (App.errorMsg ? '<div class="bg-red-50 text-red-600 p-3 rounded-xl text-sm font-bold text-center border border-red-200">' + App.errorMsg + '</div>' : '') +
+                '<div><label class="text-xs font-bold text-gray-500 mb-1 block">Nome *</label><input type="text" placeholder="Seu nome" class="input-style" id="regNome" /></div>' +
+                '<div><label class="text-xs font-bold text-gray-500 mb-1 block">Apelido *</label><input type="text" placeholder="Seu apelido" class="input-style" id="regSobrenome" /></div>' +
+                '<div><label class="text-xs font-bold text-gray-500 mb-1 block">E-mail *</label><input type="email" placeholder="seu@email.com" class="input-style" id="regEmail" /></div>' +
+                '<div><label class="text-xs font-bold text-gray-500 mb-1 block">Senha *</label><input type="password" placeholder="Mínimo 6 caracteres" class="input-style" id="regSenha" /></div>' +
+                '<div><label class="text-xs font-bold text-gray-500 mb-1 block">Confirmar Senha *</label><input type="password" placeholder="Digite a senha novamente" class="input-style" id="regConfirmSenha" /></div>' +
+                '<div class="flex items-start gap-2.5 my-3"><input type="checkbox" class="mt-1 h-4 w-4 rounded" style="accentColor:#7aa2a1" id="regTermos" /><span class="text-xs text-gray-500">Li e concordo com os termos.</span></div>' +
+                '<button onclick="handleRegister()" class="btn-solid flex items-center justify-center gap-2"><i class="fas fa-user-plus"></i> Criar conta</button>' +
+                '<button onclick="navigateTo(\'login\')" class="text-sm font-bold text-gray-500 text-center hover:underline mt-2">Voltar ao Login</button></div></div>';
         }
 
         async function handleRegister() {
-            const nome = document.getElementById('regNome').value;
-            const email = document.getElementById('regEmail').value;
-            const senha = document.getElementById('regSenha').value;
-            if (!nome || !email || !senha) return alert('Preencha todos os campos.');
+            var nome = document.getElementById('regNome').value.trim();
+            var sobrenome = document.getElementById('regSobrenome').value.trim();
+            var email = document.getElementById('regEmail').value.trim();
+            var senha = document.getElementById('regSenha').value;
+            var confirmSenha = document.getElementById('regConfirmSenha').value;
+            var termos = document.getElementById('regTermos').checked;
+            if (!nome || !sobrenome || !email || !senha) { App.errorMsg = 'Preencha todos os campos.'; render(); return; }
+            if (senha.length < 6) { App.errorMsg = 'A senha deve ter 6 caracteres.'; render(); return; }
+            if (senha !== confirmSenha) { App.errorMsg = 'As senhas não coincidem.'; render(); return; }
+            if (!termos) { App.errorMsg = 'Aceite os termos.'; render(); return; }
+            App.isLoading = true; App.errorMsg = ''; render();
             try {
-                const data = await apiRegister({ nome, email, senha });
-                App.user = data.user;
-                App.view = 'dashboard';
-                render();
-            } catch (error) { alert(error.message); }
+                await apiRegister({ nome: nome, sobrenome: sobrenome, email: email, senha: senha });
+                App.isLoading = false; App.mensagemToast = 'Conta criada!'; App.showSyncSuccess = true;
+                await carregarTurmas(); setTimeout(function() { App.showSyncSuccess = false; navigateTo('dashboard'); }, 2000); render();
+            } catch (error) { App.isLoading = false; App.errorMsg = error.message; render(); }
         }
 
-        // ==========================================
-        // DASHBOARD
-        // ==========================================
+        function renderSuccess() { return '<div class="flex-1 flex flex-col items-center justify-center p-8 bg-white max-w-md mx-auto w-full"><div class="p-4 bg-[#e8f1f1] rounded-full mb-6"><i class="fas fa-check-circle text-7xl text-[#7aa2a1]"></i></div><h2 class="text-2xl font-black text-gray-700 italic text-center mb-8">Registo realizado com sucesso!</h2><button onclick="navigateTo(\'dashboard\')" class="btn-solid">Aceder ao Painel <i class="fas fa-arrow-right"></i></button></div>'; }
+
+        function renderSidebar() {
+            var profileImg = App.profileImage ? '<img src="' + App.profileImage + '" class="w-full h-full object-cover" />' : '<i class="fas fa-user text-2xl"></i>';
+            var themeIcon = App.theme === 'light' ? 'fa-moon' : 'fa-sun'; var toggleClass = App.theme === 'dark' ? 'active' : 'inactive';
+            return '<div class="sidebar"><div class="sidebar-backdrop" onclick="closeSidebar()"></div><div class="sidebar-content"><div class="p-6 flex flex-col h-full"><div class="flex justify-between items-center mb-8"><span class="text-sm font-semibold text-gray-500">Menu</span><button onclick="closeSidebar()" class="text-gray-500 hover:text-black"><i class="fas fa-times text-2xl"></i></button></div><div class="flex items-center gap-4 mb-8 p-3 bg-white dark:bg-slate-700 rounded-xl shadow-sm cursor-pointer" onclick="navigateTo(\'profile\');closeSidebar();"><div class="w-14 h-14 bg-gray-300 rounded-full flex items-center justify-center text-white overflow-hidden shrink-0">' + profileImg + '</div><div class="overflow-hidden"><h3 class="font-bold text-gray-700 dark:text-gray-200 truncate">' + App.profileName + '</h3><p class="text-xs text-gray-500 italic">Professor</p></div></div><div class="space-y-2"><button onclick="navigateTo(\'dashboard\');closeSidebar();" class="menu-item"><i class="fas fa-sync-alt text-[#7aa2a1]"></i> Painel Principal</button><button onclick="navigateTo(\'salas\');closeSidebar();" class="menu-item"><i class="fas fa-users text-[#7aa2a1]"></i> Gestão de Salas</button><button onclick="navigateTo(\'profile\');closeSidebar();" class="menu-item"><i class="fas fa-user text-[#7aa2a1]"></i> O Meu Perfil</button></div><div class="mt-8 pt-4 border-t dark:border-slate-700"><button onclick="toggleTheme()" class="w-full flex items-center justify-between py-2 px-4 rounded-lg bg-white dark:bg-slate-700 text-sm font-bold shadow-sm text-gray-700 dark:text-gray-200"><span class="flex items-center gap-2"><i class="fas ' + themeIcon + ' text-[#7aa2a1]"></i> ' + (App.theme === 'light' ? 'Modo Escuro' : 'Modo Claro') + '</span><div class="toggle-switch ' + toggleClass + '" onclick="event.stopPropagation();toggleTheme();"><div class="toggle-dot"></div></div></button></div><button onclick="logoutUser()" class="mt-auto flex items-center gap-2 text-red-500 font-bold hover:bg-red-50 p-3 rounded-lg"><i class="fas fa-sign-out-alt"></i> Sair</button><div class="mt-2 pt-2 border-t dark:border-slate-700"><a href="' + window.GITHUB_URL + '" target="_blank" class="flex items-center gap-2 text-gray-500 hover:text-[#7aa2a1] text-xs font-bold p-2"><i class="fab fa-github"></i> GitHub</a></div></div></div></div>';
+        }
+
         function renderDashboard() {
-            return `
-                <div class="flex-1 flex flex-col h-full bg-white dark:bg-slate-800">
-                    <div class="flex items-center justify-between p-6 border-b dark:border-slate-700">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-[#7aa2a1] rounded-xl flex items-center justify-center">
-                                <i class="fas fa-check-double text-white"></i>
-                            </div>
-                            <h1 class="text-xl font-black text-gray-800 dark:text-white">Automatic Correction</h1>
-                        </div>
-                        <button onclick="toggleSidebar()" class="text-gray-500 hover:text-black dark:hover:text-white p-2 bg-gray-100 dark:bg-slate-700 rounded-lg">
-                            <i class="fas fa-bars text-xl"></i>
-                        </button>
-                    </div>
-                    
-                    <div class="p-6 flex-1 overflow-auto">
-                        <h2 class="text-sm font-bold text-gray-500 uppercase mb-4">Menu Principal</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div onclick="navigateTo('salas')" class="bg-gray-50 dark:bg-slate-700 p-6 rounded-3xl border dark:border-slate-600 cursor-pointer hover:shadow-lg transition-all flex flex-col items-center text-center">
-                                <i class="fas fa-users text-4xl text-[#7aa2a1] mb-3"></i>
-                                <h3 class="font-bold text-gray-800 dark:text-white">Gestão de Salas</h3>
-                                <p class="text-xs text-gray-500">Gerenciar turmas e alunos</p>
-                            </div>
-                            <div onclick="navigateTo('results')" class="bg-gray-50 dark:bg-slate-700 p-6 rounded-3xl border dark:border-slate-600 cursor-pointer hover:shadow-lg transition-all flex flex-col items-center text-center">
-                                <i class="fas fa-magic text-4xl text-[#7aa2a1] mb-3"></i>
-                                <h3 class="font-bold text-gray-800 dark:text-white">Correção Automática</h3>
-                                <p class="text-xs text-gray-500">Corrigir provas com IA</p>
-                            </div>
-                            <div onclick="navigateTo('charts')" class="bg-gray-50 dark:bg-slate-700 p-6 rounded-3xl border dark:border-slate-600 cursor-pointer hover:shadow-lg transition-all flex flex-col items-center text-center">
-                                <i class="fas fa-chart-pie text-4xl text-[#7aa2a1] mb-3"></i>
-                                <h3 class="font-bold text-gray-800 dark:text-white">Gráficos</h3>
-                                <p class="text-xs text-gray-500">Desempenho da turma</p>
-                            </div>
-                            <div onclick="navigateTo('compare')" class="bg-gray-50 dark:bg-slate-700 p-6 rounded-3xl border dark:border-slate-600 cursor-pointer hover:shadow-lg transition-all flex flex-col items-center text-center">
-                                <i class="fas fa-columns text-4xl text-[#7aa2a1] mb-3"></i>
-                                <h3 class="font-bold text-gray-800 dark:text-white">Comparar Provas</h3>
-                                <p class="text-xs text-gray-500">Lado a lado</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
+            var items = [
+                { id: 'salas', icon: 'fa-users', label: 'GESTÃO DE SALAS\n(TURMAS)' },
+                { id: 'import', icon: 'fa-image', label: 'IMPORTAR IMAGEM\nDO GABARITO' },
+                { id: 'scan', icon: 'fa-camera', label: 'DIGITALIZAR PROVA\n(ALUNO)' },
+                { id: 'results', icon: 'fa-check-circle', label: 'CORRIGIR\nAUTOMATICAMENTE' },
+                { id: 'compare', icon: 'fa-file-alt', label: 'COMPARAR COM O\nGABARITO OFICIAL' },
+                { id: 'tips', icon: 'fa-lightbulb', label: 'SUGESTÕES DE MELHORIA' },
+                { id: 'charts', icon: 'fa-chart-bar', label: 'GRÁFICOS DE\nDESEMPENHO' },
+                { id: 'discursive', icon: 'fa-pen', label: 'CORREÇÃO DISCURSIVA\nCOM IA' }
+            ];
+            var unreadCount = App.notifications.filter(function(n) { return n.unread; }).length; var notifHtml = '';
+            if (App.showNotifications) {
+                var listHtml = App.notifications.map(function(n) { var cls = n.unread ? 'bg-[#e8f1f1] dark:bg-slate-600/50 font-semibold' : 'bg-gray-50 dark:bg-slate-600/10 text-gray-500'; return '<div class="p-2.5 rounded-xl text-xs ' + cls + '"><p class="leading-tight text-gray-800 dark:text-gray-200">' + n.text + '</p><span class="text-[10px] text-gray-400 block mt-1">' + n.time + '</span></div>'; }).join('');
+                notifHtml = '<div class="absolute right-0 mt-2 w-72 bg-white dark:bg-slate-700 rounded-2xl shadow-2xl border border-gray-100 dark:border-slate-600 z-50 p-4 animate-fade-in"><div class="flex justify-between items-center mb-3 pb-2 border-b dark:border-slate-600"><span class="text-xs font-black uppercase text-gray-500">Notificações</span><button onclick="markAllRead()" class="text-[10px] text-[#7aa2a1] font-bold">Marcar lidas</button></div><div class="space-y-3 max-h-60 overflow-y-auto">' + listHtml + '</div></div>';
+            }
+            var itemsHtml = items.map(function(item) { return '<button onclick="navigateTo(\'' + item.id + '\')" class="dashboard-item"><i class="fas ' + item.icon + '"></i><span>' + item.label + '</span></button>'; }).join('');
+            return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800"><div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-slate-700"><button onclick="App.sidebarOpen=true;render();" class="text-gray-600 dark:text-gray-300 p-2"><i class="fas fa-bars text-3xl"></i></button><div class="flex flex-col items-center">' + renderLogo('w-12 h-12') + renderLogoText() + '</div><div class="flex items-center gap-2"><div class="relative cursor-pointer text-green-500 p-2"><i class="fas fa-cloud text-xl animate-bounce"></i><div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-white"></div></div><div class="relative"><button onclick="App.showNotifications=!App.showNotifications;render();" class="p-2 text-gray-600 dark:text-gray-300 relative hover:bg-gray-100 rounded-full"><i class="fas fa-bell text-2xl"></i>' + (unreadCount > 0 ? '<span class="notification-badge">' + unreadCount + '</span>' : '') + '</button>' + notifHtml + '</div></div></div><div class="flex-1 p-6 md:p-10 flex flex-col items-center justify-center max-w-4xl mx-auto w-full"><h2 class="text-gray-400 dark:text-gray-500 font-bold text-xs tracking-widest uppercase mb-6 self-start flex items-center gap-2"><i class="fas fa-sparkles text-[#7aa2a1]"></i> Painel de ferramentas do docente</h2><div class="dashboard-grid">' + itemsHtml + '</div><div class="mt-6 text-center text-[10px] text-gray-400"><a href="' + window.GITHUB_URL + '" target="_blank" class="hover:text-[#7aa2a1]"><i class="fab fa-github"></i> GitHub</a></div></div></div>';
         }
 
-        // ==========================================
-        // TELAS DE SALAS (A SEREM COMPLETADAS PELOS BLOCOS 3/4)
-        // ==========================================
-        function renderSalas() {
-            return `
-                ${renderSimpleHeader('Gestão de Salas')}
-                <div class="p-6">
-                    <p class="text-gray-500 text-center mt-10">A funcionalidade completa de Salas será carregada aqui.</p>
-                    <button onclick="navigateTo('dashboard')" class="mt-4 w-full btn-secondary">Voltar</button>
-                </div>
-            `;
+        function markAllRead() { App.notifications.forEach(function(n) { n.unread = false; }); App.showNotifications = false; render(); }
+
+        function renderProfile() {
+            var profileImg = App.profileImage ? '<img src="' + App.profileImage + '" class="w-full h-full object-cover" />' : '<i class="fas fa-user text-6xl text-gray-400"></i>';
+            return '<div class="flex-1 flex flex-col p-6 md:p-10 bg-white dark:bg-slate-800 max-w-2xl mx-auto w-full"><div class="flex items-center justify-between mb-8"><button onclick="navigateTo(\'dashboard\')" class="text-gray-400 hover:text-black p-2"><i class="fas fa-arrow-left text-2xl"></i></button><h2 class="text-xl font-bold text-gray-700 dark:text-slate-100">O Meu Perfil</h2><div class="w-10"></div></div><div class="flex flex-col items-center mb-8"><div class="relative group cursor-pointer" onclick="document.getElementById(\'profileInput\').click()"><div class="w-32 h-32 bg-gray-200 dark:bg-slate-700 rounded-full flex items-center justify-center overflow-hidden border-4 border-[#e8f1f1] dark:border-slate-700 shadow-md">' + profileImg + '</div><div class="absolute bottom-1 right-1 bg-[#7aa2a1] text-white p-2 rounded-full shadow border-2 border-white hover:bg-[#688f8e]"><i class="fas fa-camera text-sm"></i></div></div><p class="text-xs text-gray-400 dark:text-gray-500 mt-3 font-semibold">Clique para alterar</p><input type="file" id="profileInput" class="hidden" accept="image/*" onchange="handleProfileImage(event)" /></div><div class="space-y-4 max-w-md mx-auto w-full"><div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Nome</label><input type="text" class="input-style" value="' + App.profileName + '" id="profileNameInput" /></div><div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Biografia</label><input type="text" class="input-style" value="' + App.profileBio + '" id="profileBioInput" /></div><div><label class="text-xs font-bold text-gray-500 mb-1.5 block">E-mail</label><input type="email" class="input-style" value="' + App.profileEmail + '" id="profileEmailInput" /></div><div class="pt-6"><button onclick="handleUpdateProfile()" class="btn-solid">Guardar</button></div></div></div>';
         }
+
+        async function handleUpdateProfile() {
+            try {
+                var nome = document.getElementById('profileNameInput').value; var biografia = document.getElementById('profileBioInput').value; var email = document.getElementById('profileEmailInput').value;
+                await apiUpdateProfile({ nome: nome, sobrenome: App.user ? App.user.sobrenome : '', email: email, biografia: biografia, escola: biografia, foto_perfil: App.profileImage });
+                App.profileName = nome; App.profileBio = biografia; App.profileEmail = email;
+                App.mensagemToast = 'Perfil atualizado!'; App.showSyncSuccess = true; render(); setTimeout(function() { App.showSyncSuccess = false; render(); }, 3000);
+            } catch (error) { App.mensagemErro = 'Erro: ' + error.message; App.showSyncError = true; render(); setTimeout(function() { App.showSyncError = false; render(); }, 3000); }
+        }
+
+        function handleProfileImage(event) { var file = event.target.files[0]; if (file) { var reader = new FileReader(); reader.onloadend = function() { App.profileImage = reader.result; render(); }; reader.readAsDataURL(file); } }
+
+        function renderSalas() {
+            var filtro = App.salasFilter; var turmasFiltradas = App.classes.slice();
+            if (filtro.busca) turmasFiltradas = turmasFiltradas.filter(function(t) { return t.name.toLowerCase().indexOf(filtro.busca.toLowerCase()) !== -1; });
+            if (filtro.status !== 'todos') turmasFiltradas = turmasFiltradas.filter(function(t) { return t.status === filtro.status; });
+            
+            var statsHtml = '<div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">' +
+                '<div class="bg-white dark:bg-slate-700 p-4 rounded-2xl border border-gray-100 dark:border-slate-600 shadow-sm"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-[#e8f1f1] dark:bg-slate-600 flex items-center justify-center"><i class="fas fa-users text-[#7aa2a1]"></i></div><div><p class="text-[10px] text-gray-400 uppercase font-bold">Turmas</p><p class="text-xl font-black text-gray-800 dark:text-white">' + App.classes.length + '</p></div></div></div>' +
+                '<div class="bg-white dark:bg-slate-700 p-4 rounded-2xl border border-gray-100 dark:border-slate-600 shadow-sm"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center"><i class="fas fa-user-graduate text-blue-500"></i></div><div><p class="text-[10px] text-gray-400 uppercase font-bold">Alunos</p><p class="text-xl font-black text-gray-800 dark:text-white">' + App.classes.reduce(function(acc, t) { return acc + (t.studentCount || 0); }, 0) + '</p></div></div></div>' +
+                '<div class="bg-white dark:bg-slate-700 p-4 rounded-2xl border border-gray-100 dark:border-slate-600 shadow-sm"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center"><i class="fas fa-chart-line text-green-500"></i></div><div><p class="text-[10px] text-gray-400 uppercase font-bold">Média</p><p class="text-xl font-black text-gray-800 dark:text-white">' + (App.classes.length > 0 ? (App.classes.reduce(function(acc, t) { return acc + (t.average || 0); }, 0) / App.classes.length).toFixed(1) : '0.0') + '</p></div></div></div>' +
+                '<div class="bg-white dark:bg-slate-700 p-4 rounded-2xl border border-gray-100 dark:border-slate-600 shadow-sm"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center"><i class="fas fa-exclamation-triangle text-yellow-500"></i></div><div><p class="text-[10px] text-gray-400 uppercase font-bold">Atenção</p><p class="text-xl font-black text-gray-800 dark:text-white">' + App.classes.filter(function(t) { return t.status === 'warning' || t.status === 'danger'; }).length + '</p></div></div></div></div>';
+
+            var filtrosHtml = '<div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm mb-6"><div class="flex flex-col md:flex-row gap-3"><div class="relative flex-1"><i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"></i><input type="text" placeholder="Pesquisar turma..." class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-slate-700 dark:text-white rounded-xl outline-none focus:ring-2 focus:ring-[#7aa2a1] text-sm" value="' + filtro.busca + '" oninput="App.salasFilter.busca=this.value;render();" /></div><button onclick="navigateTo(\'nova-turma\')" class="px-4 py-2.5 bg-[#7aa2a1] text-white rounded-xl hover:bg-[#688f8e] transition-colors text-sm font-bold flex items-center gap-2 justify-center shadow-md"><i class="fas fa-plus"></i><span>Nova Turma</span></button></div></div>';
+
+            var classesHtml = '';
+            if (turmasFiltradas.length === 0) { classesHtml = '<div class="col-span-full empty-state"><i class="fas fa-users"></i><h3>Nenhuma turma encontrada</h3></div>'; }
+            else {
+                classesHtml = turmasFiltradas.map(function(c) {
+                    var statusLabel = getStatusLabelFromStatus(c.status);
+                    var statusIcon = c.status === 'success' ? 'fa-check-circle' : c.status === 'warning' ? 'fa-exclamation-triangle' : 'fa-times-circle';
+                    var initials = c.name.split(' ').map(function(w) { return w[0]; }).slice(0, 2).join('').toUpperCase();
+                    return '<div class="bg-white dark:bg-slate-700 rounded-3xl shadow-sm border border-gray-100 dark:border-slate-600 overflow-hidden hover:shadow-xl transition-all duration-300 group"><div class="h-2 ' + getStatusColor(c.status) + '"></div><div class="p-5"><div class="flex items-start justify-between mb-4"><div class="flex items-center gap-3 flex-1 min-w-0"><div class="w-12 h-12 rounded-2xl ' + (c.status === 'success' ? 'bg-green-100 text-green-600' : c.status === 'warning' ? 'bg-yellow-100 text-yellow-600' : 'bg-red-100 text-red-600') + ' flex items-center justify-center shrink-0"><span class="text-lg font-black">' + initials + '</span></div><div class="min-w-0 flex-1"><h4 class="text-base font-black text-gray-800 dark:text-white truncate">' + c.name + '</h4><span class="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 ' + (c.status === 'success' ? 'bg-green-100 text-green-700' : c.status === 'warning' ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700') + '"><i class="fas ' + statusIcon + '"></i> ' + statusLabel + '</span></div></div></div><div class="grid grid-cols-3 gap-2 mb-4"><div class="bg-gray-50 dark:bg-slate-800 rounded-xl p-3 text-center"><p class="text-[9px] text-gray-400 uppercase font-bold mb-1">Alunos</p><p class="text-lg font-black text-gray-800 dark:text-white">' + c.studentCount + '</p></div><div class="bg-gray-50 dark:bg-slate-800 rounded-xl p-3 text-center"><p class="text-[9px] text-gray-400 uppercase font-bold mb-1">Média</p><p class="text-lg font-black ' + getGradeColor(c.average) + '">' + c.average + '</p></div><div class="bg-gray-50 dark:bg-slate-800 rounded-xl p-3 text-center"><p class="text-[9px] text-gray-400 uppercase font-bold mb-1">Nível</p><p class="text-[10px] font-black text-[#7aa2a1] leading-tight mt-1">' + (c.nivel || 'Básico').split(' ').pop() + '</p></div></div><div class="grid grid-cols-2 gap-2"><button onclick="selectClass(\'' + c.id + '\')" class="py-2.5 px-3 bg-[#e8f1f1] dark:bg-slate-600 text-[#7aa2a1] dark:text-slate-100 text-xs font-bold rounded-xl hover:bg-[#d0e1e1] transition-all flex items-center justify-center gap-2"><i class="fas fa-users"></i> Ver Alunos</button><button onclick="selectClassAndNavigate(\'' + c.id + '\',\'relatorios\')" class="py-2.5 px-3 bg-gray-100 dark:bg-slate-600/50 text-gray-600 dark:text-slate-300 text-xs font-bold rounded-xl hover:bg-gray-200 transition-all flex items-center justify-center gap-2"><i class="fas fa-chart-bar"></i> Relatórios</button></div></div></div>';
+                }).join('');
+            }
+            return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-5xl mx-auto w-full">' + renderSimpleHeader('Gestão de Salas') + '<div class="p-6 md:p-8 flex-1 overflow-y-auto"><div class="mb-6"><h2 class="text-2xl font-black text-gray-800 dark:text-white mb-1">Minhas Turmas</h2></div>' + statsHtml + filtrosHtml + '<div class="grid md:grid-cols-2 gap-5">' + classesHtml + '</div></div></div>';
+        }
+
+        // ===================================================================================
+        // BLOCO 4 (PARTE 3B) - TELAS E LÓGICA DE CORREÇÃO
+        // Cole este bloco dentro do <script> do BLOCO 4: APP
+        // ===================================================================================
 
         function renderSalaDetalhe() {
-            return `
-                ${renderSimpleHeader('Detalhes da Sala')}
-                <div class="p-6 text-center text-gray-500">Carregando detalhes...</div>
-            `;
+            var cls = App.selectedClass;
+            if (!cls) return '<div class="p-6 text-center text-gray-500">Turma não encontrada.</div>';
+
+            var students = cls.students || [];
+            var showStats = App.showStatsTab;
+            var stats = cls.statistics || { mediaTurma: 0, aprovados: 0, reprovados: 0, averageAttendance: '0%' };
+            var totalAulas = cls.totalAulas || 0;
+
+            var studentsHtml = '';
+            if (students.length > 0) {
+                var sortedStudents = students.slice();
+                // Ordenação
+                if (App.activeSort === 'alfabetica') {
+                    sortedStudents.sort(function(a, b) { return a.name.localeCompare(b.name); });
+                } else if (App.activeSort === 'melhor-desempenho') {
+                    sortedStudents.sort(function(a, b) { return (b.gpa || 0) - (a.gpa || 0); });
+                } else if (App.activeSort === 'pior-desempenho') {
+                    sortedStudents.sort(function(a, b) { return (a.gpa || 0) - (b.gpa || 0); });
+                }
+
+                // Filtro de busca
+                if (App.searchQuery) {
+                    var q = App.searchQuery.toLowerCase();
+                    sortedStudents = sortedStudents.filter(function(s) {
+                        return s.name.toLowerCase().indexOf(q) !== -1 || String(s.number).indexOf(q) !== -1;
+                    });
+                }
+
+                for (var si = 0; si < sortedStudents.length; si++) {
+                    var s = sortedStudents[si];
+                    var initials = typeof getInitials === 'function' ? getInitials(s.name) : s.name.substring(0, 2).toUpperCase();
+                    var gradeColor = typeof getGradeColor === 'function' ? getGradeColor(s.gpa) : 'text-gray-800';
+
+                    studentsHtml += '<div class="bg-white dark:bg-slate-700 border border-gray-100 dark:border-slate-600 rounded-3xl p-5 shadow-sm hover:shadow-md transition-all flex flex-col sm:flex-row items-center justify-between gap-4">' +
+                        '<div class="flex items-center gap-4 w-full sm:w-auto">' +
+                        '<div class="w-12 h-12 rounded-full bg-[#7aa2a1]/20 text-[#7aa2a1] flex items-center justify-center font-bold text-lg">' + initials + '</div>' +
+                        '<div><h4 class="font-black text-gray-800 dark:text-white">' + s.name + '</h4><p class="text-xs text-gray-400 dark:text-gray-500 font-bold uppercase mt-0.5">Nº ' + s.number + ' | ' + (s.testCount || 0) + ' provas</p></div></div>' +
+                        '<div class="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">' +
+                        '<div class="text-right"><p class="text-[10px] text-gray-400 dark:text-gray-500 font-bold uppercase">Média</p><p class="text-lg font-black ' + gradeColor + '">' + (s.gpa || 0) + '</p></div>' +
+                        '<div class="flex flex-wrap gap-1">' +
+                        '<button onclick="abrirModalNota(\'' + s.id + '\')" class="btn-info text-xs py-1 px-2" title="Adicionar Nota"><i class="fas fa-graduation-cap"></i></button>' +
+                        '<button onclick="selectStudent(\'' + s.id + '\')" class="btn-secondary text-xs py-1 px-2" title="Ver Detalhes"><i class="fas fa-eye"></i></button>' +
+                        '</div></div></div>';
+                }
+            } else {
+                studentsHtml = '<div class="empty-state text-center p-8"><i class="fas fa-user-graduate text-4xl text-gray-300 mb-3"></i><h3 class="text-lg font-bold text-gray-700 dark:text-gray-300">Nenhum aluno matriculado</h3><p class="text-sm text-gray-500 mb-4">Adicione alunos a esta turma.</p>' +
+                    '<button onclick="abrirModalNovoAluno(\'' + cls.id + '\')" class="bg-[#7aa2a1] text-white px-6 py-2 rounded-xl font-bold hover:bg-[#688f8e] transition-colors inline-flex items-center gap-2"><i class="fas fa-plus"></i> Adicionar Primeiro Aluno</button></div>';
+            }
+
+            var statsHtml = '';
+            if (showStats) {
+                statsHtml = '<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">' +
+                    '<div class="bg-white dark:bg-slate-700 p-5 rounded-3xl border text-center"><span class="text-xs text-gray-400 uppercase font-bold">Média</span><h4 class="text-3xl font-black text-[#7aa2a1]">' + stats.mediaTurma + '</h4></div>' +
+                    '<div class="bg-white dark:bg-slate-700 p-5 rounded-3xl border text-center"><span class="text-xs text-gray-400 uppercase font-bold">Aprovados</span><h4 class="text-3xl font-black text-green-500">' + stats.aprovados + '</h4></div>' +
+                    '<div class="bg-white dark:bg-slate-700 p-5 rounded-3xl border text-center"><span class="text-xs text-gray-400 uppercase font-bold">Reprovados</span><h4 class="text-3xl font-black text-red-500">' + stats.reprovados + '</h4></div>' +
+                    '<div class="bg-white dark:bg-slate-700 p-5 rounded-3xl border text-center"><span class="text-xs text-gray-400 uppercase font-bold">Presença</span><h4 class="text-3xl font-black text-[#7aa2a1]">' + stats.averageAttendance + '</h4></div></div>';
+            }
+
+            return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-4xl mx-auto w-full">' +
+                '<div class="flex items-center justify-between p-6 border-b border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800 sticky top-0 z-10">' +
+                '<button onclick="navigateTo(\'salas\')" class="text-gray-400 hover:text-black dark:hover:text-white p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-full transition-colors"><i class="fas fa-arrow-left text-2xl"></i></button>' +
+                '<div class="text-center"><h2 class="text-lg font-black text-gray-800 dark:text-slate-100">' + cls.name + '</h2><p class="text-xs text-gray-400 dark:text-gray-500 font-bold uppercase mt-0.5">Média: ' + (cls.average || 0) + '/10 | Alunos: ' + (cls.studentCount || 0) + '</p></div>' +
+                '<div class="w-10"></div></div>' +
+                '<div class="flex border-b dark:border-slate-700">' +
+                '<button onclick="App.showStatsTab=false;render();" class="flex-1 py-4 text-center font-bold text-xs uppercase tracking-wider transition-colors ' + (!App.showStatsTab ? 'text-[#7aa2a1] border-b-2 border-[#7aa2a1]' : 'text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-700/50') + '">Alunos (' + students.length + ')</button>' +
+                '<button onclick="App.showStatsTab=true;render();" class="flex-1 py-4 text-center font-bold text-xs uppercase tracking-wider transition-colors ' + (App.showStatsTab ? 'text-[#7aa2a1] border-b-2 border-[#7aa2a1]' : 'text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-700/50') + '">Estatísticas</button></div>' +
+                '<div class="p-6 flex-1 flex flex-col gap-6 overflow-auto">' +
+                (showStats ? statsHtml : '') +
+                '<div class="flex flex-col sm:flex-row gap-4">' +
+                '<div class="relative flex-1"><i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"></i>' +
+                '<input type="text" placeholder="Pesquisar aluno..." class="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-slate-700 dark:text-white rounded-2xl outline-none focus:ring-2 focus:ring-[#7aa2a1]" value="' + (App.searchQuery || '') + '" oninput="App.searchQuery=this.value;render();"></div>' +
+                '<div class="flex items-center gap-2 bg-gray-50 dark:bg-slate-700 rounded-2xl px-4 py-2.5">' +
+                '<i class="fas fa-sliders-h text-[#7aa2a1]"></i>' +
+                '<select class="bg-transparent text-xs font-bold text-gray-600 dark:text-slate-300 outline-none" onchange="App.activeSort=this.value;render();">' +
+                '<option value="alfabetica" ' + (App.activeSort === 'alfabetica' ? 'selected' : '') + '>Ordem Alfabética</option>' +
+                '<option value="melhor-desempenho" ' + (App.activeSort === 'melhor-desempenho' ? 'selected' : '') + '>Melhor Desempenho</option>' +
+                '<option value="pior-desempenho" ' + (App.activeSort === 'pior-desempenho' ? 'selected' : '') + '>Pior Desempenho</option>' +
+                '</select></div></div>' +
+                '<div class="flex flex-wrap gap-2 items-center">' +
+                '<button onclick="adicionarAula()" class="btn-success text-xs py-2 px-4"><i class="fas fa-plus"></i> Registrar Aula</button>' +
+                '<button onclick="abrirModalNovoAluno(\'' + cls.id + '\')" class="btn-info text-xs py-2 px-4"><i class="fas fa-user-plus"></i> Adicionar Aluno</button>' +
+                '<span class="text-xs text-gray-500 dark:text-gray-400 font-bold ml-auto">Total de aulas: ' + totalAulas + '</span>' +
+                '</div>' +
+                '<div class="space-y-4">' + studentsHtml + '</div></div>' +
+                (typeof renderModalNota === 'function' ? renderModalNota() : '') +
+                renderModalNovoAluno() +
+                '</div>';
         }
 
         function renderResults() {
+            const hasOfficial = App.officialGabarito != null;
+            const hasStudent = App.studentGabarito != null;
+
+            // Opções de turma
+            let classOptions = '<option value="">Selecione uma turma...</option>';
+            for (let ci = 0; ci < App.classes.length; ci++) {
+                const c = App.classes[ci];
+                const selected = (App.selectedTargetClass === c.id) ? ' selected' : '';
+                classOptions += `<option value="${c.id}"${selected}>${c.name}</option>`;
+            }
+
+            // Alunos da turma selecionada (do cache em memória)
+            let alunosDaTurma = [];
+            if (App.selectedTargetClass) {
+                alunosDaTurma = App.alunosPorTurma[App.selectedTargetClass] || [];
+            }
+
+            let studentOptions = '<option value="">Selecione um aluno...</option>';
+            for (let si = 0; si < alunosDaTurma.length; si++) {
+                const s = alunosDaTurma[si];
+                const selected = (App.selectedTargetStudent === s.id) ? ' selected' : '';
+                studentOptions += `<option value="${s.id}"${selected}>${s.name} (Nº ${s.number})</option>`;
+            }
+
             return `
-                ${renderSimpleHeader('Correção Automática')}
-                <div class="p-6 text-center text-gray-500">Tela de correção será carregada aqui.</div>
+                <div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-3xl mx-auto w-full">
+                    ${typeof renderSimpleHeader === 'function' ? renderSimpleHeader('Correção Automática') : '<div class="p-4 border-b"><h2 class="font-bold">Correção Automática</h2></div>'}
+                    
+                    <div class="flex-1 p-6 flex flex-col justify-center items-center overflow-y-auto">
+                        
+                        ${App.simulationMode ? `
+                            <div class="w-full max-w-md mb-4 bg-amber-50 dark:bg-amber-950/30 border-2 border-amber-300 dark:border-amber-700 rounded-xl p-3 text-center">
+                                <p class="text-xs font-black text-amber-700 dark:text-amber-400 uppercase">
+                                    <i class="fas fa-flask"></i> MODO SIMULAÇÃO ATIVO
+                                </p>
+                                <p class="text-[10px] text-amber-600 dark:text-amber-500 mt-1">
+                                    O endpoint de IA ainda não está disponível. Os resultados são simulados para teste de fluxo.
+                                </p>
+                            </div>
+                        ` : ''}
+
+                        <div class="w-full max-w-md bg-gray-50 dark:bg-slate-700 border rounded-3xl p-6 mb-6">
+                            <h3 class="font-bold text-gray-700 dark:text-slate-200 text-sm mb-4 uppercase flex items-center gap-2">
+                                <i class="fas fa-sync-alt text-[#7aa2a1]"></i> Configuração
+                            </h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="text-xs font-bold text-gray-500 mb-1 block">Turma:</label>
+                                    <select class="w-full py-2.5 px-3 rounded-xl border dark:border-slate-600 bg-white dark:bg-slate-800 text-sm outline-none"
+                                        onchange="selecionarTurmaParaCorrecao(this.value)">
+                                        ${classOptions}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="text-xs font-bold text-gray-500 mb-1 block">Aluno:</label>
+                                    <select class="w-full py-2.5 px-3 rounded-xl border dark:border-slate-600 bg-white dark:bg-slate-800 text-sm outline-none"
+                                        onchange="App.selectedTargetStudent=this.value">
+                                        ${studentOptions}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full max-w-md bg-gray-50 dark:bg-slate-700 border rounded-3xl p-6 mb-6">
+                            <h3 class="font-bold text-gray-700 dark:text-slate-200 text-xs mb-4 uppercase tracking-wider">Estado das Imagens</h3>
+                            <div class="flex items-center justify-between mb-4 pb-3 border-b dark:border-slate-600">
+                                <span class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">1. Gabarito Oficial</span>
+                                ${hasOfficial ? 
+                                    `<span class="text-xs bg-green-100 text-green-700 font-bold px-3 py-1 rounded-full flex items-center gap-1"><i class="fas fa-check"></i> PRONTO</span>` : 
+                                    `<button onclick="navigateTo('import')" class="text-xs bg-red-50 text-red-600 font-bold px-3 py-1 rounded-full border border-red-200 hover:bg-red-100 transition-colors"><i class="fas fa-upload"></i> CARREGAR</button>`
+                                }
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">2. Prova do Aluno</span>
+                                ${hasStudent ? 
+                                    `<span class="text-xs bg-green-100 text-green-700 font-bold px-3 py-1 rounded-full flex items-center gap-1"><i class="fas fa-check"></i> PRONTO</span>` : 
+                                    `<button onclick="navigateTo('scan')" class="text-xs bg-gray-100 dark:bg-slate-600 text-gray-700 dark:text-slate-300 font-bold px-3 py-1 rounded-lg hover:bg-gray-200 transition-colors"><i class="fas fa-camera"></i> DIGITALIZAR</button>`
+                                }
+                            </div>
+                        </div>
+
+                        ${App.errorMsg ? `
+                            <div class="text-red-500 text-xs font-bold bg-red-50 p-4 rounded-xl border border-red-200 max-w-md mb-6 leading-relaxed">
+                                <i class="fas fa-exclamation-circle"></i> ${App.errorMsg}
+                            </div>
+                        ` : ''}
+
+                        <div class="w-full max-w-md">
+                            <button onclick="handleAiCorrection()" ${(App.isCorrecting || !hasOfficial || !hasStudent) ? 'disabled' : ''} 
+                                class="w-full py-4 rounded-xl font-bold text-white shadow-lg flex items-center justify-center gap-2 transition-all ${(App.isCorrecting || !hasOfficial || !hasStudent) ? 'bg-gray-300 cursor-not-allowed text-gray-500 dark:bg-slate-700' : 'bg-[#7aa2a1] hover:bg-[#688f8e] active:scale-95'}">
+                                ${App.isCorrecting ? '<i class="fas fa-sync-alt animate-spin"></i> CORRIGINDO...' : '<i class="fas fa-check-circle"></i> INICIAR CORREÇÃO'}
+                            </button>
+                            
+                            <button onclick="App.simulationMode = !App.simulationMode; render();" 
+                                class="w-full mt-3 py-2 rounded-xl text-xs font-bold transition-colors ${App.simulationMode ? 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 border border-amber-300 dark:border-amber-700' : 'bg-gray-100 text-gray-500 dark:bg-slate-700 dark:text-slate-400 hover:bg-gray-200 dark:hover:bg-slate-600'}">
+                                <i class="fas fa-flask"></i> ${App.simulationMode ? 'Desativar' : 'Ativar'} Modo Simulação
+                            </button>
+                        </div>
+                    </div>
+                </div>
             `;
         }
 
-        function renderCharts() { return renderSimpleHeader('Gráficos') + '<div class="p-6 text-center text-gray-500">Gráficos</div>'; }
-        function renderCompare() { return renderSimpleHeader('Comparar Provas') + '<div class="p-6 text-center text-gray-500">Comparação</div>'; }
-        function renderAplicarProva() { return renderSimpleHeader('Aplicar Prova') + '<div class="p-6 text-center text-gray-500">Aplicar Prova</div>'; }
-        function renderProfile() { return renderSimpleHeader('Meu Perfil') + '<div class="p-6 text-center text-gray-500">Perfil</div>'; }
-
-        // ==========================================
-        // INICIALIZAÇÃO
-        // ==========================================
-        window.onload = function() {
-            const token = localStorage.getItem('token');
-            const userStr = localStorage.getItem('user');
-            if (token && userStr) {
-                try { App.user = JSON.parse(userStr); } catch(e) {}
-                App.view = 'dashboard';
-            } else {
-                App.view = 'splash';
+        async function selecionarTurmaParaCorrecao(turmaId) {
+            App.selectedTargetClass = turmaId;
+            App.selectedTargetStudent = '';
+            
+            if (!turmaId) {
+                render();
+                return;
             }
+
+            // Se já temos em cache, só renderiza
+            if (App.alunosPorTurma[turmaId] && App.alunosPorTurma[turmaId].length > 0) {
+                render();
+                return;
+            }
+
+            try {
+                const alunos = await apiListarAlunos(turmaId);
+                App.alunosPorTurma[turmaId] = (alunos || []).map(function(a) {
+                    return {
+                        id: a.id,
+                        number: a.numero,
+                        name: a.nome,
+                        gpa: a.gpa || 0
+                    };
+                });
+                render();
+            } catch (error) {
+                console.warn('Erro ao carregar alunos da turma:', error);
+                App.alunosPorTurma[turmaId] = [];
+                render();
+            }
+        }
+
+        async function handleAiCorrection() {
+            if (!App.officialGabarito) {
+                App.errorMsg = 'ERRO: Carregue primeiro o Gabarito Oficial do Professor.';
+                render();
+                return;
+            }
+            if (!App.studentGabarito) {
+                App.errorMsg = 'ERRO: Digitalize ou carregue a prova do Aluno.';
+                render();
+                return;
+            }
+
+            App.isCorrecting = true;
+            App.errorMsg = '';
             render();
-        };
+
+            // ---------------------------------------------------------
+            // MODO SIMULAÇÃO
+            // ---------------------------------------------------------
+            if (App.simulationMode) {
+                await new Promise(function(resolve) { setTimeout(resolve, 1500); });
+                
+                const grade = (Math.random() * 4 + 6); // Simula nota entre 6 e 10
+                const correctCount = Math.floor(Math.random() * 10) + 10;
+                
+                App.ultimaCorrecao = {
+                    studentName: 'Aluno (Simulação)',
+                    grade: parseFloat(grade.toFixed(1)),
+                    correctCount: correctCount,
+                    wrongCount: 20 - correctCount,
+                    mainDifficulty: 'Interpretação de Texto',
+                    tipsList: [
+                        { title: 'Revisão de Conteúdo', desc: 'Praticar mais exercícios de interpretação textual.' },
+                        { title: 'Exercícios Complementares', desc: 'Resolver questões de provas anteriores.' }
+                    ],
+                    simulado: true
+                };
+                
+                App.lastCorrectionData = App.ultimaCorrecao;
+                App.isCorrecting = false;
+                App.mensagemToast = 'SIMULAÇÃO: Nota ' + grade.toFixed(1) + ' (não salva no banco)';
+                App.showSyncSuccess = true;
+                render();
+                setTimeout(function() { App.showSyncSuccess = false; render(); }, 4000);
+                return;
+            }
+
+            // ---------------------------------------------------------
+            // MODO REAL (Chama a API)
+            // ---------------------------------------------------------
+            try {
+                const response = await apiCorrigirProva({
+                    gabaritoOficial: App.officialGabarito, 
+                    provaAluno: App.studentGabarito,       
+                    turmaId: App.selectedTargetClass || null,
+                    alunoId: App.selectedTargetStudent || null,
+                    gabaritoTipo: 'image'
+                });
+
+                App.ultimaCorrecao = {
+                    studentName: 'Aluno Corrigido',
+                    grade: response.nota || 0,
+                    correctCount: response.acertos || 0,
+                    wrongCount: response.erros || 0,
+                    mainDifficulty: response.dificuldade_principal || '-',
+                    tipsList: response.dicas || [],
+                    simulado: false
+                };
+                
+                App.lastCorrectionData = App.ultimaCorrecao;
+                App.mensagemToast = 'Correção realizada com sucesso!';
+                App.showSyncSuccess = true;
+
+            } catch (error) {
+                console.error('Erro na correção:', error);
+                
+                if (typeof isEndpointIndisponivel === 'function' && isEndpointIndisponivel(error)) {
+                    App.errorMsg = 'O endpoint de correção por IA ainda não foi implementado no backend. Ative o "Modo Simulação" para testar o fluxo visual.';
+                } else {
+                    App.errorMsg = 'Erro ao conectar com o servidor: ' + error.message;
+                }
+            } finally {
+                App.isCorrecting = false;
+                render();
+                setTimeout(function() { App.showSyncSuccess = false; render(); }, 3000);
+            }
+        }
+        function renderModalNota() {
+            if (!App.mostrarModalNota) return '';
+            return '<div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"><div class="bg-white dark:bg-slate-800 rounded-3xl p-6 max-w-md w-full shadow-2xl"><h3 class="text-lg font-black text-gray-800 dark:text-white mb-4"><i class="fas fa-graduation-cap text-[#7aa2a1]"></i> Adicionar Nota</h3><div class="space-y-4"><div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Título</label><input type="text" class="input-style" value="' + App.modalNota.titulo + '" onchange="App.modalNota.titulo=this.value" placeholder="Ex: Prova Trimestral" /></div><div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Nota</label><input type="number" class="input-style" value="' + App.modalNota.nota + '" min="0" max="10" step="0.5" onchange="App.modalNota.nota=parseFloat(this.value)||0" /></div><div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Data</label><input type="date" class="input-style" value="' + (App.modalNota.data || new Date().toISOString().split('T')[0]) + '" onchange="App.modalNota.data=this.value" /></div></div><div class="flex gap-3 mt-6"><button onclick="confirmarNota()" class="flex-1 btn-solid bg-[#7aa2a1]">Adicionar</button><button onclick="cancelarNota()" class="flex-1 btn-secondary">Cancelar</button></div></div></div>';
+        }
+
+        function abrirModalNota(alunoId) { App.modalNota.alunoId = alunoId; App.modalNota.titulo = ''; App.modalNota.nota = 0; App.modalNota.data = new Date().toISOString().split('T')[0]; App.mostrarModalNota = true; render(); }
+        function cancelarNota() { App.mostrarModalNota = false; render(); }
+
+        async function confirmarNota() {
+            var cls = App.selectedClass; if (!cls) return;
+            if (!App.modalNota.titulo.trim()) { alert('Insira um título.'); return; }
+            if (App.modalNota.nota <= 0 || App.modalNota.nota > 10) { alert('Nota inválida.'); return; }
+            try {
+                await apiAdicionarNota(App.modalNota.alunoId, { titulo: App.modalNota.titulo, nota: App.modalNota.nota, data: App.modalNota.data, acertos: Math.round(App.modalNota.nota * 2), erros: Math.round((10 - App.modalNota.nota) * 2), questoes_detalhes: getRandomDetails(20) });
+                await selectClass(cls.id); App.mostrarModalNota = false; App.mensagemToast = 'Nota adicionada!'; App.showSyncSuccess = true; render(); setTimeout(function() { App.showSyncSuccess = false; render(); }, 3000);
+            } catch (error) { alert('Erro: ' + error.message); }
+        }
+
+        function selectStudent(studentId) { var cls = App.selectedClass; if (cls) { for (var i = 0; i < cls.students.length; i++) { if (cls.students[i].id === studentId) { App.selectedStudent = cls.students[i]; navigateTo('aluno-detalhe'); return; } } } }
+
+        function renderAlunoDetalhe() {
+            var student = App.selectedStudent; if (!student) return '<div class="p-8 text-center">Aluno não encontrado</div>';
+            var statusClass = getStatusClass(student.gpa);
+            return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-4xl mx-auto w-full">' + renderSimpleHeader('Dossiê do Aluno') + '<div class="p-6 overflow-y-auto flex-1 space-y-6"><div class="gradient-card p-6 rounded-3xl text-white flex items-center gap-6 shadow-md"><div class="w-24 h-24 rounded-full bg-white/20 flex items-center justify-center text-4xl font-black border-4 border-white/20">' + getInitials(student.name) + '</div><div><h3 class="text-2xl font-black">' + student.name + '</h3><p class="text-xs font-semibold opacity-80 uppercase mt-0.5">Número: ' + student.number + '</p></div><div class="ml-auto"><span class="status-badge ' + statusClass + ' text-base px-4 py-2"><i class="fas ' + getStatusIcon(student.gpa) + '"></i> ' + getStatusLabel(student.gpa) + '</span></div></div><div class="grid grid-cols-3 gap-4"><div class="bg-white dark:bg-slate-700 border dark:border-slate-600 p-4 rounded-2xl text-center"><span class="text-[10px] text-gray-400 uppercase font-bold">Média</span><p class="text-2xl font-black ' + getGradeColor(student.gpa) + '">' + student.gpa + '</p></div><div class="bg-white dark:bg-slate-700 border dark:border-slate-600 p-4 rounded-2xl text-center"><span class="text-[10px] text-gray-400 uppercase font-bold">Última</span><p class="text-2xl font-black">' + student.lastGrade + '</p></div><div class="bg-white dark:bg-slate-700 border dark:border-slate-600 p-4 rounded-2xl text-center"><span class="text-[10px] text-gray-400 uppercase font-bold">Acertos</span><p class="text-2xl font-black text-[#7aa2a1]">' + student.successRate + '%</p></div></div></div></div>';
+        }
+
+        function renderNovaTurma() {
+            var tab = App.activeTab || 'config';
+            var configHtml = '<div class="space-y-6"><div class="bg-gray-50 dark:bg-slate-700 p-6 rounded-2xl border dark:border-slate-600"><h3 class="text-sm font-black text-gray-700 dark:text-gray-200 mb-4">Configurações</h3><div class="space-y-4"><div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Nome</label><input type="text" class="input-style" value="' + App.novaTurma.nome + '" onchange="App.novaTurma.nome=this.value" placeholder="Ex: 9° Ano B" /></div><div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Nível</label><select class="input-style appearance-none" onchange="App.novaTurma.nivel=this.value"><option value="Ensino Básico" ' + (App.novaTurma.nivel === 'Ensino Básico' ? 'selected' : '') + '>Ensino Básico</option><option value="Ensino Secundário" ' + (App.novaTurma.nivel === 'Ensino Secundário' ? 'selected' : '') + '>Ensino Secundário</option></select></div><div><label class="text-xs font-bold text-gray-500 mb-1.5 block">Status</label><select class="input-style appearance-none" onchange="App.novaTurma.status=this.value"><option value="success" ' + (App.novaTurma.status === 'success' ? 'selected' : '') + '>Excelente</option><option value="warning" ' + (App.novaTurma.status === 'warning' ? 'selected' : '') + '>Atenção</option><option value="danger" ' + (App.novaTurma.status === 'danger' ? 'selected' : '') + '>Crítico</option></select></div></div></div></div>';
+            var alunosHtml = '<div class="space-y-6"><div class="bg-gray-50 dark:bg-slate-700 p-6 rounded-2xl border dark:border-slate-600"><h3 class="text-sm font-black text-gray-700 dark:text-gray-200 mb-4 flex items-center justify-between"><span>Alunos</span><button onclick="adicionarAluno()" class="btn-success text-xs">+ Adicionar</button></h3>';
+            if (App.novaTurma.alunos && App.novaTurma.alunos.length > 0) {
+                alunosHtml += '<div class="space-y-3 max-h-96 overflow-y-auto scrollbar-hide">';
+                for (var ai = 0; ai < App.novaTurma.alunos.length; ai++) {
+                    var aluno = App.novaTurma.alunos[ai];
+                    alunosHtml += '<div class="student-card flex items-center justify-between gap-4"><div class="flex items-center gap-3"><div class="student-avatar-placeholder">' + getInitials(aluno.name) + '</div><div><p class="font-bold text-gray-800 dark:text-white text-sm">' + aluno.name + '</p></div></div><div class="flex gap-2"><button onclick="removerAluno(\'' + aluno.id + '\')" class="btn-danger text-xs py-1 px-3">Remover</button></div></div>';
+                }
+                alunosHtml += '</div>';
+            } else { alunosHtml += '<div class="empty-state"><i class="fas fa-user-plus"></i><h3>Nenhum aluno</h3></div>'; }
+            alunosHtml += '</div></div>';
+            return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-4xl mx-auto w-full"><div class="flex items-center justify-between p-6 border-b border-gray-100 dark:border-slate-700"><button onclick="navigateTo(\'salas\')" class="text-gray-400 hover:text-black"><i class="fas fa-arrow-left text-2xl"></i></button><h2 class="text-lg font-black text-gray-700 dark:text-slate-100">Nova Turma</h2><div class="w-6"></div></div><div class="p-6 flex-1 overflow-y-auto"><div class="flex gap-2 mb-6 border-b dark:border-slate-700 pb-4"><button class="tab-button ' + (tab === 'config' ? 'active' : '') + '" onclick="App.activeTab=\'config\';render();"><i class="fas fa-cog"></i> Configurações</button><button class="tab-button ' + (tab === 'alunos' ? 'active' : '') + '" onclick="App.activeTab=\'alunos\';render();"><i class="fas fa-users"></i> Alunos</button></div>' + (tab === 'config' ? configHtml : alunosHtml) + '<div class="mt-6 flex gap-4"><button onclick="salvarTurma()" class="flex-1 btn-solid">💾 Salvar Turma</button><button onclick="cancelarTurma()" class="flex-1 btn-secondary">Cancelar</button></div></div></div>';
+        }
+
+        function adicionarAluno() { App.novaTurma.alunos.push({ id: generateId(), number: (App.novaTurma.alunos || []).length + 1, name: 'Aluno ' + ((App.novaTurma.alunos || []).length + 1), gpa: 0 }); render(); }
+        function removerAluno(id) { App.novaTurma.alunos = App.novaTurma.alunos.filter(function(a) { return a.id !== id; }); render(); }
+        async function salvarTurma() {
+            if (!App.novaTurma.nome.trim()) { alert('Insira um nome.'); return; }
+            try {
+                var turma = await apiCriarTurma({ nome: App.novaTurma.nome, nivel: App.novaTurma.nivel, status: App.novaTurma.status });
+                for (var i = 0; i < App.novaTurma.alunos.length; i++) { await apiAdicionarAluno({ turma_id: turma.id, numero: App.novaTurma.alunos[i].number, nome: App.novaTurma.alunos[i].name }); }
+                App.novaTurma = { nome: '', nivel: 'Ensino Básico', status: 'success', alunos: [] };
+                await carregarTurmas(); navigateTo('salas');
+            } catch (error) { alert('Erro: ' + error.message); }
+        }
+        function cancelarTurma() { App.novaTurma = { nome: '', nivel: 'Ensino Básico', status: 'success', alunos: [] }; navigateTo('salas'); }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 AUTOMATIC CORRECTION - Inicializando...');
+            setTimeout(verificarServidor, 1000);
+            var token = localStorage.getItem('token'); var user = localStorage.getItem('user');
+            if (token && user) {
+                try {
+                    App.user = JSON.parse(user); App.profileName = App.user.nome || 'Professor'; App.profileEmail = App.user.email || ''; App.profileBio = App.user.biografia || 'Docente';
+                    carregarTurmas().then(function() { navigateTo('dashboard'); });
+                } catch (e) { localStorage.removeItem('token'); localStorage.removeItem('user'); navigateTo('login'); }
+            } else { navigateTo('splash'); }
+        });
+        // ===================================================================================
+        // PARTE 4 - TELAS DE GRÁFICOS, COMPARAÇÃO E APLICAR PROVA
+        // ===================================================================================
+
+        function renderCharts() {
+            var cls = App.selectedClass;
+            if (!cls) return '<div class="p-6 text-center text-gray-500">Nenhuma turma selecionada.</div>';
+
+            var stats = cls.statistics || { mediaTurma: 0, aprovados: 0, reprovados: 0, averageAttendance: '0%', heatmap: {} };
+            var students = cls.students || [];
+            
+            // Calcula o máximo para escala dos gráficos de barra (evita divisão por zero)
+            var maxMedia = 10; 
+            var totalAlunos = students.length || 1;
+
+            // Monta o HTML do Heatmap (Habilidades)
+            var heatmapHtml = '';
+            var heatmapKeys = Object.keys(stats.heatmap || {});
+            if (heatmapKeys.length === 0) {
+                heatmapHtml = '<p class="text-sm text-gray-500">Sem dados de habilidades suficientes.</p>';
+            } else {
+                heatmapKeys.forEach(function(key) {
+                    var val = stats.heatmap[key] || 0;
+                    // Cor baseada no valor (0-100)
+                    var colorClass = val >= 80 ? 'bg-green-500' : val >= 60 ? 'bg-yellow-400' : val >= 40 ? 'bg-orange-400' : 'bg-red-500';
+                    heatmapHtml += '<div class="mb-3">' +
+                        '<div class="flex justify-between text-xs font-bold text-gray-600 dark:text-gray-300 mb-1">' +
+                        '<span>' + key + '</span><span>' + val + '%</span></div>' +
+                        '<div class="w-full bg-gray-200 dark:bg-slate-600 rounded-full h-2.5">' +
+                        '<div class="' + colorClass + ' h-2.5 rounded-full" style="width: ' + val + '%"></div>' +
+                        '</div></div>';
+                });
+            }
+
+            // Monta o HTML de distribuição de notas (Aprovados vs Reprovados)
+            var aprovadosPct = totalAlunos > 0 ? Math.round((stats.aprovados / totalAlunos) * 100) : 0;
+            var reprovadosPct = totalAlunos > 0 ? Math.round((stats.reprovados / totalAlunos) * 100) : 0;
+
+            return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-4xl mx-auto w-full">' +
+                '<div class="p-6 border-b border-gray-100 dark:border-slate-700">' +
+                '<h2 class="text-xl font-black text-gray-800 dark:text-white"><i class="fas fa-chart-pie text-[#7aa2a1]"></i> Desempenho da Turma</h2>' +
+                '<p class="text-sm text-gray-500">' + cls.name + '</p></div>' +
+                
+                '<div class="p-6 flex-1 overflow-auto space-y-8">' +
+                
+                // 1. Cards de Resumo
+                '<div class="grid grid-cols-2 md:grid-cols-4 gap-4">' +
+                '<div class="bg-gray-50 dark:bg-slate-700 p-4 rounded-2xl border dark:border-slate-600 text-center"><p class="text-xs text-gray-500 font-bold uppercase">Média Geral</p><p class="text-3xl font-black text-[#7aa2a1]">' + stats.mediaTurma + '</p></div>' +
+                '<div class="bg-gray-50 dark:bg-slate-700 p-4 rounded-2xl border dark:border-slate-600 text-center"><p class="text-xs text-gray-500 font-bold uppercase">Presença</p><p class="text-3xl font-black text-[#7aa2a1]">' + stats.averageAttendance + '</p></div>' +
+                '<div class="bg-gray-50 dark:bg-slate-700 p-4 rounded-2xl border dark:border-slate-600 text-center"><p class="text-xs text-gray-500 font-bold uppercase">Aprovados</p><p class="text-3xl font-black text-green-500">' + stats.aprovados + '</p></div>' +
+                '<div class="bg-gray-50 dark:bg-slate-700 p-4 rounded-2xl border dark:border-slate-600 text-center"><p class="text-xs text-gray-500 font-bold uppercase">Reprovados</p><p class="text-3xl font-black text-red-500">' + stats.reprovados + '</p></div>' +
+                '</div>' +
+
+                // 2. Heatmap de Habilidades
+                '<div class="bg-white dark:bg-slate-700 border dark:border-slate-600 rounded-3xl p-6 shadow-sm">' +
+                '<h3 class="font-bold text-gray-800 dark:text-white mb-4"><i class="fas fa-fire text-orange-500"></i> Domínio por Habilidade</h3>' +
+                heatmapHtml +
+                '</div>' +
+
+                // 3. Gráfico de Aprovação (Barras Horizontais)
+                '<div class="bg-white dark:bg-slate-700 border dark:border-slate-600 rounded-3xl p-6 shadow-sm">' +
+                '<h3 class="font-bold text-gray-800 dark:text-white mb-4"><i class="fas fa-check-circle text-green-500"></i> Status dos Alunos</h3>' +
+                '<div class="flex items-center gap-4 mb-2"><span class="w-24 text-xs font-bold text-gray-500">Aprovados</span>' +
+                '<div class="flex-1 bg-gray-100 dark:bg-slate-600 rounded-full h-4"><div class="bg-green-500 h-4 rounded-full" style="width: ' + aprovadosPct + '%"></div></div>' +
+                '<span class="text-xs font-bold w-10 text-right">' + aprovadosPct + '%</span></div>' +
+                '<div class="flex items-center gap-4"><span class="w-24 text-xs font-bold text-gray-500">Reprovados</span>' +
+                '<div class="flex-1 bg-gray-100 dark:bg-slate-600 rounded-full h-4"><div class="bg-red-500 h-4 rounded-full" style="width: ' + reprovadosPct + '%"></div></div>' +
+                '<span class="text-xs font-bold w-10 text-right">' + reprovadosPct + '%</span></div>' +
+                '</div>' +
+
+                '<div class="flex justify-center pt-4">' +
+                '<button onclick="navigateTo(\'sala_detalhe\')" class="btn-secondary px-6 py-2"><i class="fas fa-arrow-left"></i> Voltar para a Turma</button>' +
+                '</div>' +
+                '</div></div>';
+        }
+
+        function renderCompare() {
+            var hasOfficial = App.officialGabarito != null;
+            var hasStudent = App.studentGabarito != null;
+            var correction = App.ultimaCorrecao || App.lastCorrectionData;
+
+            var oficialHtml = hasOfficial ? 
+                `<img src="${App.officialGabarito}" class="max-h-64 mx-auto object-contain rounded border border-gray-200" alt="Gabarito Oficial">` : 
+                `<div class="h-64 flex flex-col items-center justify-center bg-gray-50 rounded border border-dashed border-gray-300 text-gray-400"><i class="fas fa-file-image text-4xl mb-2"></i><p class="text-sm">Nenhum gabarito carregado</p></div>`;
+
+            var alunoHtml = hasStudent ? 
+                `<img src="${App.studentGabarito}" class="max-h-64 mx-auto object-contain rounded border border-gray-200" alt="Prova do Aluno">` : 
+                `<div class="h-64 flex flex-col items-center justify-center bg-gray-50 rounded border border-dashed border-gray-300 text-gray-400"><i class="fas fa-camera text-4xl mb-2"></i><p class="text-sm">Nenhuma prova digitalizada</p></div>`;
+
+            var resultadoHtml = '';
+            if (correction) {
+                var badge = correction.simulado ? '<span class="bg-amber-100 text-amber-700 text-[10px] font-bold px-2 py-1 rounded uppercase">Simulação</span>' : '';
+                resultadoHtml = `
+                    <div class="mt-6 bg-white dark:bg-slate-700 border dark:border-slate-600 rounded-3xl p-6 shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-gray-800 dark:text-white"><i class="fas fa-clipboard-check text-[#7aa2a1]"></i> Resultado da Correção</h3>
+                            ${badge}
+                        </div>
+                        <div class="flex items-center gap-6 mb-4">
+                            <div class="text-center">
+                                <p class="text-4xl font-black text-[#7aa2a1]">${correction.grade}</p>
+                                <p class="text-xs text-gray-500 font-bold uppercase">Nota</p>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-600 dark:text-gray-300"><strong>Acertos:</strong> ${correction.correctCount} | <strong>Erros:</strong> ${correction.wrongCount}</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mt-1"><strong>Maior dificuldade:</strong> ${correction.mainDifficulty}</p>
+                            </div>
+                        </div>
+                        ${correction.tipsList && correction.tipsList.length > 0 ? `
+                            <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl mt-4">
+                                <p class="text-xs font-bold text-blue-800 dark:text-blue-300 uppercase mb-2">Recomendações de Estudo:</p>
+                                <ul class="list-disc list-inside text-sm text-blue-700 dark:text-blue-400">
+                                    ${correction.tipsList.map(t => `<li><strong>${t.title}:</strong> ${t.desc}</li>`).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            } else {
+                resultadoHtml = `
+                    <div class="mt-6 text-center p-6 bg-gray-50 dark:bg-slate-700 rounded-3xl border border-dashed border-gray-300 dark:border-slate-600">
+                        <i class="fas fa-info-circle text-gray-400 text-2xl mb-2"></i>
+                        <p class="text-sm text-gray-500">Nenhuma correção realizada ainda. Vá para a tela de Correção Automática para iniciar.</p>
+                        <button onclick="navigateTo('results')" class="mt-3 text-[#7aa2a1] font-bold text-sm hover:underline">Ir para Correção Automática</button>
+                    </div>
+                `;
+            }
+
+            return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-5xl mx-auto w-full">' +
+                '<div class="p-6 border-b border-gray-100 dark:border-slate-700">' +
+                '<h2 class="text-xl font-black text-gray-800 dark:text-white"><i class="fas fa-columns text-[#7aa2a1]"></i> Comparar Provas</h2>' +
+                '<p class="text-sm text-gray-500">Veja lado a lado o gabarito oficial e a prova do aluno.</p></div>' +
+                
+                '<div class="p-6 flex-1 overflow-auto">' +
+                '<div class="grid grid-cols-1 md:grid-cols-2 gap-6">' +
+                '<div class="bg-gray-50 dark:bg-slate-700 p-4 rounded-2xl"><h3 class="text-sm font-bold text-gray-700 dark:text-gray-200 mb-3 uppercase text-center">Gabarito Oficial</h3>' + oficialHtml + '</div>' +
+                '<div class="bg-gray-50 dark:bg-slate-700 p-4 rounded-2xl"><h3 class="text-sm font-bold text-gray-700 dark:text-gray-200 mb-3 uppercase text-center">Prova do Aluno</h3>' + alunoHtml + '</div>' +
+                '</div>' +
+                resultadoHtml +
+                '<div class="flex justify-center mt-8">' +
+                '<button onclick="navigateTo(\'results\')" class="btn-secondary px-6 py-2"><i class="fas fa-arrow-left"></i> Voltar</button>' +
+                '</div></div></div>';
+        }
+
+        function renderAplicarProva() {
+            // Estrutura preparada para o endpoint POST /provas
+            return '<div class="flex-1 flex flex-col bg-white dark:bg-slate-800 max-w-3xl mx-auto w-full">' +
+                '<div class="p-6 border-b border-gray-100 dark:border-slate-700">' +
+                '<h2 class="text-xl font-black text-gray-800 dark:text-white"><i class="fas fa-file-signature text-[#7aa2a1]"></i> Aplicar Prova Digital</h2>' +
+                '<p class="text-sm text-gray-500">Crie uma nova avaliação para uma turma.</p></div>' +
+                
+                '<div class="p-6 flex-1 overflow-auto">' +
+                '<div class="bg-white dark:bg-slate-700 border dark:border-slate-600 rounded-3xl p-6 shadow-sm mb-6">' +
+                '<div class="space-y-4">' +
+                '<div><label class="text-xs font-bold text-gray-500 mb-1 block">Título da Prova</label>' +
+                '<input type="text" id="provaTitulo" class="w-full p-3 bg-gray-50 dark:bg-slate-800 border dark:border-slate-600 rounded-xl outline-none focus:ring-2 focus:ring-[#7aa2a1]" placeholder="Ex: Prova Bimestral de Matemática"></div>' +
+                
+                '<div><label class="text-xs font-bold text-gray-500 mb-1 block">Turma Destino</label>' +
+                '<select id="provaTurma" class="w-full p-3 bg-gray-50 dark:bg-slate-800 border dark:border-slate-600 rounded-xl outline-none">' +
+                '<option value="">Selecione a turma...</option>' +
+                App.classes.map(c => `<option value="${c.id}">${c.name}</option>`).join('') +
+                '</select></div>' +
+
+                '<div class="grid grid-cols-2 gap-4">' +
+                '<div><label class="text-xs font-bold text-gray-500 mb-1 block">Disciplina</label>' +
+                '<input type="text" id="provaDisciplina" class="w-full p-3 bg-gray-50 dark:bg-slate-800 border dark:border-slate-600 rounded-xl outline-none" placeholder="Ex: Matemática"></div>' +
+                '<div><label class="text-xs font-bold text-gray-500 mb-1 block">Nº de Questões</label>' +
+                '<input type="number" id="provaQtd" class="w-full p-3 bg-gray-50 dark:bg-slate-800 border dark:border-slate-600 rounded-xl outline-none" value="10" min="1"></div>' +
+                '</div>' +
+
+                '<div><label class="text-xs font-bold text-gray-500 mb-1 block">Data de Aplicação</label>' +
+                '<input type="date" id="provaData" class="w-full p-3 bg-gray-50 dark:bg-slate-800 border dark:border-slate-600 rounded-xl outline-none"></div>' +
+                '</div></div>' +
+
+                '<div class="flex justify-end gap-3">' +
+                '<button onclick="navigateTo(\'dashboard\')" class="btn-secondary px-6 py-2">Cancelar</button>' +
+                '<button onclick="handleAplicarProva()" class="btn-solid bg-[#7aa2a1] hover:bg-[#688f8e] px-6 py-2"><i class="fas fa-paper-plane"></i> Criar e Aplicar</button>' +
+                '</div>' +
+                '</div></div>';
+        }
+
+        // Função auxiliar que será chamada pelo botão "Criar e Aplicar"
+        async function handleAplicarProva() {
+            var titulo = document.getElementById('provaTitulo').value;
+            var turmaId = document.getElementById('provaTurma').value;
+            var disciplina = document.getElementById('provaDisciplina').value;
+            var totalQuestoes = document.getElementById('provaQtd').value;
+            var dataAplicacao = document.getElementById('provaData').value;
+
+            if (!titulo || !turmaId) {
+                alert('Por favor, preencha o título e selecione a turma.');
+                return;
+            }
+
+            try {
+                // Chama a API (que vai falhar graciosamente se o endpoint não existir)
+                await apiAplicarProva({
+                    titulo: titulo,
+                    turmaId: turmaId,
+                    disciplina: disciplina || null,
+                    totalQuestoes: parseInt(totalQuestoes, 10),
+                    dataAplicacao: dataAplicacao || new Date().toISOString()
+                });
+
+                App.mensagemToast = 'Prova aplicada com sucesso!';
+                App.showSyncSuccess = true;
+                navigateTo('dashboard');
+                setTimeout(function() { App.showSyncSuccess = false; render(); }, 3000);
+
+            } catch (error) {
+                console.error('Erro ao aplicar prova:', error);
+                
+                // Verifica se o erro é porque o endpoint não existe no backend
+                if (typeof isEndpointIndisponivel === 'function' && isEndpointIndisponivel(error)) {
+                    App.mensagemErro = 'O recurso de "Aplicar Prova Digital" ainda está em desenvolvimento no servidor. Em breve estará disponível!';
+                } else {
+                    App.mensagemErro = 'Erro ao aplicar prova: ' + error.message;
+                }
+                App.showSyncError = true;
+                render();
+                setTimeout(function() { App.showSyncError = false; render(); }, 5000);
+            }
+        }
     </script>
 </body>
 </html>
